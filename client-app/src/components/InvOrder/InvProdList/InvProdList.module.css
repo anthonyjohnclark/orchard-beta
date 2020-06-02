@@ -1,0 +1,11 @@
+.InvProd {
+  border-collapse: collapse;
+  background-color: gray;
+  width: 100%;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.InvProdHeader {
+  background-color: #3c40c6;
+}
