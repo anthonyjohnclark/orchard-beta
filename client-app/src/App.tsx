@@ -6,13 +6,13 @@ import axios from "axios";
 
 class App extends Component {
   // state = { ProductInventory: [] };
-  state = { values: [] };
+  state = { products: [] };
 
   componentDidMount() {
-    axios.get("http://localhost:5000/api/values").then((response) => {
+    axios.get("http://localhost:5000/api/products").then((response) => {
       console.log(response);
       this.setState({
-        values: response.data,
+        products: response.data,
       });
     });
   }
@@ -21,7 +21,7 @@ class App extends Component {
     return (
       <div>
         <Layout>
-          <InvOrd products={this.state.values} />
+          <InvOrd products={this.state.products} />
         </Layout>
       </div>
     );

@@ -12,7 +12,7 @@ const invProdList = (props: any) => {
           <th scope="col">Price</th>
           <th scope="col">Case</th>
           <th scope="col">Unit</th>
-          <th scope="col">Price</th>
+          <th scope="col">Cost</th>
           <th scope="col">Expected Inv</th>
           <th scope="col">ITB</th>
           <th scope="col">Predicted Floor</th>
