@@ -21,10 +21,18 @@ namespace API.Controllers
 
         [HttpGet]
 
-        public async Task<ActionResult<List<Product>>> List()
+        public async Task<ActionResult<List<Product>>> AllProducts()
         {
             return await _mediator.Send(new ProductList.Query());
         }
+
+        [HttpGet("{id}")]
+
+        public async Task<ActionResult<Product>> OneProduct(int id)
+        {
+            return await _mediator.Send(new ProductItem.Query { Id = id });
+        }
+
 
     }
 }
