@@ -8,7 +8,10 @@
   border: 0;
 }
 
-.InvProdHeader {
+.InvProdHeader th {
   background-color: #29335c;
   color: white;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 56px;
 }

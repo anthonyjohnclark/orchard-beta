@@ -23,11 +23,25 @@ class InvProduct extends Component<any, any> {
       let styles: any = [classes.InvProd];
 
       switch (true) {
-        case organic:
-          styles.push(classes.OGProd);
+        case productActive:
+          {
+            organic
+              ? styles.push(classes.OGProdActive)
+              : styles.push(classes.CVProdActive);
+
+            if (onSale === true) {
+              styles.push(classes.OnSale);
+            }
+          }
           break;
-        default:
-          styles.push(classes.CVProd);
+        default: {
+          organic
+            ? styles.push(classes.OGProdInactive)
+            : styles.push(classes.CVProdInactive);
+          if (onSale === true) {
+            styles.push(classes.OnSale);
+          }
+        }
       }
 
       // if (organic === true) {

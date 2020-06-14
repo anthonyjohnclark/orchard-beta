@@ -47,14 +47,37 @@ tr:hover td.highlight div {
   transform: scaleX(3);
 }
 
-.InvProd.OGProd {
+.InvProd.OGProdActive {
   background-color: #7fb069;
 }
 
-.InvProd.CVProd {
+.InvProd.CVProdActive {
   background-color: #7678ed;
 }
 
-.OnSale {
-  border: #eca400;
+.InvProd.CVProdInactive {
+  background-color: blue;
+}
+
+.InvProd.OGProdInactive {
+  background-color: green;
+}
+
+.InvProd.CVProdActive.OnSale,
+.InvProd.OGProdActive.OnSale {
+  box-sizing: border-box;
+  border-left: 15px solid #fdcb6e;
+}
+
+.InvProd.CVProdActive.OnSale:hover td,
+.InvProd.OGProdActive.OnSale:hover td,
+.InvProd.CVProdInactive.OnSale:hover td,
+.InvProd.OGProdInactive.OnSale:hover td {
+  color: #fdcb6e;
+}
+
+.InvProd.CVProdInactive.OnSale,
+.InvProd.OGProdInactive.OnSale {
+  box-sizing: border-box;
+  border-left: 15px solid #fdcb6e;
 }
