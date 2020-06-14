@@ -6,8 +6,8 @@ import Logo from "../../Logo/Logo";
 const NavBar = (props: any) => {
   return (
     <header className={classes.NavBar}>
-      <h1>PRODUCE NINJA</h1>
       <Logo />
+      <h1>PRODUCE NINJA</h1>
       <nav>
         <NavBarItems />
       </nav>

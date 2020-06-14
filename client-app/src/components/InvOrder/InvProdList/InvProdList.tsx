@@ -4,7 +4,7 @@ import InvProduct from "./InvProd/InvProduct";
 
 const invProdList = (props: any) => {
   return (
-    <table className={classes.InvProd}>
+    <table className={classes.InvProdTable}>
       <thead className={classes.InvProdHeader}>
         <tr>
           <th scope="col">VIN</th>

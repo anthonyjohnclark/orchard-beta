@@ -1,12 +1,14 @@
-.InvProd {
+.InvProdTable {
   border-collapse: collapse;
-  background-color: gray;
+  background-color: #29335c;
   width: 100%;
-  padding: 0.5rem;
-  text-align: left;
+  text-align: center;
   table-layout: fixed;
+  color: white;
+  border: 0;
 }
 
 .InvProdHeader {
-  background-color: #3c40c6;
+  background-color: #29335c;
+  color: white;
 }

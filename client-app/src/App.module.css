@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  color: white;
 }
 
 .App-logo {
@@ -36,3 +37,5 @@
     transform: rotate(360deg);
   }
 }
+/* 
+https://coolors.co/f5e6e8-eca400-29335c-7678ed-221d23-04e762-363636-d81159 */

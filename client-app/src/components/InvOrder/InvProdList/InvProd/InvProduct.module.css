@@ -1,13 +1,60 @@
 .InvProd {
-  background-color: grey;
+  background-color: #363636;
+  text-align: left;
+  transition: transform 0.1s; /* Animation */
+  width: 100%;
+  text-align: center;
+  z-index: 7;
 }
 
-.OGProd {
-  background-color: #05c46b;
+.InvProd td {
+  text-align: center;
+  padding: 12px;
+  transition: all 0.2s ease-in-out;
+  border-color: #221d23;
 }
 
-/* .CVProd {
+.InvProd td.highlight {
+  padding: 0;
+  width: 4px;
+  background-color: #221d23;
+}
+.InvPrd td.highlight div {
+  width: 4px;
+  height: 60px;
+  border-radius: 4px;
+  background-color: #221d23;
+  transition: all 0.2s ease-in-out;
 }
 
-.onSale {
-} */
+.InvProd:hover td {
+  cursor: pointer;
+  color: #363636;
+  font-weight: bold;
+  border-top: 1px solid #221d23;
+  border-bottom: 1px solid #221d23;
+}
+
+.InvProd:hover {
+  border-top: #363636;
+  border-bottom: #363636;
+  text-align: center;
+  opacity: 90%;
+  box-shadow: 0px 9px 4px -6px #221d23;
+}
+
+tr:hover td.highlight div {
+  transform: scaleX(3);
+}
+
+.InvProd.OGProd {
+  background-color: #7fb069;
+}
+
+.InvProd.CVProd {
+  background-color: #7678ed;
+}
+
+.OnSale {
+  border: #eca400;
+}

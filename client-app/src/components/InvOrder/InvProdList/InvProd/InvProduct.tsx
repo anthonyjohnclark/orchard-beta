@@ -3,7 +3,7 @@ import classes from "../InvProd/InvProduct.module.css";
 
 class InvProduct extends Component<any, any> {
   renderProductRows() {
-    return this.props.products.map((product: any) => {
+    return this.props.products.map((productValues: any) => {
       const {
         id,
         name,
@@ -18,14 +18,26 @@ class InvProduct extends Component<any, any> {
         expectedFloor,
         par,
         productActive,
-      } = product;
-      let styles: any = null;
-      if (organic === true) {
-        styles = classes.OGProd;
+      } = productValues;
+
+      let styles: any = [classes.InvProd];
+
+      switch (true) {
+        case organic:
+          styles.push(classes.OGProd);
+          break;
+        default:
+          styles.push(classes.CVProd);
       }
 
+      // if (organic === true) {
+      //   styles.push(classes.OGProd);
+      // } else {
+      //   styles.push(classes.CVProd);
+      // }
+
       return (
-        <tr className={styles} key={id}>
+        <tr className={styles.join(" ")} key={id}>
           <td>{id}</td>
           <td>{name}</td>
           <td>{retailPrice}</td>
