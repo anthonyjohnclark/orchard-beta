@@ -8,10 +8,148 @@
   border: 0;
 }
 
-.InvProdHeader th {
+.InvProdHeader {
   background-color: #29335c;
   color: white;
   position: sticky;
   position: -webkit-sticky;
   top: 56px;
+  z-index: 1;
+}
+
+.InvProdHeaderAsc:after {
+  background-color: #29335c;
+  color: white;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 56px;
+  z-index: 1;
+  content: " \02C6";
+}
+
+.InvProdHeaderDesc:after {
+  background-color: #29335c;
+  color: white;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 56px;
+  z-index: 1;
+  content: " \02C7";
+}
+
+.InvProdHeader:hover {
+  cursor: pointer;
+}
+
+.SortContainer {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  width: auto;
+  font-weight: bold;
+  text-align: center;
+  border: none;
+  text-decoration: none;
+  text-align: center;
+  display: flex;
+}
+
+.SortButton {
+  box-sizing: border-box;
+  outline: none;
+  width: 5vw;
+  float: inline-start;
+  padding: 8px 8px;
+  background-color: #29335c;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border: 4px;
+  height: 100%;
+  border-bottom: 4px solid transparent;
+}
+
+.SortDropdownButton {
+  width: 10vw;
+  box-sizing: border-box;
+  background-color: #29335c;
+  height: 100%;
+  border: 0;
+  align-self: center;
+  color: #363636;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  padding: 8px 8px;
+  outline: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  border-bottom: 4px solid transparent;
+}
+
+.SortDropdown {
+  width: 100%;
+  background-color: #29335c;
+  display: flex;
+}
+
+.SortDropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  float: inline-end;
+  width: 100%;
+  height: 100%;
+}
+
+.SortDropdownButton:hover,
+.SortButton:hover {
+  cursor: pointer;
+  background-color: #b2bec3;
+  border-bottom: 4px solid #fdcb6e;
+  box-sizing: border-box;
+}
+
+.Active {
+  align-self: center;
+  color: #363636;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  width: 5vw;
+  border: none;
+  text-decoration: none;
+  text-align: center;
+  box-sizing: border-box;
+  border-bottom: 4px solid transparent;
+  padding: 8px 8px;
+  outline: none;
+  cursor: pointer;
+  background-color: #b2bec3;
+  border-bottom: 4px solid #fdcb6e;
+}
+
+.ActiveSort {
+  width: 10vw;
+  box-sizing: border-box;
+  background-color: #29335c;
+  height: 100%;
+  border: 0;
+  border-bottom: 4px solid #fdcb6e;
+  align-self: center;
+  color: #363636;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  padding: 8px 8px;
+  outline: none;
+  cursor: pointer;
+  background-color: #b2bec3;
+  box-sizing: border-box;
 }

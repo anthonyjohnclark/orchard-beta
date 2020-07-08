@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import classes from "../InvProd/InvProduct.module.css";
+import Auxil from "../../../../hoc/Auxil";
 
 class InvProduct extends Component<any, any> {
   renderProductRows() {
-    return this.props.products.map((productValues: any) => {
+    return this.props.sortedProducts.map((productTableValues: any) => {
       const {
         id,
         name,
@@ -18,7 +19,7 @@ class InvProduct extends Component<any, any> {
         expectedFloor,
         par,
         productActive,
-      } = productValues;
+      } = productTableValues;
 
       let styles: any = [classes.InvProd];
 
@@ -43,7 +44,6 @@ class InvProduct extends Component<any, any> {
           }
         }
       }
-
       // if (organic === true) {
       //   styles.push(classes.OGProd);
       // } else {
@@ -57,17 +57,24 @@ class InvProduct extends Component<any, any> {
           <td>{retailPrice}</td>
           <td>{caseSize}</td>
           <td>{soldBy}</td>
-          <td>{null}</td>
+          <td> {null}</td>
           <td>{expectedInv}</td>
-          <td>{null}</td>
+          <td>
+            <input type="text">{null}</input>
+          </td>
           <td>{expectedFloor}</td>
-          <td>{null}</td>
+          <td>
+            {" "}
+            <input type="text">{null}</input>
+          </td>
           <td>{sold}</td>
           <td>{null}</td>
           <td>{par}</td>
           <td>{null}</td>
           <td>{null}</td>
-          <td>{null}</td>
+          <td>
+            <input type="text">{null}</input>
+          </td>
         </tr>
       );
     });

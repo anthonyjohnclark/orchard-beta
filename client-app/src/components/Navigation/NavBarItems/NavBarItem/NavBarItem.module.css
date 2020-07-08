@@ -14,10 +14,10 @@
   border-bottom: 4px solid transparent;
   box-sizing: border-box;
   display: block;
+  font-weight: bold;
 }
 
 .NavBarItem a:hover,
-.NavBarItem a:active,
 .NavBarItem a.active {
   background-color: #b2bec3;
   border-bottom: 4px solid #fdcb6e;

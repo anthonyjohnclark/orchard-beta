@@ -14,6 +14,14 @@
   border-color: #221d23;
 }
 
+.InvProd td input {
+  width: 100%;
+  color: white;
+  font-weight: bold;
+  background-color: #221d23;
+  text-align: center;
+}
+
 .InvProd td.highlight {
   padding: 0;
   width: 4px;
@@ -56,11 +64,11 @@ tr:hover td.highlight div {
 }
 
 .InvProd.CVProdInactive {
-  background-color: blue;
+  background-color: #383be5;
 }
 
 .InvProd.OGProdInactive {
-  background-color: green;
+  background-color: #51783f;
 }
 
 .InvProd.CVProdActive.OnSale,
