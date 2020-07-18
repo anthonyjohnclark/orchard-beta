@@ -12,12 +12,18 @@ class InvProduct extends Component<any, any> {
         onSale,
         soldBy,
         caseSize,
+        cost,
         retailPrice,
-        sold,
+        sell,
         shrink,
         expectedInv,
         expectedFloor,
+        inTheBack,
+        onTheFloor,
+        selling,
         par,
+        fill,
+        suggested,
         productActive,
       } = productTableValues;
 
@@ -57,17 +63,15 @@ class InvProduct extends Component<any, any> {
           <td>{retailPrice}</td>
           <td>{caseSize}</td>
           <td>{soldBy}</td>
-          <td> {null}</td>
           <td>{expectedInv}</td>
           <td>
             <input type="text">{null}</input>
           </td>
           <td>{expectedFloor}</td>
           <td>
-            {" "}
             <input type="text">{null}</input>
           </td>
-          <td>{sold}</td>
+          <td>{sell}</td>
           <td>{null}</td>
           <td>{par}</td>
           <td>{null}</td>

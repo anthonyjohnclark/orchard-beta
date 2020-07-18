@@ -3,7 +3,7 @@ import classes from "./ButtonList.module.css";
 
 const buttonList = [
   {
-    id: "1",
+    id: 1,
     name: "Active/Inactive",
     primaryKey: "productActive",
     secondaryKey: "onSale",

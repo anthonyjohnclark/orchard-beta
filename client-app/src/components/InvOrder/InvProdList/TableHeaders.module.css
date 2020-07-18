@@ -1,0 +1,32 @@
+.InvProdHeader {
+  background-color: #29335c;
+  color: white;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 56px;
+  z-index: 1;
+}
+
+.InvProdHeaderAsc:after {
+  background-color: #29335c;
+  color: white;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 56px;
+  z-index: 1;
+  content: " \02C6";
+}
+
+.InvProdHeaderDesc:after {
+  background-color: #29335c;
+  color: white;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 56px;
+  z-index: 1;
+  content: " \02C7";
+}
+
+.InvProdHeader:hover {
+  cursor: pointer;
+}

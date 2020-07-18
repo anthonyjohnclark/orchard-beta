@@ -3,6 +3,7 @@ import classes from "../InvProdList/InvProdList.module.css";
 import InvProduct from "./InvProd/InvProduct";
 import Auxil from "../../../hoc/Auxil";
 import ButtonList from "./ButtonList";
+import TableHeaders from "./TableHeaders";
 
 const InvProdList = (props: any) => {
   const { products } = props;
@@ -110,203 +111,23 @@ const InvProdList = (props: any) => {
         </button>
         {dropdown ? (
           <div className={classes.SortDropdown}>
-            {
-              <ButtonList
-                requestSort={requestSort}
-                setButtonActive={setButtonActive}
-                activeSort={activeSort}
-              />
-            }
-            {/* {
-              <ul>
-                <li>
-                  <button
-                    className={
-                      activeSort.buttonKey == 1
-                        ? classes.ActiveSort
-                        : classes.SortDropdownButton
-                    }
-                    onClick={() => {
-                      requestSort(
-                        "productActive",
-                        "onSale",
-                        "organic",
-                        "normal"
-                      );
-                      setButtonActive("1");
-                    }}
-                  >
-                    Active/Inactive
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className={
-                      activeSort.buttonKey == 2
-                        ? classes.ActiveSort
-                        : classes.SortDropdownButton
-                    }
-                    onClick={() => {
-                      requestSort(
-                        "productActive",
-                        "organic",
-                        "onSale",
-                        "normal"
-                      );
-                      setButtonActive("2");
-                    }}
-                  >
-                    Active OG
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className={
-                      activeSort.buttonKey == 3
-                        ? classes.ActiveSort
-                        : classes.SortDropdownButton
-                    }
-                    onClick={() => {
-                      requestSort(
-                        "productActive",
-                        "organic",
-                        "onSale",
-                        "reverse2"
-                      );
-                      setButtonActive("3");
-                    }}
-                  >
-                    Active CV
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className={
-                      activeSort.buttonKey == 4
-                        ? classes.ActiveSort
-                        : classes.SortDropdownButton
-                    }
-                    onClick={() => {
-                      requestSort(
-                        "productActive",
-                        "onSale",
-                        "organic",
-                        "normal"
-                      );
-                      setButtonActive("4");
-                    }}
-                  >
-                    On Sale Active
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className={
-                      activeSort.buttonKey == 5
-                        ? classes.ActiveSort
-                        : classes.SortDropdownButton
-                    }
-                    onClick={() => {
-                      requestSort(
-                        "organic",
-                        "onSale",
-                        "productActive",
-                        "normal"
-                      );
-                      setButtonActive("5");
-                    }}
-                  >
-                    On Sale Organic
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className={
-                      activeSort.buttonKey == 6
-                        ? classes.ActiveSort
-                        : classes.SortDropdownButton
-                    }
-                    onClick={() => {
-                      requestSort(
-                        "organic",
-                        "onSale",
-                        "productActive",
-                        "reverse1"
-                      );
-                      setButtonActive("6");
-                    }}
-                  >
-                    On Sale CV
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className={
-                      activeSort.buttonKey == 7
-                        ? classes.ActiveSort
-                        : classes.SortDropdownButton
-                    }
-                    onClick={() => {
-                      requestSort(
-                        "productActive",
-                        "onSale",
-                        "organic",
-                        "reverse1"
-                      );
-                      setButtonActive("7");
-                    }}
-                  >
-                    On Sale-Inactive
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className={
-                      activeSort.buttonKey == 8
-                        ? classes.ActiveSort
-                        : classes.SortDropdownButton
-                    }
-                    onClick={() => {
-                      requestSort(
-                        "productActive",
-                        "organic",
-                        "onSale",
-                        "reverse1and2"
-                      );
-                      setButtonActive("8");
-                    }}
-                  >
-                    Inactive CV
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className={
-                      activeSort.buttonKey == 9
-                        ? classes.ActiveSort
-                        : classes.SortDropdownButton
-                    }
-                    onClick={() => {
-                      requestSort(
-                        "productActive",
-                        "organic",
-                        "onSale",
-                        "reverse2"
-                      );
-                      setButtonActive("9");
-                    }}
-                  >
-                    Inactive OG
-                  </button>
-                </li>
-              </ul>
-            } */}
+            <ButtonList
+              requestSort={requestSort}
+              setButtonActive={setButtonActive}
+              activeSort={activeSort}
+            />
           </div>
         ) : null}
       </div>
       <table className={classes.InvProdTable}>
         <thead className={classes.InvProdHeader}>
-          <tr>
+          <TableHeaders
+            activeHeaderSort={activeHeaderSort}
+            setHeaderActive={setHeaderActive}
+            requestSortForHeaders={requestSortForHeaders}
+            sortConfigForHeaders={sortConfigForHeaders}
+          />
+          {/* <tr>
             <th
               className={
                 activeHeaderSort.headerKey == 1 &&
@@ -393,7 +214,7 @@ const InvProdList = (props: any) => {
             <th className={classes.InvProdHeader} scope="col">
               Order
             </th>
-          </tr>
+          </tr> */}
         </thead>
         <InvProduct
           key={props.id}
