@@ -4,7 +4,6 @@
   transition: transform 0.1s; /* Animation */
   width: 100%;
   text-align: center;
-  z-index: 7;
 }
 
 .InvProd td {

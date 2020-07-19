@@ -20,10 +20,16 @@ const InvProdList = (props: any) => {
 
   const [dropdown, toggleDropdown] = useState(false);
 
+  const [searchText, setSearch] = useState("");
+
   const [sortConfig, setSortConfig] = useState(props);
   const [sortConfigForHeaders, setSortConfigForHeaders] = useState(props);
 
-  let sortedProducts = [...products];
+  let filteredProducts = [...products].filter((products) => {
+    return products.name.toLowerCase().indexOf(searchText) >= 0;
+  });
+
+  let sortedProducts = [...filteredProducts];
 
   const requestSort = (
     primaryKey: any,
@@ -102,6 +108,13 @@ const InvProdList = (props: any) => {
 
   return (
     <Auxil>
+      <div>
+        <input
+          type="text"
+          placeholder="Search by Name..."
+          onChange={(text) => setSearch(text.target.value)}
+        />
+      </div>
       <div className={classes.SortContainer}>
         <button
           className={dropdown === false ? classes.SortButton : classes.Active}
@@ -127,94 +140,6 @@ const InvProdList = (props: any) => {
             requestSortForHeaders={requestSortForHeaders}
             sortConfigForHeaders={sortConfigForHeaders}
           />
-          {/* <tr>
-            <th
-              className={
-                activeHeaderSort.headerKey == 1 &&
-                sortConfigForHeaders.direction == "descending"
-                  ? classes.InvProdHeaderAsc
-                  : activeHeaderSort.headerKey == 1 &&
-                    sortConfigForHeaders.direction == "ascending"
-                  ? classes.InvProdHeaderDesc
-                  : classes.InvProdHeader
-              }
-              onClick={() => {
-                requestSortForHeaders("id");
-                setHeaderActive("1");
-              }}
-              scope="col"
-            >
-              VIN
-            </th>
-            <th
-              className={
-                activeHeaderSort.headerKey == 2 &&
-                sortConfigForHeaders.direction == "descending"
-                  ? classes.InvProdHeaderAsc
-                  : activeHeaderSort.headerKey == 2 &&
-                    sortConfigForHeaders.direction == "ascending"
-                  ? classes.InvProdHeaderDesc
-                  : classes.InvProdHeader
-              }
-              onClick={() => {
-                requestSortForHeaders("name");
-                setHeaderActive("2");
-              }}
-              scope="col"
-            >
-              Name
-            </th>
-            <th
-              className={classes.InvProdHeader}
-              onClick={() => requestSortForHeaders("retailPrice")}
-              scope="col"
-            >
-              Price
-            </th>
-            <th
-              className={classes.InvProdHeader}
-              onClick={() => requestSortForHeaders("caseSize")}
-              scope="col"
-            >
-              Case
-            </th>
-            <th className={classes.InvProdHeader} scope="col">
-              Unit
-            </th>
-            <th className={classes.InvProdHeader} scope="col">
-              Cost
-            </th>
-            <th className={classes.InvProdHeader} scope="col">
-              Expected Inv
-            </th>
-            <th className={classes.InvProdHeader} scope="col">
-              ITB
-            </th>
-            <th className={classes.InvProdHeader} scope="col">
-              Predicted Floor
-            </th>
-            <th className={classes.InvProdHeader} scope="col">
-              OTF
-            </th>
-            <th className={classes.InvProdHeader} scope="col">
-              Sell
-            </th>
-            <th className={classes.InvProdHeader} scope="col">
-              Selling
-            </th>
-            <th className={classes.InvProdHeader} scope="col">
-              Par
-            </th>
-            <th className={classes.InvProdHeader} scope="col">
-              Fill
-            </th>
-            <th className={classes.InvProdHeader} scope="col">
-              Suggested
-            </th>
-            <th className={classes.InvProdHeader} scope="col">
-              Order
-            </th>
-          </tr> */}
         </thead>
         <InvProduct
           key={props.id}

@@ -7,7 +7,7 @@
   color: white;
   border: 0;
 }
-
+/* 
 .InvProdHeader {
   background-color: #29335c;
   color: white;
@@ -39,8 +39,7 @@
 
 .InvProdHeader:hover {
   cursor: pointer;
-}
-
+} */
 .SortContainer {
   position: relative;
   height: 100%;
@@ -66,7 +65,6 @@
   text-align: center;
   text-decoration: none;
   border: 4px;
-  height: 100%;
   border-bottom: 4px solid transparent;
 }
 
@@ -103,7 +101,6 @@
   display: flex;
   float: inline-end;
   width: 100%;
-  height: 100%;
 }
 
 .SortDropdownButton:hover,

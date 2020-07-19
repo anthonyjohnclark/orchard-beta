@@ -20,7 +20,7 @@ let tableHeaders = [
 ];
 
 const TableHeaders = (props: any) => (
-  <tr>
+  <tr className={classes.InvProdHeader}>
     {tableHeaders.map((headers) => (
       <th
         key={headers.headerKey}
