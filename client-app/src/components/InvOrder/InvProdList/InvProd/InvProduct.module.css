@@ -4,6 +4,7 @@
   transition: transform 0.1s; /* Animation */
   width: 100%;
   text-align: center;
+  z-index: 7;
 }
 
 .InvProd td {
@@ -11,6 +12,7 @@
   padding: 12px;
   transition: all 0.2s ease-in-out;
   border-color: #221d23;
+  z-index: 7;
 }
 
 .InvProd td input {

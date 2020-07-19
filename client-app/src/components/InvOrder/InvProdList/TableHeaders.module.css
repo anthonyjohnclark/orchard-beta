@@ -10,12 +10,14 @@
   background-color: #29335c;
   position: sticky;
   top: 56px;
+  z-index: 1;
 }
 
 .InvProdHeaderDesc {
   background-color: #29335c;
   position: sticky;
   top: 56px;
+  z-index: 1;
 }
 
 .InvProdHeaderAsc:after {
