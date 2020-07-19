@@ -26,7 +26,10 @@ const InvProdList = (props: any) => {
   const [sortConfigForHeaders, setSortConfigForHeaders] = useState(props);
 
   let filteredProducts = [...products].filter((products) => {
-    return products.name.toLowerCase().indexOf(searchText) >= 0;
+    return (
+      products.name.toString().toLowerCase().indexOf(searchText) >= 0 ||
+      products.id.toString().indexOf(searchText) >= 0
+    );
   });
 
   let sortedProducts = [...filteredProducts];
@@ -111,7 +114,7 @@ const InvProdList = (props: any) => {
       <div>
         <input
           type="text"
-          placeholder="Search by Name..."
+          placeholder="Search by Name or VIN..."
           onChange={(text) => setSearch(text.target.value)}
         />
       </div>
