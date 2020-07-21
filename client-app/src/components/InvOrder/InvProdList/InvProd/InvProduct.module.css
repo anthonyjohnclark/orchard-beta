@@ -16,6 +16,8 @@
 }
 
 .InvProd td input {
+  outline: none;
+
   width: 100%;
   color: white;
   font-weight: bold;

@@ -1,45 +1,31 @@
-.InvProdTable {
-  border-collapse: collapse;
-  background-color: #29335c;
-  width: 100%;
-  text-align: center;
-  table-layout: fixed;
-  color: white;
-  border: 0;
-}
-/* 
-.InvProdHeader {
-  background-color: #29335c;
-  color: white;
-  position: sticky;
-  position: -webkit-sticky;
+.SearchBar {
+  position: absolute;
+  display: flex;
   top: 56px;
-  z-index: 1;
+  right: 0;
 }
 
-.InvProdHeaderAsc:after {
-  background-color: #29335c;
+.SearchBarText {
+  padding-right: 5px;
+  margin: 0;
   color: white;
-  position: sticky;
-  position: -webkit-sticky;
-  top: 56px;
-  z-index: 1;
-  content: " \02C6";
+  font-weight: bold;
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.InvProdHeaderDesc:after {
-  background-color: #29335c;
-  color: white;
-  position: sticky;
-  position: -webkit-sticky;
-  top: 56px;
-  z-index: 1;
-  content: " \02C7";
+.SearchBar input {
+  outline: none;
+  color: #363636;
+  font-weight: bold;
+  background-color: white;
+  text-align: left;
+  font-weight: bold;
+  height: 5vh;
 }
 
-.InvProdHeader:hover {
-  cursor: pointer;
-} */
 .SortContainer {
   position: relative;
   height: 100%;
@@ -149,4 +135,13 @@
   cursor: pointer;
   background-color: #b2bec3;
   box-sizing: border-box;
+}
+.InvProdTable {
+  border-collapse: collapse;
+  background-color: #29335c;
+  width: 100%;
+  text-align: center;
+  table-layout: fixed;
+  color: white;
+  border: 0;
 }

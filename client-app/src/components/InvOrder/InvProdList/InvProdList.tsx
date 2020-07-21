@@ -111,10 +111,13 @@ const InvProdList = (props: any) => {
 
   return (
     <Auxil>
-      <div>
+      <div className={classes.SearchBar}>
+        <div className={classes.SearchBarText}>
+          <p>Search</p>
+        </div>
         <input
           type="text"
-          placeholder="Search by Name or VIN..."
+          placeholder="by Name or VIN..."
           onChange={(text) => setSearch(text.target.value)}
         />
       </div>
