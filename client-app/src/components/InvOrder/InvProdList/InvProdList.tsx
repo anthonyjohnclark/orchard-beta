@@ -20,19 +20,10 @@ const InvProdList = (props: any) => {
 
   const [dropdown, toggleDropdown] = useState(false);
 
-  const [searchText, setSearch] = useState("");
-
   const [sortConfig, setSortConfig] = useState(props);
   const [sortConfigForHeaders, setSortConfigForHeaders] = useState(props);
 
-  let filteredProducts = [...products].filter((products) => {
-    return (
-      products.name.toString().toLowerCase().indexOf(searchText) >= 0 ||
-      products.id.toString().indexOf(searchText) >= 0
-    );
-  });
-
-  let sortedProducts = [...filteredProducts];
+  let sortedProducts = [...products];
 
   const requestSort = (
     primaryKey: any,
@@ -55,10 +46,8 @@ const InvProdList = (props: any) => {
     if (sortConfig !== null) {
       setSortConfig(products);
     }
-    {
-      setSortConfigForHeaders({ key, direction });
-      toggleActiveSort({ buttonKey: 0 });
-    }
+    setSortConfigForHeaders({ key, direction });
+    toggleActiveSort({ buttonKey: 0 });
   };
 
   if (sortConfigForHeaders !== null) {
@@ -111,16 +100,7 @@ const InvProdList = (props: any) => {
 
   return (
     <Auxil>
-      <div className={classes.SearchBar}>
-        <div className={classes.SearchBarText}>
-          <p>Search</p>
-        </div>
-        <input
-          type="text"
-          placeholder="by Name or VIN..."
-          onChange={(text) => setSearch(text.target.value)}
-        />
-      </div>
+      <div></div>
       <div className={classes.SortContainer}>
         <button
           className={dropdown === false ? classes.SortButton : classes.Active}

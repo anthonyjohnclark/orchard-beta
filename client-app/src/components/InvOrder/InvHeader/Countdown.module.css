@@ -1,0 +1,15 @@
+.Countdown {
+  left: 0;
+}
+.CountdownTimeLeft {
+  color: white;
+  top: 0;
+}
+
+.CountdownTimeLeft.Warning {
+  color: #fdcb6e;
+}
+
+.CountdownTimeLeft.Warning.Alert {
+  color: #a4031f;
+}

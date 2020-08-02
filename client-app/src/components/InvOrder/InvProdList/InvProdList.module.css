@@ -1,31 +1,3 @@
-.SearchBar {
-  position: absolute;
-  display: flex;
-  top: 56px;
-  right: 0;
-}
-
-.SearchBarText {
-  padding-right: 5px;
-  margin: 0;
-  color: white;
-  font-weight: bold;
-  height: 5vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.SearchBar input {
-  outline: none;
-  color: #363636;
-  font-weight: bold;
-  background-color: white;
-  text-align: left;
-  font-weight: bold;
-  height: 5vh;
-}
-
 .SortContainer {
   position: relative;
   height: 100%;
