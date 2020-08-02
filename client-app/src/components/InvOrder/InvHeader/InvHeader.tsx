@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import InvProdList from "../InvProdList/InvProdList";
 import classes from "../InvHeader/InvHeader.module.css";
-import Countdown from "./Countdown";
+import Countdown from "./InvHeaderComponents/Countdown";
+import SearchBar from "./InvHeaderComponents/SearchBar";
 import Auxil from "../../../hoc/Auxil";
 
 const InvHeader = (props: any) => {
   const { products } = props;
 
   const [searchText, setSearch] = useState("");
+
+  const setNewSearch = (newSearchText: any) => {
+    setSearch(newSearchText);
+  };
 
   let filteredProducts = [...products].filter((products) => {
     return (
@@ -19,16 +24,7 @@ const InvHeader = (props: any) => {
   return (
     <Auxil className={classes.InvHeader}>
       <Countdown />
-      <div className={classes.SearchBar}>
-        <div className={classes.SearchBarText}>
-          <p>Search</p>
-        </div>
-        <input
-          type="text"
-          placeholder="by Name or VIN..."
-          onChange={(text) => setSearch(text.target.value)}
-        />
-      </div>
+      <SearchBar searchText={searchText} onChange={setNewSearch} />
       <InvProdList products={filteredProducts} />
     </Auxil>
   );

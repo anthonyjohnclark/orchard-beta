@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import classes from "../InvProdList/InvProdList.module.css";
 import InvProduct from "./InvProd/InvProduct";
 import Auxil from "../../../hoc/Auxil";
-import ButtonList from "./ButtonList";
-import TableHeaders from "./TableHeaders";
+import ButtonList from "./InvProdComponents/ButtonList";
+import TableHeaders from "./InvProdComponents/TableHeaders";
 
 const InvProdList = (props: any) => {
   const { products } = props;
@@ -100,7 +100,6 @@ const InvProdList = (props: any) => {
 
   return (
     <Auxil>
-      <div></div>
       <div className={classes.SortContainer}>
         <button
           className={dropdown === false ? classes.SortButton : classes.Active}

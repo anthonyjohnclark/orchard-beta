@@ -1,33 +1,3 @@
 .InvHeader {
   margin-bottom: 56px;
 }
-
-.SearchBar {
-  position: absolute;
-  display: flex;
-  top: 56px;
-  right: 0;
-  background-color: #29335c;
-  padding-left: 5px;
-}
-
-.SearchBarText {
-  padding-right: 5px;
-  margin: 0;
-  color: white;
-  font-weight: bold;
-  height: 5vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.SearchBar input {
-  outline: none;
-  color: #363636;
-  font-weight: bold;
-  background-color: white;
-  text-align: left;
-  font-weight: bold;
-  height: 5vh;
-}
