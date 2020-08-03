@@ -11,21 +11,6 @@
   display: flex;
 }
 
-.SortButton {
-  box-sizing: border-box;
-  outline: none;
-  width: 5vw;
-  float: inline-start;
-  padding: 8px 8px;
-  background-color: #29335c;
-  color: white;
-  font-weight: bold;
-  text-align: center;
-  text-decoration: none;
-  border: 4px;
-  border-bottom: 4px solid transparent;
-}
-
 .SortDropdownButton {
   width: 10vw;
   box-sizing: border-box;

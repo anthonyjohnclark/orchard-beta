@@ -1,0 +1,40 @@
+.SortButton {
+  box-sizing: border-box;
+  outline: none;
+  width: 5vw;
+  float: inline-start;
+  padding: 8px 8px;
+  background-color: #29335c;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border: 4px;
+  border-bottom: 4px solid transparent;
+}
+
+.SortButton:hover {
+  cursor: pointer;
+  background-color: #b2bec3;
+  border-bottom: 4px solid #fdcb6e;
+  box-sizing: border-box;
+}
+
+.Active {
+  align-self: center;
+  color: #363636;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  width: 5vw;
+  border: none;
+  text-decoration: none;
+  text-align: center;
+  box-sizing: border-box;
+  border-bottom: 4px solid transparent;
+  padding: 8px 8px;
+  outline: none;
+  cursor: pointer;
+  background-color: #b2bec3;
+  border-bottom: 4px solid #fdcb6e;
+}

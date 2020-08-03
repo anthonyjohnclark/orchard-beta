@@ -4,6 +4,7 @@ import InvProduct from "./InvProd/InvProduct";
 import Auxil from "../../../hoc/Auxil";
 import ButtonList from "./InvProdComponents/ButtonList";
 import TableHeaders from "./InvProdComponents/TableHeaders";
+import SortFilterButton from "./InvProdComponents/SortFilterButton";
 
 const InvProdList = (props: any) => {
   const { products } = props;
@@ -101,12 +102,7 @@ const InvProdList = (props: any) => {
   return (
     <Auxil>
       <div className={classes.SortContainer}>
-        <button
-          className={dropdown === false ? classes.SortButton : classes.Active}
-          onClick={() => toggleDropdown(!dropdown)}
-        >
-          ☰ Sort
-        </button>
+        <SortFilterButton dropdown={dropdown} toggleDropdown={toggleDropdown} />
         {dropdown ? (
           <div className={classes.SortDropdown}>
             <ButtonList
