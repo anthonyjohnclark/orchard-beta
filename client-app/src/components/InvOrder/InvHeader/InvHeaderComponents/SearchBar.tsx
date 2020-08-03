@@ -14,7 +14,7 @@ const SearchBar = (props: any) => {
       <input
         type="text"
         placeholder="by Name or VIN..."
-        onChange={(text) => props.onChange(text.target.value)}
+        onChange={(text) => props.setNewSearch(text.target.value)}
       />
     </div>
   );

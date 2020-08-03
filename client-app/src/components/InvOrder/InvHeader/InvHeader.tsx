@@ -24,7 +24,7 @@ const InvHeader = (props: any) => {
   return (
     <Auxil className={classes.InvHeader}>
       <Countdown />
-      <SearchBar searchText={searchText} onChange={setNewSearch} />
+      <SearchBar searchText={searchText} setNewSearch={setNewSearch} />
       <InvProdList products={filteredProducts} />
     </Auxil>
   );

@@ -21,6 +21,12 @@ const InvProdList = (props: any) => {
 
   const [dropdown, toggleDropdown] = useState(false);
 
+  const [filterEnabled, toggleFilter] = useState(false);
+  const setFilterEnabled = (filterEnabled: any, e: any) => {
+    e.stopPropagation();
+    toggleFilter(!filterEnabled);
+  };
+
   const [sortConfig, setSortConfig] = useState(props);
   const [sortConfigForHeaders, setSortConfigForHeaders] = useState(props);
 
@@ -102,7 +108,12 @@ const InvProdList = (props: any) => {
   return (
     <Auxil>
       <div className={classes.SortContainer}>
-        <SortFilterButton dropdown={dropdown} toggleDropdown={toggleDropdown} />
+        <SortFilterButton
+          filterEnabled={filterEnabled}
+          setFilterEnabled={setFilterEnabled}
+          dropdown={dropdown}
+          toggleDropdown={toggleDropdown}
+        />
         {dropdown ? (
           <div className={classes.SortDropdown}>
             <ButtonList
