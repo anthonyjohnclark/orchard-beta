@@ -6,6 +6,7 @@
   float: inline-end;
   width: 100%;
   height: 100%;
+  justify-content: space-between;
 }
 
 .SortDropdownButton:hover,
@@ -17,7 +18,7 @@
 }
 
 .SortDropdownButton {
-  width: 10vw;
+  width: 9vw;
   box-sizing: border-box;
   background-color: #29335c;
   height: 100%;
@@ -37,7 +38,7 @@
 }
 
 .ActiveSort {
-  width: 10vw;
+  width: 9vw;
   box-sizing: border-box;
   background-color: #29335c;
   height: 100%;

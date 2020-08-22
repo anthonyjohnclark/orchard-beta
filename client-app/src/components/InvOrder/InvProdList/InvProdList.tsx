@@ -22,25 +22,65 @@ const InvProdList = (props: any) => {
   const [dropdown, toggleDropdown] = useState(false);
 
   const [filterEnabled, toggleFilter] = useState(false);
-  const setFilterEnabled = (filterEnabled: any, e: any) => {
-    e.stopPropagation();
-    toggleFilter(!filterEnabled);
+
+  const requestSort = (
+    id: any,
+    primaryKey: any,
+    secondaryKey: any,
+    tertiaryKey: any,
+    direction: any
+  ) => {
+    if (!filterEnabled) {
+      toggleHeaderActiveSort({ headerKey: 0 });
+      setSortConfig({
+        id: 0,
+        primaryKey,
+        secondaryKey,
+        tertiaryKey,
+        direction,
+      });
+    }
+    if (filterEnabled) {
+      setSortConfig({
+        primaryKey,
+        secondaryKey,
+        tertiaryKey,
+        direction,
+      });
+      props.requestFilterConfig(
+        //only primary and secondary key are passed for the filter
+        id,
+        primaryKey,
+        secondaryKey
+      );
+    }
   };
+
+  const setFilterEnabled = (filterEnabled: any, e: any) => {
+    toggleFilter(!filterEnabled);
+    e.stopPropagation();
+
+    if (filterEnabled) {
+      requestSort(
+        sortConfig.id,
+        sortConfig.primaryKey,
+        sortConfig.secondaryKey,
+        sortConfig.tertiaryKey,
+        sortConfig.direction
+      );
+    }
+
+    toggleHeaderActiveSort({ headerKey: 0 });
+  };
+
+  console.log(filterEnabled);
 
   const [sortConfig, setSortConfig] = useState(props);
   const [sortConfigForHeaders, setSortConfigForHeaders] = useState(props);
 
   let sortedProducts = [...products];
 
-  const requestSort = (
-    primaryKey: any,
-    secondaryKey: any,
-    tertiaryKey: any,
-    direction: any
-  ) => {
-    toggleHeaderActiveSort({ headerKey: 0 });
-    setSortConfig({ primaryKey, secondaryKey, tertiaryKey, direction });
-  };
+  console.log(sortConfig);
 
   const requestSortForHeaders = (key: any) => {
     let direction = "ascending";
@@ -54,7 +94,8 @@ const InvProdList = (props: any) => {
       setSortConfig(products);
     }
     setSortConfigForHeaders({ key, direction });
-    toggleActiveSort({ buttonKey: 0 });
+
+    if (!filterEnabled) toggleActiveSort({ buttonKey: 0 });
   };
 
   if (sortConfigForHeaders !== null) {
@@ -70,7 +111,7 @@ const InvProdList = (props: any) => {
   }
 
   if (sortConfig !== null) {
-    if (sortConfig.direction == "normal") {
+    if (sortConfig.direction === "normal") {
       sortedProducts.sort((a, b) => {
         return (
           b[sortConfig.primaryKey] - a[sortConfig.primaryKey] ||
@@ -78,7 +119,7 @@ const InvProdList = (props: any) => {
           b[sortConfig.tertiaryKey] - a[sortConfig.tertiaryKey]
         );
       });
-    } else if (sortConfig.direction == "reverse1") {
+    } else if (sortConfig.direction === "reverse1") {
       sortedProducts.sort((a, b) => {
         return (
           a[sortConfig.primaryKey] - b[sortConfig.primaryKey] ||
@@ -86,7 +127,7 @@ const InvProdList = (props: any) => {
           b[sortConfig.tertiaryKey] - a[sortConfig.tertiaryKey]
         );
       });
-    } else if (sortConfig.direction == "reverse2") {
+    } else if (sortConfig.direction === "reverse2") {
       sortedProducts.sort((a, b) => {
         return (
           b[sortConfig.primaryKey] - a[sortConfig.primaryKey] ||
@@ -94,7 +135,7 @@ const InvProdList = (props: any) => {
           b[sortConfig.tertiaryKey] - a[sortConfig.tertiaryKey]
         );
       });
-    } else if (sortConfig.direction == "reverse1and2") {
+    } else if (sortConfig.direction === "reverse1and2") {
       sortedProducts.sort((a, b) => {
         return (
           a[sortConfig.primaryKey] - b[sortConfig.primaryKey] ||

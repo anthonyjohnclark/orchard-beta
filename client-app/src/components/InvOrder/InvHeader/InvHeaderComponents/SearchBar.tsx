@@ -2,10 +2,6 @@ import React from "react";
 import classes from "./SearchBar.module.css";
 
 const SearchBar = (props: any) => {
-  const setNewSearch = (text: any) => {
-    props.onChange(text.target.value);
-  };
-
   return (
     <div className={classes.SearchBar}>
       <div className={classes.SearchBarText}>

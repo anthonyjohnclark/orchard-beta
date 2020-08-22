@@ -5,7 +5,7 @@ const Countdown = () => {
   const calculateTimeLeft = () => {
     let time = new Date();
     let difference = new Date(
-      +new Date(time.getFullYear(), time.getMonth(), time.getDate(), 10, 0, 0) -
+      +new Date(time.getFullYear(), time.getMonth(), time.getDate(), 21, 0, 0) -
         +new Date(
           time.getFullYear(),
           time.getMonth(),
