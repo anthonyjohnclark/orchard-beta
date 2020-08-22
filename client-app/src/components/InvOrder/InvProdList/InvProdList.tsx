@@ -30,23 +30,24 @@ const InvProdList = (props: any) => {
     tertiaryKey: any,
     direction: any
   ) => {
+    setSortConfig({
+      id,
+      primaryKey,
+      secondaryKey,
+      tertiaryKey,
+      direction,
+    });
+    toggleHeaderActiveSort({ headerKey: 0 });
+
     if (!filterEnabled) {
-      toggleHeaderActiveSort({ headerKey: 0 });
-      setSortConfig({
-        id: 0,
+      props.requestFilterConfig(
+        //only primary and secondary key are passed for the filter
+        0,
         primaryKey,
-        secondaryKey,
-        tertiaryKey,
-        direction,
-      });
+        secondaryKey
+      );
     }
     if (filterEnabled) {
-      setSortConfig({
-        primaryKey,
-        secondaryKey,
-        tertiaryKey,
-        direction,
-      });
       props.requestFilterConfig(
         //only primary and secondary key are passed for the filter
         id,
@@ -60,13 +61,21 @@ const InvProdList = (props: any) => {
     toggleFilter(!filterEnabled);
     e.stopPropagation();
 
-    if (filterEnabled) {
-      requestSort(
+    if (sortConfig) {
+      props.requestFilterConfig(
+        //only primary and secondary key are passed for the filter
         sortConfig.id,
         sortConfig.primaryKey,
-        sortConfig.secondaryKey,
-        sortConfig.tertiaryKey,
-        sortConfig.direction
+        sortConfig.secondaryKey
+      );
+    }
+    //'resets' the config id to 0 so that filtering stops if you have a sortConfig
+    if (sortConfig.id === props.filterConfig.id) {
+      props.requestFilterConfig(
+        //only primary and secondary key are passed for the filter
+        0,
+        sortConfig.primaryKey,
+        sortConfig.secondaryKey
       );
     }
 

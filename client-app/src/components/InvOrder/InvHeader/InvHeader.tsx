@@ -72,6 +72,7 @@ const InvHeader = (props: any) => {
       <InvProdList
         products={filteredProducts}
         requestFilterConfig={requestFilterConfig}
+        filterConfig={filterConfig}
       />
     </Auxil>
   );
