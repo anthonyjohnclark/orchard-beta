@@ -78,8 +78,6 @@ const InvProdList = (props: any) => {
         sortConfig.secondaryKey
       );
     }
-
-    toggleHeaderActiveSort({ headerKey: 0 });
   };
 
   console.log(filterEnabled);
@@ -163,6 +161,7 @@ const InvProdList = (props: any) => {
           setFilterEnabled={setFilterEnabled}
           dropdown={dropdown}
           toggleDropdown={toggleDropdown}
+          activeSort={activeSort}
         />
         {dropdown ? (
           <div className={classes.SortDropdown}>

@@ -6,7 +6,11 @@ let SortFilterButton = (props: any) => {
 
   return (
     <button
-      className={props.dropdown === false ? classes.SortButton : classes.Active}
+      className={
+        props.dropdown === true || props.activeSort.buttonKey
+          ? classes.Active
+          : classes.SortButton
+      }
       onClick={() => props.toggleDropdown(!props.dropdown)}
     >
       <div>
