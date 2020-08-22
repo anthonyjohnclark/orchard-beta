@@ -96,6 +96,8 @@ const ButtonList = (props: any) => (
               : classes.SortDropdownButton
           }
           onClick={() => {
+            props.setButtonActive(button.id);
+
             props.requestSort(
               button.id,
               button.primaryKey,
@@ -103,7 +105,6 @@ const ButtonList = (props: any) => (
               button.tertiaryKey,
               button.direction
             );
-            props.setButtonActive(button.id);
           }}
         >
           {button.name}

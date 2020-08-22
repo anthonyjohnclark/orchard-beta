@@ -39,6 +39,17 @@ const InvProdList = (props: any) => {
     });
     toggleHeaderActiveSort({ headerKey: 0 });
 
+    if (!filterEnabled && sortConfig.id === id) {
+      toggleActiveSort({ buttonKey: 0 });
+      setSortConfig({
+        id: 0,
+        primaryKey: 0,
+        secondaryKey: 0,
+        tertiaryKey: 0,
+        direction: 0,
+      });
+    }
+
     if (!filterEnabled) {
       props.requestFilterConfig(
         //only primary and secondary key are passed for the filter
@@ -54,6 +65,24 @@ const InvProdList = (props: any) => {
         primaryKey,
         secondaryKey
       );
+    }
+
+    if (filterEnabled && props.filterConfig.id === id) {
+      props.requestFilterConfig(
+        //only primary and secondary key are passed for the filter
+        0,
+        primaryKey,
+        secondaryKey
+      );
+
+      setSortConfig({
+        id: 0,
+        primaryKey: 0,
+        secondaryKey: 0,
+        tertiaryKey: 0,
+        direction: 0,
+      });
+      toggleActiveSort({ buttonKey: 0 });
     }
   };
 
@@ -77,6 +106,20 @@ const InvProdList = (props: any) => {
         sortConfig.primaryKey,
         sortConfig.secondaryKey
       );
+    }
+    if (filterEnabled && props.filterConfig.id === 0) {
+      props.setFilterConfig({
+        id: 0,
+        primaryKey: 0,
+        secondaryKey: 0,
+      });
+      setSortConfig({
+        id: 0,
+        primaryKey: 0,
+        secondaryKey: 0,
+        tertiaryKey: 0,
+        direction: 0,
+      });
     }
   };
 
