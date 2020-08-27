@@ -18,5 +18,9 @@ namespace Domain
         public double expectedFloor { get; set; }
         public double par { get; set; }
         public Boolean productActive { get; set; }
+        public double cost { get; set; }
+        public double percentSales { get; set; }
+        public double netGIG { get; set; }
+
     }
 }

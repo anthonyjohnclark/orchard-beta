@@ -26,6 +26,7 @@ new Product
                      expectedFloor = 1,
                       par = 3,
                       productActive = true,
+                      percentSales = 7
                     },
 new Product
     {
@@ -41,6 +42,11 @@ new Product
                      expectedFloor = 1.5,
                       par = 5,
                       productActive = true,
+                      percentSales = 6.5,
+                      netGIG = 60.97,
+                      cost = 44.99
+
+
                     },
                     new Product
     {
@@ -56,6 +62,10 @@ new Product
                      expectedFloor = 2,
                       par = 1,
                       productActive = true,
+                      percentSales = 6,
+                      netGIG = 55.43,
+                      cost = 44.99
+
                     },
                     new Product
     {
@@ -71,6 +81,11 @@ new Product
                      expectedFloor = 2,
                       par = 1,
                       productActive = true,
+                      percentSales = 5,
+                      
+                      netGIG = 55.43,
+                      cost = 44.99
+
                     },
                     new Product
     {
@@ -86,6 +101,11 @@ new Product
                      expectedFloor = 2,
                       par = 2,
                       productActive = true,
+                                                                  percentSales = 5,
+                                                                   netGIG = 42.97,
+                      cost = 32.99
+                                                              
+
                     },
                     new Product
     {
@@ -101,6 +121,11 @@ new Product
                      expectedFloor = 1,
                       par = 3,
                       productActive = true,
+                                                                  percentSales = 4,
+                                                                   netGIG = 30.97,
+                      cost = 19.99
+
+
                     },
                     new Product
     {
@@ -116,6 +141,10 @@ new Product
                      expectedFloor = 2,
                       par = 1,
                       productActive = true,
+                      percentSales = 6,
+                      netGIG = 32.97,
+                      cost = 23.99
+
                     },
                     new Product
     {
@@ -131,6 +160,10 @@ new Product
                      expectedFloor = 4,
                       par = 10,
                       productActive = true,
+                      percentSales = 8,
+                      netGIG = 32.97,
+                      cost = 23.99
+
                     },
                     new Product
     {
@@ -146,6 +179,10 @@ new Product
                      expectedFloor = 1,
                       par = 0,
                       productActive = false,
+                      percentSales = 9,
+                      netGIG = 66.97,
+                      cost = 55.99
+
                     },
                     new Product
     {
@@ -161,6 +198,10 @@ new Product
                      expectedFloor = 1,
                       par = 1,
                       productActive = true,
+                      percentSales = 3.33,
+                      netGIG = 72.97,
+                      cost = 61.99
+
                     },
                     new Product
     {
@@ -176,6 +217,10 @@ new Product
                      expectedFloor = 3,
                       par = 3,
                       productActive = true,
+                     percentSales = 2,
+                      netGIG = 75.97,
+                      cost = 68.99
+
                     }
 
     };

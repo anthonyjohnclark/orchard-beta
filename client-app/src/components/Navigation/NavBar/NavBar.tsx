@@ -7,7 +7,7 @@ const NavBar = (props: any) => {
   return (
     <header className={classes.NavBar}>
       <Logo />
-      <h1>PRODUCE NINJA</h1>
+      <h1>orchard</h1>
       <nav>
         <NavBarItems />
       </nav>
