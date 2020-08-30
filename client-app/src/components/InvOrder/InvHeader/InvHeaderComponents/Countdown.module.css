@@ -1,5 +1,6 @@
 .Countdown {
   left: 0;
+  width: 10 vw;
 }
 .CountdownTimeLeft {
   color: white;

@@ -1,3 +1,7 @@
 .InvHeader {
-  margin-bottom: 56px;
+  top: 56px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
 }

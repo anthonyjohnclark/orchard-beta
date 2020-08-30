@@ -3,6 +3,7 @@ import InvProdList from "../InvProdList/InvProdList";
 import classes from "../InvHeader/InvHeader.module.css";
 import Countdown from "./InvHeaderComponents/Countdown";
 import SearchBar from "./InvHeaderComponents/SearchBar";
+import SalesPredictor from "./InvHeaderComponents/SalesPredictor";
 import Auxil from "../../../hoc/Auxil";
 
 const InvHeader = (props: any) => {
@@ -12,6 +13,12 @@ const InvHeader = (props: any) => {
 
   const setNewSearch = (newSearchText: any) => {
     setSearch(newSearchText);
+  };
+
+  const [salesPrediction, setSalesPrediction] = useState("");
+
+  const setNewSalesPrediction = (newSalesNumber: any) => {
+    setSalesPrediction(newSalesNumber);
   };
 
   const [filterConfig, setFilterConfig] = useState(props);
@@ -66,16 +73,22 @@ const InvHeader = (props: any) => {
   });
 
   return (
-    <Auxil className={classes.InvHeader}>
-      <Countdown />
-      <SearchBar searchText={searchText} setNewSearch={setNewSearch} />
+    <div>
+      <div className={classes.InvHeader}>
+        <Countdown />
+        <SalesPredictor
+          setNewSalesPrediction={setNewSalesPrediction}
+          salesPrediction={salesPrediction}
+        />
+        <SearchBar searchText={searchText} setNewSearch={setNewSearch} />
+      </div>
       <InvProdList
         products={filteredProducts}
         requestFilterConfig={requestFilterConfig}
         filterConfig={filterConfig}
         setFilterConfig={setFilterConfig}
       />
-    </Auxil>
+    </div>
   );
 };
 
