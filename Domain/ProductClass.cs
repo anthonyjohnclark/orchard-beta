@@ -21,6 +21,8 @@ namespace Domain
         public double cost { get; set; }
         public double percentSales { get; set; }
         public double netGIG { get; set; }
+        public double fill { get; set; }
+
 
     }
 }

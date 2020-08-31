@@ -36,6 +36,9 @@ namespace Persistence.Migrations
                     b.Property<double>("expectedInv")
                         .HasColumnType("REAL");
 
+                    b.Property<double>("fill")
+                        .HasColumnType("REAL");
+
                     b.Property<double>("netGIG")
                         .HasColumnType("REAL");
 

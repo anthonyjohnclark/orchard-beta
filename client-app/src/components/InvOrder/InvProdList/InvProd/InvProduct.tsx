@@ -74,7 +74,7 @@ class InvProduct extends Component<any, any> {
           <td>{sell}</td>
           <td>{null}</td>
           <td>{par}</td>
-          <td>{null}</td>
+          <td>{fill}</td>
           <td>{null}</td>
           <td>
             <input type="text">{null}</input>

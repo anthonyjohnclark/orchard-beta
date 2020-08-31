@@ -14,7 +14,7 @@ let tableHeaders = [
   { headerKey: 10, name: "Sell", column: "id" },
   { headerKey: 11, name: "Selling", column: "id" },
   { headerKey: 12, name: "Par", column: "id" },
-  { headerKey: 13, name: "Fill", column: "id" },
+  { headerKey: 13, name: "Fill", column: "fill" },
   { headerKey: 14, name: "Suggested", column: "id" },
   { headerKey: 15, name: "Order", column: "id" },
 ];

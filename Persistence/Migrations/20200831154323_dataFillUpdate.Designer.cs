@@ -8,8 +8,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200827222008_dataupdate")]
-    partial class dataupdate
+    [Migration("20200831154323_dataFillUpdate")]
+    partial class dataFillUpdate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,6 +36,9 @@ namespace Persistence.Migrations
                         .HasColumnType("REAL");
 
                     b.Property<double>("expectedInv")
+                        .HasColumnType("REAL");
+
+                    b.Property<double>("fill")
                         .HasColumnType("REAL");
 
                     b.Property<double>("netGIG")

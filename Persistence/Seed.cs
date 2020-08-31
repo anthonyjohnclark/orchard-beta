@@ -26,7 +26,9 @@ new Product
                      expectedFloor = 1,
                       par = 3,
                       productActive = true,
-                      percentSales = 7
+                      percentSales = 7,
+                      cost = 50.99,
+                      fill = 3
                     },
 new Product
     {
@@ -44,9 +46,8 @@ new Product
                       productActive = true,
                       percentSales = 6.5,
                       netGIG = 60.97,
-                      cost = 44.99
-
-
+                      cost = 44.99,
+                      fill = 3
                     },
                     new Product
     {
@@ -64,8 +65,8 @@ new Product
                       productActive = true,
                       percentSales = 6,
                       netGIG = 55.43,
-                      cost = 44.99
-
+                      cost = 44.99,
+                      fill = 2
                     },
                     new Product
     {
@@ -81,12 +82,12 @@ new Product
                      expectedFloor = 2,
                       par = 1,
                       productActive = true,
-                      percentSales = 5,
-                      
+                      percentSales = 5,                
                       netGIG = 55.43,
-                      cost = 44.99
-
+                      cost = 44.99,
+                       fill = 2
                     },
+
                     new Product
     {
                       organic = true,
@@ -101,11 +102,10 @@ new Product
                      expectedFloor = 2,
                       par = 2,
                       productActive = true,
-                                                                  percentSales = 5,
-                                                                   netGIG = 42.97,
-                      cost = 32.99
-                                                              
-
+                      percentSales = 5,
+                      netGIG = 42.97,
+                      cost = 32.99,
+                      fill = 2                                                       
                     },
                     new Product
     {
@@ -121,12 +121,11 @@ new Product
                      expectedFloor = 1,
                       par = 3,
                       productActive = true,
-                                                                  percentSales = 4,
-                                                                   netGIG = 30.97,
-                      cost = 19.99
-
-
-                    },
+                      percentSales = 4,
+                      netGIG = 30.97,
+                      cost = 19.99,
+                      fill = 2
+                   },
                     new Product
     {
                       organic = false,
@@ -143,7 +142,9 @@ new Product
                       productActive = true,
                       percentSales = 6,
                       netGIG = 32.97,
-                      cost = 23.99
+                      cost = 23.99,
+                      fill = 6
+
 
                     },
                     new Product
@@ -162,8 +163,8 @@ new Product
                       productActive = true,
                       percentSales = 8,
                       netGIG = 32.97,
-                      cost = 23.99
-
+                      cost = 23.99,
+                      fill = 12
                     },
                     new Product
     {
@@ -181,8 +182,8 @@ new Product
                       productActive = false,
                       percentSales = 9,
                       netGIG = 66.97,
-                      cost = 55.99
-
+                      cost = 107.99,
+                      fill = 1
                     },
                     new Product
     {
@@ -200,8 +201,8 @@ new Product
                       productActive = true,
                       percentSales = 3.33,
                       netGIG = 72.97,
-                      cost = 61.99
-
+                      cost = 61.99,
+                      fill = 1
                     },
                     new Product
     {
@@ -214,13 +215,13 @@ new Product
                       sold = 200,
                       shrink = 25,
                       expectedInv = 5,
-                     expectedFloor = 3,
-                      par = 3,
-                      productActive = true,
-                     percentSales = 2,
-                      netGIG = 75.97,
-                      cost = 68.99
-
+                    expectedFloor = 3,
+                    par = 3,
+                    productActive = true,
+                   percentSales = 2,
+                    netGIG = 75.97,
+                    cost = 68.99,
+                      fill = 7
                     }
 
     };

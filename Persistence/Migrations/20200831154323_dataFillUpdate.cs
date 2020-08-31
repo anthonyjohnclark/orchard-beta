@@ -2,7 +2,7 @@
 
 namespace Persistence.Migrations
 {
-    public partial class dataupdate : Migration
+    public partial class dataFillUpdate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,7 +26,8 @@ namespace Persistence.Migrations
                     productActive = table.Column<bool>(nullable: false),
                     cost = table.Column<double>(nullable: false),
                     percentSales = table.Column<double>(nullable: false),
-                    netGIG = table.Column<double>(nullable: false)
+                    netGIG = table.Column<double>(nullable: false),
+                    fill = table.Column<double>(nullable: false)
                 },
                 constraints: table =>
                 {
