@@ -4,7 +4,7 @@ import classes from "./TableHeaders.module.css";
 let tableHeaders = [
   { headerKey: 1, name: "VIN", column: "id" },
   { headerKey: 2, name: "Name", column: "name" },
-  { headerKey: 3, name: "Price", column: "retailPrice" },
+  { headerKey: 3, name: "Cost", column: "cost" },
   { headerKey: 4, name: "Case", column: "caseSize" },
   { headerKey: 5, name: "Sold By", column: "soldBy" },
   { headerKey: 6, name: "Expected Inv", column: "id" },

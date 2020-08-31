@@ -60,7 +60,7 @@ class InvProduct extends Component<any, any> {
         <tr className={styles.join(" ")} key={id}>
           <td>{id}</td>
           <td>{name}</td>
-          <td>{retailPrice}</td>
+          <td>{cost}</td>
           <td>{caseSize}</td>
           <td>{soldBy}</td>
           <td>{expectedInv}</td>

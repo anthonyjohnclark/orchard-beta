@@ -21,6 +21,8 @@ const InvHeader = (props: any) => {
     setSalesPrediction(newSalesNumber);
   };
 
+  console.log(salesPrediction);
+
   const [filterConfig, setFilterConfig] = useState(props);
 
   const requestFilterConfig = (id: any, primaryKey: any, secondaryKey: any) => {
