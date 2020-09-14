@@ -4,7 +4,7 @@ import classes from "../InvHeader/InvHeader.module.css";
 import Countdown from "./InvHeaderComponents/Countdown";
 import SearchBar from "./InvHeaderComponents/SearchBar";
 import SalesPredictor from "./InvHeaderComponents/SalesPredictor";
-import Auxil from "../../../hoc/Auxil";
+import TodaysSales from "./InvHeaderComponents/TodaysSales";
 
 const InvHeader = (props: any) => {
   const { products } = props;
@@ -22,6 +22,12 @@ const InvHeader = (props: any) => {
   };
 
   console.log(salesPrediction);
+
+  const [todaysSales, setTodaysSales] = useState("");
+
+  const setNewTodaysSales = (newToddaysSales: any) => {
+    setTodaysSales(newToddaysSales);
+  };
 
   const [filterConfig, setFilterConfig] = useState(props);
 
@@ -82,6 +88,10 @@ const InvHeader = (props: any) => {
           setNewSalesPrediction={setNewSalesPrediction}
           salesPrediction={salesPrediction}
         />
+        <TodaysSales
+          setNewTodaysSales={setNewTodaysSales}
+          todaysSales={todaysSales}
+        />
         <SearchBar searchText={searchText} setNewSearch={setNewSearch} />
       </div>
       <InvProdList
@@ -89,6 +99,8 @@ const InvHeader = (props: any) => {
         requestFilterConfig={requestFilterConfig}
         filterConfig={filterConfig}
         setFilterConfig={setFilterConfig}
+        todaysSales={todaysSales}
+        salesPrediction={salesPrediction}
       />
     </div>
   );

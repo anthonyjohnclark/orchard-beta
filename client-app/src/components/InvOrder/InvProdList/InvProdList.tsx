@@ -123,14 +123,14 @@ const InvProdList = (props: any) => {
     }
   };
 
-  console.log(filterEnabled);
+  // console.log(filterEnabled);
 
   const [sortConfig, setSortConfig] = useState(props);
   const [sortConfigForHeaders, setSortConfigForHeaders] = useState(props);
 
   let sortedProducts = [...products];
 
-  console.log(sortConfig);
+  // console.log(sortConfig);
 
   const requestSortForHeaders = (key: any) => {
     let direction = "ascending";
@@ -227,8 +227,10 @@ const InvProdList = (props: any) => {
         </thead>
         <InvProduct
           key={props.id}
-          products={props.products}
-          sortedProducts={sortedProducts}
+          sortedAndFilteredProducts={sortedProducts}
+          salesPrediction={props.salesPrediction}
+          todaysSales={props.todaysSales}
+          renderProductRows={props.renderProductRows}
         />
       </table>
     </Auxil>
