@@ -227,6 +227,7 @@ const InvProdList = (props: any) => {
         </thead>
         <InvProduct
           key={props.id}
+          updateInputChanged={props.updateInputChanged}
           sortedAndFilteredProducts={sortedProducts}
           salesPrediction={props.salesPrediction}
           todaysSales={props.todaysSales}

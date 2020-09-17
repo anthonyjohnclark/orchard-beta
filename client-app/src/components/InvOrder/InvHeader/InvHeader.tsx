@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import InvProdList from "../InvProdList/InvProdList";
 import classes from "../InvHeader/InvHeader.module.css";
 import Countdown from "./InvHeaderComponents/Countdown";
@@ -7,7 +7,39 @@ import SalesPredictor from "./InvHeaderComponents/SalesPredictor";
 import TodaysSales from "./InvHeaderComponents/TodaysSales";
 
 const InvHeader = (props: any) => {
-  const { products } = props;
+  //here we need to create a new array with blank fields for each product object
+  let productsNew = props.products.map((products: any) => ({
+    ...products,
+    order: "",
+    sell: "",
+    selling: "",
+    suggested: "",
+  }));
+
+  console.log(productsNew);
+
+  const [inputs, setProductInput] = useState(productsNew);
+
+  console.log(inputs);
+
+  const updateInputChanged = (index: any) => (e: any) => {
+    console.log("index: " + index);
+    console.log("property name: " + e.target.name);
+    console.log("value: " + e.target.value);
+
+    console.log(inputs);
+
+    let productsWithInput = [...inputs];
+    productsWithInput[index].order = e.target.value;
+    setProductInput(productsWithInput);
+  };
+
+  //update the initial state of inputs just once when it's blank to be a copy of the new array
+  useEffect(() => {
+    if (inputs.length < 1) {
+      setProductInput([...productsNew]);
+    }
+  }, [inputs, setProductInput]);
 
   const [searchText, setSearch] = useState("");
 
@@ -35,9 +67,9 @@ const InvHeader = (props: any) => {
     setFilterConfig({ id, primaryKey, secondaryKey });
   };
 
-  console.log(filterConfig);
+  // console.log(filterConfig);
 
-  let searchfilteredProducts = [...products].filter((products) => {
+  let searchfilteredProducts = inputs.filter((products: any) => {
     return (
       products.name.toString().toLowerCase().indexOf(searchText) >= 0 ||
       products.id.toString().indexOf(searchText) >= 0
@@ -95,6 +127,7 @@ const InvHeader = (props: any) => {
         <SearchBar searchText={searchText} setNewSearch={setNewSearch} />
       </div>
       <InvProdList
+        updateInputChanged={updateInputChanged}
         products={filteredProducts}
         requestFilterConfig={requestFilterConfig}
         filterConfig={filterConfig}
