@@ -66,18 +66,28 @@ const InvProduct = (props: any) => {
             <td>{soldBy}</td>
             <td>{expectedInv}</td>
             <td>
-              <input type="text">{null}</input>
+              <input
+                type="number"
+                value={productTableValues.inTheBack}
+                name="inTheBack"
+                onChange={props.updateInputChanged(id)}
+              ></input>{" "}
             </td>
             <td>{expectedFloor}</td>
             <td>
-              <input type="text">{null}</input>
+              <input
+                type="number"
+                value={productTableValues.onTheFloor}
+                name="onTheFloor"
+                onChange={props.updateInputChanged(id)}
+              ></input>{" "}
             </td>
             <td>{sell}</td>
             <td>{selling}</td>
             <td>{par}</td>
             <td>{fill}</td>
             <td>{props.todaysSales}</td>
-            <td key={index}>
+            <td>
               <input
                 type="number"
                 value={productTableValues.order}

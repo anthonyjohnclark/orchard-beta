@@ -10,6 +10,8 @@ const InvHeader = (props: any) => {
   //here we need to create a new array with blank fields for each product object
   let productsNew = props.products.map((products: any) => ({
     ...products,
+    inTheBack: "",
+    onTheFloor: "",
     order: "",
     sell: "",
     selling: "",
@@ -25,10 +27,11 @@ const InvHeader = (props: any) => {
   const updateInputChanged = (id: any) => (e: any) => {
     let productsWithInput = [...inputs];
     let prodID = id;
+    let property = e.target.name;
     const prodIndex = productsWithInput.findIndex(({ id }) => id === prodID);
     console.log(prodIndex);
 
-    productsWithInput[prodIndex].order = e.target.value;
+    productsWithInput[prodIndex][property] = e.target.value;
 
     setProductInput(productsWithInput);
     console.log(inputs);
