@@ -22,16 +22,16 @@ const InvHeader = (props: any) => {
 
   console.log(inputs);
 
-  const updateInputChanged = (index: any) => (e: any) => {
-    console.log("index: " + index);
-    console.log("property name: " + e.target.name);
-    console.log("value: " + e.target.value);
-
-    console.log(inputs);
-
+  const updateInputChanged = (id: any) => (e: any) => {
     let productsWithInput = [...inputs];
-    productsWithInput[index].order = e.target.value;
+    let prodID = id;
+    const prodIndex = productsWithInput.findIndex(({ id }) => id === prodID);
+    console.log(prodIndex);
+
+    productsWithInput[prodIndex].order = e.target.value;
+
     setProductInput(productsWithInput);
+    console.log(inputs);
   };
 
   //update the initial state of inputs just once when it's blank to be a copy of the new array

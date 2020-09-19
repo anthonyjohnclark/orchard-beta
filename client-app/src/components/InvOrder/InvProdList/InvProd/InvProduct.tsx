@@ -2,44 +2,7 @@ import React from "react";
 import classes from "../InvProd/InvProduct.module.css";
 
 const InvProduct = (props: any) => {
-  // let productsNew = props.sortedAndFilteredProducts.map((products: any) => ({
-  //   ...products,
-  //   order: "",
-  //   sell: "",
-  //   selling: "",
-  //   suggested: "",
-  // }));
-
-  // const [inputs, setProductInput] = useState([productsNew]);
-
-  // const updateInputChanged = (index: any) => (e: any) => {
-  //   console.log("index: " + index);
-  //   console.log("property name: " + e.target.name);
-  //   console.log("value: " + e.target.value);
-
-  //   console.log(inputs);
-  //   let productsWithInput = [...productsNew]; // copying the old datas array
-  //   productsWithInput[index].order = e.target.value; // replace e.target.value with whatever you want to change it to
-
-  //   console.log(productsNew);
-
-  //   setProductInput(productsWithInput); // ??
-  // };
-
   const renderProductRows = () => {
-    // let productTable: any = [];
-
-    // if (inputs.length > 1) {
-    //   productTable = [...inputs];
-    // } else {
-    //   productTable = productsNew;
-    // }
-
-    // console.log(productsNew);
-    // console.log(inputs);
-
-    // console.log(productTable);
-
     return props.sortedAndFilteredProducts.map(
       (productTableValues: any, index: any) => {
         const {
@@ -110,17 +73,16 @@ const InvProduct = (props: any) => {
               <input type="text">{null}</input>
             </td>
             <td>{sell}</td>
-            <td>{null}</td>
+            <td>{selling}</td>
             <td>{par}</td>
             <td>{fill}</td>
             <td>{props.todaysSales}</td>
             <td key={index}>
               <input
-                key={order}
                 type="number"
-                value={order}
+                value={productTableValues.order}
                 name="order"
-                onChange={props.updateInputChanged(index)}
+                onChange={props.updateInputChanged(id)}
               ></input>
             </td>
           </tr>
