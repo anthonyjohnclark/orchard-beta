@@ -50,9 +50,9 @@ const InvHeader = (props: any) => {
     setSearch(newSearchText);
   };
 
-  const [salesPrediction, setSalesPrediction] = useState("");
+  const [salesPrediction, setSalesPrediction] = useState(Number);
 
-  const setNewSalesPrediction = (newSalesNumber: any) => {
+  const setNewSalesPrediction = (newSalesNumber: number) => {
     setSalesPrediction(newSalesNumber);
   };
 
