@@ -33,6 +33,13 @@ const InvHeader = (props: any) => {
 
     productsWithInput[prodIndex][property] = e.target.value;
 
+    if (property === "onTheFloor" || property === "inTheBack") {
+      let onTheFloorValue = Number(productsWithInput[prodIndex].onTheFloor);
+      let sellingValue = Number(productsWithInput[prodIndex].inTheBack);
+
+      productsWithInput[prodIndex].suggested = onTheFloorValue + sellingValue;
+    }
+
     setProductInput(productsWithInput);
     console.log(inputs);
   };
@@ -52,16 +59,52 @@ const InvHeader = (props: any) => {
 
   const [salesPrediction, setSalesPrediction] = useState(Number);
 
+  console.log(salesPrediction)
+
   const setNewSalesPrediction = (newSalesNumber: number) => {
-    setSalesPrediction(newSalesNumber);
+    setSalesPrediction(newSalesNumber)
+    updateSell();
   };
 
-  console.log(salesPrediction);
+  useEffect(() => {
+    updateSell();
+  }, [salesPrediction,setSalesPrediction]);
 
-  const [todaysSales, setTodaysSales] = useState("");
+  const updateSell = () => {
+    let productsWithSellSelling = [...inputs];
 
+    const formatter = new Intl.NumberFormat("en-US", {});
+
+    productsWithSellSelling.forEach((products) => { 
+      products.sell = formatter.format(salesPrediction * 1)
+    });
+
+    setProductInput(productsWithSellSelling);
+  };
+
+  
+  const [todaysSales, setTodaysSales] = useState(Number);
+
+  // The updateSelling and updateSell functions could maybe be refactored to be one function
   const setNewTodaysSales = (newToddaysSales: any) => {
     setTodaysSales(newToddaysSales);
+    updateSelling();
+  };
+
+  useEffect(() => {
+    updateSelling();
+  }, [todaysSales,setTodaysSales]);
+
+  const updateSelling = () => {
+    let productsWithSellSelling = [...inputs];
+
+    const formatter = new Intl.NumberFormat("en-US", {});
+    
+    productsWithSellSelling.forEach((products) => { 
+      products.selling = formatter.format(todaysSales * 2)
+    });
+
+    setProductInput(productsWithSellSelling);
   };
 
   const [filterConfig, setFilterConfig] = useState(props);
@@ -126,6 +169,7 @@ const InvHeader = (props: any) => {
         <TodaysSales
           setNewTodaysSales={setNewTodaysSales}
           todaysSales={todaysSales}
+          
         />
         <SearchBar searchText={searchText} setNewSearch={setNewSearch} />
       </div>

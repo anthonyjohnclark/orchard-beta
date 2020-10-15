@@ -11,6 +11,12 @@ const SalesPredictor = (props: any) => {
     console.log(isEditing);
   };
 
+  const handleKeyPress = (e: any) => {
+    if (e.keyCode === 13) {
+      setEditingState();
+    }
+  };
+
   const formatSalesPrediction = (value: any) => {
     const formatter = new Intl.NumberFormat("en-US", {
       style: "currency",
@@ -27,13 +33,15 @@ const SalesPredictor = (props: any) => {
       </div>
       {isEditing ? (
         <input
+          name = "SalesPrediction"
           type="number"
           placeholder="Enter predicted sales here..."
-          onChange={(number) => {
-            props.setNewSalesPrediction(number.target.value);
+          onChange={(e) => {
+            props.setNewSalesPrediction(e.target.value);
           }}
           onBlur={setEditingState}
-          value={value}
+          value={value ? value : undefined}
+          onKeyDown={(e) => handleKeyPress(e)}
         />
       ) : (
         <input
