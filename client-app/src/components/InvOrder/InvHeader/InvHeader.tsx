@@ -35,9 +35,13 @@ const InvHeader = (props: any) => {
 
     if (property === "onTheFloor" || property === "inTheBack") {
       let onTheFloorValue = Number(productsWithInput[prodIndex].onTheFloor);
-      let sellingValue = Number(productsWithInput[prodIndex].inTheBack);
+      let intheBackValue = Number(productsWithInput[prodIndex].inTheBack);
+      let sellingValue = Number(productsWithInput[prodIndex].selling);
+      let sellValue = Number(productsWithInput[prodIndex].sell);
+      let fillValue = Number(productsWithInput[prodIndex].fill);
+      let parValue = Number(productsWithInput[prodIndex].par);
 
-      productsWithInput[prodIndex].suggested = onTheFloorValue + sellingValue;
+      productsWithInput[prodIndex].suggested = ((((sellingValue - onTheFloorValue - intheBackValue) + sellValue) - fillValue) + parValue).toFixed(1)
     }
 
     setProductInput(productsWithInput);
@@ -73,11 +77,11 @@ const InvHeader = (props: any) => {
   const updateSell = () => {
     let productsWithSellSelling = [...inputs];
 
-    const formatter = new Intl.NumberFormat("en-US", {});
-
+    const formatter = new Intl.NumberFormat("en-US",  {maximumFractionDigits: 1 })
+      
     productsWithSellSelling.forEach((products) => { 
-      products.sell = formatter.format(salesPrediction * 1)
-    });
+      products.sell = formatter.format((((salesPrediction * (products.percentSales/100))/products.retailPrice))/(products.caseSize)
+    )});
 
     setProductInput(productsWithSellSelling);
   };
@@ -98,11 +102,11 @@ const InvHeader = (props: any) => {
   const updateSelling = () => {
     let productsWithSellSelling = [...inputs];
 
-    const formatter = new Intl.NumberFormat("en-US", {});
+    const formatter = new Intl.NumberFormat("en-US", {maximumFractionDigits: 1});
     
     productsWithSellSelling.forEach((products) => { 
-      products.selling = formatter.format(todaysSales * 2)
-    });
+      products.selling = formatter.format((((todaysSales * (products.percentSales/100))/products.retailPrice))/(products.caseSize)
+    )});
 
     setProductInput(productsWithSellSelling);
   };

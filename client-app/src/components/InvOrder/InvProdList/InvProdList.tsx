@@ -7,13 +7,13 @@ import TableHeaders from "./InvProdComponents/TableHeaders";
 import SortFilterButton from "./InvProdComponents/SortFilterButton";
 
 const InvProdList = (props: any) => {
-  const { products } = props;
+  const  products = props.products;
 
   const [activeSort, toggleActiveSort] = useState({ buttonKey: 0 });
   const setButtonActive = (buttonKey: any) => {
     toggleActiveSort({ buttonKey });
   };
-
+  
   const [activeHeaderSort, toggleHeaderActiveSort] = useState({ headerKey: 0 });
   const setHeaderActive = (headerKey: any) => {
     toggleHeaderActiveSort({ headerKey });
