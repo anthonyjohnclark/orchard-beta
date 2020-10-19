@@ -42,6 +42,7 @@ const SalesPredictor = (props: any) => {
           onBlur={setEditingState}
           value={value ? value : undefined}
           onKeyDown={(e) => handleKeyPress(e)}
+          min= "0"
         />
       ) : (
         <input

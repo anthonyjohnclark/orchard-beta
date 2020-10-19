@@ -68,7 +68,8 @@ const InvProduct = (props: any) => {
               value={inTheBack}
               name="inTheBack"
               onChange={props.updateInputChanged(id)}
-            ></input>{" "}
+              min= "0">
+            </input>{" "}
           </td>
           <td>{expectedFloor}</td>
           <td>
@@ -77,6 +78,8 @@ const InvProduct = (props: any) => {
               value={onTheFloor}
               name="onTheFloor"
               onChange={props.updateInputChanged(id)}
+              max = {fill}
+              min= "0"
             ></input>{" "}
           </td>
           <td>{sell}</td>
@@ -90,6 +93,7 @@ const InvProduct = (props: any) => {
               value={order}
               name="order"
               onChange={props.updateInputChanged(id)}
+              min = "0" 
             ></input>
           </td>
         </tr>

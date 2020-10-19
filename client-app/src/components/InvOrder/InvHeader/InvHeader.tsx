@@ -41,9 +41,10 @@ const InvHeader = (props: any) => {
       let fillValue = Number(productsWithInput[prodIndex].fill);
       let parValue = Number(productsWithInput[prodIndex].par);
 
-      productsWithInput[prodIndex].suggested = ((((sellingValue - onTheFloorValue - intheBackValue) + sellValue) - fillValue) + parValue).toFixed(1)
-    }
+      let suggestedValue = Math.max(0,((((sellingValue - onTheFloorValue - intheBackValue) + sellValue) - fillValue) + parValue))
 
+      productsWithInput[prodIndex].suggested = suggestedValue.toFixed(1)
+    }
     setProductInput(productsWithInput);
     console.log(inputs);
   };
@@ -106,6 +107,7 @@ const InvHeader = (props: any) => {
     
     productsWithSellSelling.forEach((products) => { 
       products.selling = formatter.format((((todaysSales * (products.percentSales/100))/products.retailPrice))/(products.caseSize)
+      
     )});
 
     setProductInput(productsWithSellSelling);
