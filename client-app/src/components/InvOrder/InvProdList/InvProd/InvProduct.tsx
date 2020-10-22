@@ -2,6 +2,19 @@ import React from "react";
 import classes from "../InvProd/InvProduct.module.css";
 
 const InvProduct = (props: any) => {
+	const handleKeypress =  (e:any) => {
+    const characterCode = e.key
+     const characterNumber = Number(characterCode)
+    if (characterNumber >= 0 && characterNumber <= 9) {
+      if (e.currentTarget.value && e.currentTarget.value.length ) {
+        return
+      } else if (characterNumber === 0) {
+         e.preventDefault()
+      }
+    } else {
+			 e.preventDefault()
+    }
+  }
   const renderProductRows = () => {
     return props.sortedAndFilteredProducts.map((productTableValues: any) => {
       const {
@@ -93,7 +106,8 @@ const InvProduct = (props: any) => {
               value={order}
               name="order"
               onChange={props.updateInputChanged(id)}
-              min = "0" 
+              onKeyPress={handleKeypress}
+              min = "1"
             ></input>
           </td>
         </tr>
