@@ -84,6 +84,25 @@ const InvHeader = (props: any) => {
       products.sell = formatter.format((((salesPrediction * (products.percentSales/100))/products.retailPrice))/(products.caseSize)
     )});
 
+    //this could also get refactored at some point. 
+    
+    productsWithSellSelling.forEach((products) => { 
+
+      let onTheFloorValue = Number(products.onTheFloor);
+      let intheBackValue = Number(products.inTheBack);
+      let sellingValue = Number(products.selling);
+      let sellValue = Number(products.sell);
+      let fillValue = Number(products.fill);
+      let parValue = Number(products.par);
+
+      let suggestedValue = Math.max(0,((((sellingValue - onTheFloorValue - intheBackValue) + sellValue) - fillValue) + parValue))
+
+      products.suggested = suggestedValue.toFixed(1)
+    
+
+
+    });
+
     setProductInput(productsWithSellSelling);
   };
 
@@ -109,6 +128,26 @@ const InvHeader = (props: any) => {
       products.selling = formatter.format((((todaysSales * (products.percentSales/100))/products.retailPrice))/(products.caseSize)
       
     )});
+
+        //this should also get refactored at some point. 
+
+        productsWithSellSelling.forEach((products) => { 
+
+          let onTheFloorValue = Number(products.onTheFloor);
+          let intheBackValue = Number(products.inTheBack);
+          let sellingValue = Number(products.selling);
+          let sellValue = Number(products.sell);
+          let fillValue = Number(products.fill);
+          let parValue = Number(products.par);
+
+          let suggestedValue = Math.max(0,((((sellingValue - onTheFloorValue - intheBackValue) + sellValue) - fillValue) + parValue))
+
+          products.suggested = suggestedValue.toFixed(1)
+        
+
+    
+        });
+
 
     setProductInput(productsWithSellSelling);
   };
