@@ -9,7 +9,7 @@ let tableHeaders = [
   { headerKey: 5, name: "Sold By", column: "soldBy" },
   { headerKey: 6, name: "Expected Inv", column: "expectedInv" },
   { headerKey: 7, name: "ITB", column: "inTheBack" },
-  { headerKey: 8, name: "Predicted Floor", column: "predictedFloor" },
+  { headerKey: 8, name: "Predicted Floor", column: "expectedFloor" },
   { headerKey: 9, name: "OTF", column: "onTheFloor" },
   { headerKey: 10, name: "Sell", column: "sell" },
   { headerKey: 11, name: "Selling", column: "selling" },
