@@ -24,6 +24,11 @@ const InvHeader = (props: any) => {
 
   console.log(inputs);
 
+  const calculateSuggestedValue = (sellingValue:number,onTheFloorValue:number,intheBackValue:any,sellValue:any,fillValue:any,parValue:any) => { 
+    let suggestedValue = (Math.abs(((sellingValue - onTheFloorValue - intheBackValue)) + sellValue) - fillValue + parValue)
+    return suggestedValue
+  }
+
   const updateInputChanged = (id: any) => (e: any) => {
     let productsWithInput = [...inputs];
     let prodID = id;
@@ -41,10 +46,9 @@ const InvHeader = (props: any) => {
       let fillValue = Number(productsWithInput[prodIndex].fill);
       let parValue = Number(productsWithInput[prodIndex].par);
 
-      let suggestedValue = Math.max(0,((((sellingValue - onTheFloorValue - intheBackValue) + sellValue) - fillValue) + parValue))
       console.log(inputs);
 
-      productsWithInput[prodIndex].suggested = suggestedValue.toFixed(1)
+      productsWithInput[prodIndex].suggested = parseFloat(calculateSuggestedValue(onTheFloorValue,intheBackValue,sellingValue,sellValue,fillValue,parValue).toFixed(1))
     }
     setProductInput(productsWithInput);
   };
@@ -80,12 +84,9 @@ const InvHeader = (props: any) => {
 
       
     productsWithSellSelling.forEach((products) => { 
-      let productSellValue =  ((((salesPrediction * (products.percentSales/100))/products.retailPrice))/(products.caseSize))
-      
-      products.sell = parseFloat(productSellValue.toFixed(1))
-    
-    
-      });
+      let sellValue = (((salesPrediction * (products.percentSales/100))/products.retailPrice))/(products.caseSize)
+      products.sell =  parseFloat(sellValue.toFixed(1))
+    });
 
     //this could also get refactored at some point. 
     
@@ -98,8 +99,7 @@ const InvHeader = (props: any) => {
       let fillValue = Number(products.fill);
       let parValue = Number(products.par);
 
-       let suggestedValue = Math.max(0,((((sellingValue - onTheFloorValue - intheBackValue) + sellValue) - fillValue) + parValue))
-       products.suggested = parseFloat(suggestedValue.toFixed(1))
+       products.suggested = parseFloat(calculateSuggestedValue(onTheFloorValue,intheBackValue,sellingValue,sellValue,fillValue,parValue).toFixed(1))
       });
 
     setProductInput(productsWithSellSelling);
@@ -120,13 +120,10 @@ const InvHeader = (props: any) => {
 
   const updateSelling = () => {
     let productsWithSellSelling = [...inputs];
-
     
     productsWithSellSelling.forEach((products) => { 
-      let productSellValue =  ((((salesPrediction * (products.percentSales/100))/products.retailPrice))/(products.caseSize))
-      
-      products.selling = parseFloat(productSellValue.toFixed(1))
-      
+      let sellingValue = (((todaysSales * (products.percentSales/100))/products.retailPrice))/(products.caseSize)
+      products.selling = parseFloat(sellingValue.toFixed(1))
     });
 
         //this should also get refactored at some point. 
@@ -142,10 +139,7 @@ const InvHeader = (props: any) => {
 
           let suggestedValue = Math.max(0,((((sellingValue - onTheFloorValue - intheBackValue) + sellValue) - fillValue) + parValue))
 
-          products.suggested = parseFloat(suggestedValue.toFixed(1))
-        
-
-    
+          products.suggested = parseFloat(calculateSuggestedValue(onTheFloorValue,intheBackValue,sellingValue,sellValue,fillValue,parValue).toFixed(1))   
         });
 
 

@@ -37,7 +37,7 @@ const TodaysSales = (props: any) => {
           type="number"
           placeholder="Enter today's sales here..."
           onChange={(e) => {
-            props.setNewTodaysSales(e.target.value);
+            props.setNewTodaysSales(e.target.value, e.target.name);
           }}
           onBlur={setEditingState}
           value={value ? value : undefined}
