@@ -70,27 +70,24 @@ const InvHeader = (props: any) => {
 
   console.log(salesPrediction)
 
-  const setNewSalesPrediction = (newSalesNumber: number) => {
+  const setNewSalesPrediction = (newSalesNumber: number, name:any) => {
     setSalesPrediction(newSalesNumber)
-    updateSell();
+    updateSellSelling(name);
   };
 
-  useEffect(() => {
-    updateSell();
-  }, [salesPrediction,setSalesPrediction]);
-
-  const updateSell = () => {
+  const updateSellSelling = (name:any) => {
     let productsWithSellSelling = [...inputs];
-
-      
-    productsWithSellSelling.forEach((products) => { 
-      let sellValue = (((salesPrediction * (products.percentSales/100))/products.retailPrice))/(products.caseSize)
-      products.sell =  parseFloat(sellValue.toFixed(1))
-    });
-
-    //this could also get refactored at some point. 
-    
-    productsWithSellSelling.forEach((products) => { 
+      productsWithSellSelling.forEach((products) => { 
+      if (name ==="TodaysSales"){
+        let sellValue = (((todaysSales * (products.percentSales/100))/products.retailPrice))/(products.caseSize)
+        products.sell =  parseFloat(sellValue.toFixed(1))
+      } else if (name ==="SalesPrediction"){
+        let sellValue = (((salesPrediction * (products.percentSales/100))/products.retailPrice))/(products.caseSize)
+        products.selling =  parseFloat(sellValue.toFixed(1))
+      }         
+});
+        //this could also get refactored at some point. 
+      productsWithSellSelling.forEach((products) => { 
 
       let onTheFloorValue = Number(products.onTheFloor);
       let intheBackValue = Number(products.inTheBack);
@@ -101,50 +98,23 @@ const InvHeader = (props: any) => {
 
        products.suggested = parseFloat(calculateSuggestedValue(onTheFloorValue,intheBackValue,sellingValue,sellValue,fillValue,parValue).toFixed(1))
       });
-
     setProductInput(productsWithSellSelling);
+    return name;
   };
-
-  
+ 
   const [todaysSales, setTodaysSales] = useState(Number);
 
-  // The updateSelling and updateSell functions could maybe be refactored to be one function
-  const setNewTodaysSales = (newToddaysSales: any) => {
+  const setNewTodaysSales = (newToddaysSales: any, name:any) => {
     setTodaysSales(newToddaysSales);
-    updateSelling();
+     updateSellSelling(name);
   };
 
-  useEffect(() => {
-    updateSelling();
-  }, [todaysSales,setTodaysSales]);
+   useEffect(() => {
+     updateSellSelling("TodaysSales");
+     updateSellSelling("SalesPrediction");
+   }, [salesPrediction,todaysSales]);
 
-  const updateSelling = () => {
-    let productsWithSellSelling = [...inputs];
-    
-    productsWithSellSelling.forEach((products) => { 
-      let sellingValue = (((todaysSales * (products.percentSales/100))/products.retailPrice))/(products.caseSize)
-      products.selling = parseFloat(sellingValue.toFixed(1))
-    });
-
-        //this should also get refactored at some point. 
-
-        productsWithSellSelling.forEach((products) => { 
-
-          let onTheFloorValue = Number(products.onTheFloor);
-          let intheBackValue = Number(products.inTheBack);
-          let sellingValue = Number(products.selling);
-          let sellValue = Number(products.sell);
-          let fillValue = Number(products.fill);
-          let parValue = Number(products.par);
-
-          let suggestedValue = Math.max(0,((((sellingValue - onTheFloorValue - intheBackValue) + sellValue) - fillValue) + parValue))
-
-          products.suggested = parseFloat(calculateSuggestedValue(onTheFloorValue,intheBackValue,sellingValue,sellValue,fillValue,parValue).toFixed(1))   
-        });
-
-
-    setProductInput(productsWithSellSelling);
-  };
+  // useEffect(() => {
 
   const [filterConfig, setFilterConfig] = useState(props);
 

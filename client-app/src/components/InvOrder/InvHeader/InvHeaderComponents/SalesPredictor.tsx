@@ -37,7 +37,7 @@ const SalesPredictor = (props: any) => {
           type="number"
           placeholder="Enter predicted sales here..."
           onChange={(e) => {
-            props.setNewSalesPrediction(e.target.value);
+            props.setNewSalesPrediction(e.target.value, e.target.name);
           }}
           onBlur={setEditingState}
           value={value ? value : undefined}
