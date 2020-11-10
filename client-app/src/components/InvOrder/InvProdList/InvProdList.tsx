@@ -148,7 +148,6 @@ const InvProdList = (props: any) => {
     if (!filterEnabled) toggleActiveSort({ buttonKey: 0 });
   };
 
-  console.log(sortConfigForHeaders)
 
   if (sortConfigForHeaders !== null) {
     sortedProducts.sort((a, b) => {

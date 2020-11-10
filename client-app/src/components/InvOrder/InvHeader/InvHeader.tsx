@@ -24,10 +24,17 @@ const InvHeader = (props: any) => {
 
   console.log(inputs);
 
-  const calculateSuggestedValue = (sellingValue:number,onTheFloorValue:number,intheBackValue:any,sellValue:any,fillValue:any,parValue:any) => { 
-    let suggestedValue = (Math.abs(((sellingValue - onTheFloorValue - intheBackValue)) + sellValue) - fillValue + parValue)
+  const calculateSuggestedValue = (onTheFloorValue: any,intheBackValue: any,sellingValue:any,sellValue: any,fillValue: any,parValue:any) => { 
+    if (sellingValue){
+    let neededValue = (sellValue + sellingValue)
+    let onHand = (onTheFloorValue + intheBackValue)
+    
+      let suggestedValue = Math.max(0,(neededValue - onHand))
+
     return suggestedValue
   }
+  return 0
+    }
 
   const updateInputChanged = (id: any) => (e: any) => {
     let productsWithInput = [...inputs];
@@ -45,8 +52,6 @@ const InvHeader = (props: any) => {
       let sellValue = Number(productsWithInput[prodIndex].sell);
       let fillValue = Number(productsWithInput[prodIndex].fill);
       let parValue = Number(productsWithInput[prodIndex].par);
-
-      console.log(inputs);
 
       productsWithInput[prodIndex].suggested = parseFloat(calculateSuggestedValue(onTheFloorValue,intheBackValue,sellingValue,sellValue,fillValue,parValue).toFixed(1))
     }
@@ -106,7 +111,7 @@ const InvHeader = (props: any) => {
 
   const setNewTodaysSales = (newToddaysSales: any, name:any) => {
     setTodaysSales(newToddaysSales);
-     updateSellSelling(name);
+    updateSellSelling(name);
   };
 
    useEffect(() => {

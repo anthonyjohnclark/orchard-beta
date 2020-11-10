@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import Auxil from "../../../../hoc/Auxil";
 import classes from "../InvProd/InvProduct.module.css";
 
 const InvProduct = (props: any) => {
@@ -15,6 +16,21 @@ const InvProduct = (props: any) => {
 			 e.preventDefault()
     }
   }
+
+  const [dropDownId, setDropdownId] = useState(null)
+
+  const [dropdown, toggleDropdown] = useState(false);
+
+
+
+
+
+  const toggleDropdownForOneRow = (id: any) => {
+    toggleDropdown(!dropdown);
+    setDropdownId(id);
+    console.log(dropDownId)
+  }
+
   const renderProductRows = () => {
     return props.sortedAndFilteredProducts.map((productTableValues: any) => {
       const {
@@ -36,6 +52,7 @@ const InvProduct = (props: any) => {
         suggested,
         order,
         productActive,
+        retailPrice
       } = productTableValues;
 
       let styles: any = [classes.InvProd];
@@ -61,14 +78,11 @@ const InvProduct = (props: any) => {
           }
         }
       }
-      // if (organic === true) {
-      //   styles.push(classes.OGProd);
-      // } else {
-      //   styles.push(classes.CVProd);
-      // }
+
 
       return (
-        <tr className={styles.join(" ")} key={id}>
+        <Auxil key={id}>
+        <tr className={styles.join(" ")} key={id} onClick={() => toggleDropdownForOneRow(id)}>
           <td>{id}</td>
           <td>{name}</td>
           <td>{cost}</td>
@@ -91,7 +105,7 @@ const InvProduct = (props: any) => {
               value={onTheFloor}
               name="onTheFloor"
               onChange={props.updateInputChanged(id)}
-              max = {fill}
+               max = {fill}
               min= "0"
             ></input>{" "}
           </td>
@@ -111,8 +125,9 @@ const InvProduct = (props: any) => {
             ></input>
           </td>
         </tr>
-      );
-    });
+        {dropdown && productTableValues.id === dropDownId ? (<tr className={styles.join(" ")}><td>{retailPrice}</td></tr>): null}
+        </Auxil>
+       )});
   };
 
   {
