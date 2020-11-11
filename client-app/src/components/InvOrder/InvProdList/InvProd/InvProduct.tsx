@@ -21,15 +21,20 @@ const InvProduct = (props: any) => {
 
   const [dropdown, toggleDropdown] = useState(false);
 
-
-
-
-
   const toggleDropdownForOneRow = (id: any) => {
-    toggleDropdown(!dropdown);
-    setDropdownId(id);
-    console.log(dropDownId)
+    if (id !== dropDownId ){
+      setDropdownId(id);
+      if (dropdown == false)
+      toggleDropdown(!dropdown);
+    }
+      if(id == dropDownId || dropDownId == null){
+        toggleDropdown(!dropdown);
+      }
   }
+
+    // useEffect(() => {
+    //    toggleDropdownForOneRow(dropDownId)
+    //  }, []);
 
   const renderProductRows = () => {
     return props.sortedAndFilteredProducts.map((productTableValues: any) => {
@@ -125,7 +130,7 @@ const InvProduct = (props: any) => {
             ></input>
           </td>
         </tr>
-        {dropdown && productTableValues.id === dropDownId ? (<tr className={styles.join(" ")}><td>{retailPrice}</td></tr>): null}
+        {dropdown && productTableValues.id == dropDownId ? (<tr className={styles.join(" ")}><td>{retailPrice}</td></tr>): null}
         </Auxil>
        )});
   };
