@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import Auxil from "../../../../hoc/Auxil";
 import classes from "../InvProd/InvProduct.module.css";
 
@@ -21,7 +21,15 @@ const InvProduct = (props: any) => {
 
   const [dropdown, toggleDropdown] = useState(false);
 
-  const toggleDropdownForOneRow = (id: any) => {
+  const toggleDropdownForOneRow = (id: any, e:any) => {
+      //I'm not really sure why this stopPropogation  
+      //works the way it does or why I do it this way to be honest.
+    if (e.target.name !== "order" && e.target.name !== "inTheBack" && e.target.name !== "onTheFloor"){
+        e.stopPropagation()   
+    
+      //above conditional wraps the whole rest of the logic. 
+      //I feel like there is a better way I need to figure out.
+
     if (id !== dropDownId ){
       setDropdownId(id);
       if (dropdown == false)
@@ -30,11 +38,8 @@ const InvProduct = (props: any) => {
       if(id == dropDownId || dropDownId == null){
         toggleDropdown(!dropdown);
       }
-  }
-
-    // useEffect(() => {
-    //    toggleDropdownForOneRow(dropDownId)
-    //  }, []);
+    }
+      }
 
   const renderProductRows = () => {
     return props.sortedAndFilteredProducts.map((productTableValues: any) => {
@@ -57,7 +62,11 @@ const InvProduct = (props: any) => {
         suggested,
         order,
         productActive,
-        retailPrice
+        retailPrice,
+        netGIG, 
+        percentSales,
+        shrink,
+        sold
       } = productTableValues;
 
       let styles: any = [classes.InvProd];
@@ -87,7 +96,7 @@ const InvProduct = (props: any) => {
 
       return (
         <Auxil key={id}>
-        <tr className={styles.join(" ")} key={id} onClick={() => toggleDropdownForOneRow(id)}>
+        <tr className={styles.join(" ")} key={id} onClick={(e) => toggleDropdownForOneRow(id, e)}>
           <td>{id}</td>
           <td>{name}</td>
           <td>{cost}</td>
@@ -110,7 +119,7 @@ const InvProduct = (props: any) => {
               value={onTheFloor}
               name="onTheFloor"
               onChange={props.updateInputChanged(id)}
-               max = {fill}
+              max = {fill}
               min= "0"
             ></input>{" "}
           </td>
@@ -130,7 +139,19 @@ const InvProduct = (props: any) => {
             ></input>
           </td>
         </tr>
-        {dropdown && productTableValues.id == dropDownId ? (<tr className={styles.join(" ")}><td>{retailPrice}</td></tr>): null}
+        {dropdown && productTableValues.id == dropDownId ? 
+        (<tr>
+          <td colSpan={15}>
+            <div className = {classes.InvProdDropdown}>
+            <h2>Retail Price: {retailPrice}</h2>
+            <h2>netGIG: {netGIG}</h2>
+            <h2>sold: {sold}</h2>
+            <h2>percentSales: {percentSales}%</h2>
+            <h2>shrink: {shrink}</h2>
+            </div>
+            </td>
+          </tr>)
+            : null}
         </Auxil>
        )});
   };

@@ -17,7 +17,6 @@
 
 .InvProd td input {
   outline: none;
-
   width: 100%;
   color: white;
   font-weight: bold;
@@ -91,4 +90,11 @@ tr:hover td.highlight div {
 .InvProd.OGProdInactive.OnSale {
   box-sizing: border-box;
   border-left: 15px solid #fdcb6e;
+}
+
+.InvProdDropdown {
+  background-color: #221d23;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
