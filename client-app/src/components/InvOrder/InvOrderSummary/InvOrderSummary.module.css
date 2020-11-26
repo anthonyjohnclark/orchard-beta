@@ -1,0 +1,44 @@
+.InvOrderSummary {
+  position: fixed;
+  bottom: 0;
+  outline: none;
+  width: 100%;
+  color: white;
+  font-weight: bold;
+  background-color: #221d23;
+  text-align: left;
+  font: bold;
+}
+
+.InvOrderSummary p {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 0;
+  padding: 0;
+}
+
+.InvOrderSummary p h2 {
+  margin-left: 10px;
+  padding: 0;
+}
+
+.InvOrderSummary h1 {
+  margin: 0;
+  padding: 0;
+}
+
+.InvOrderStatsHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 4px solid #fdcb6e;
+  border-top: 2px solid white;
+}
+
+.InvOrderStatsFooter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #221d23;
+}

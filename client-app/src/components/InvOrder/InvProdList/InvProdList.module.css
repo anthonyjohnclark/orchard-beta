@@ -1,8 +1,20 @@
+.InvProdTable {
+  border-collapse: collapse;
+  background-color: #221d23;
+  width: 100vw;
+  text-align: center;
+  table-layout: fixed;
+  color: white;
+  border: 0;
+  position: fixed;
+  top: 160px;
+}
+
 .SortContainer {
-  position: relative;
-  height: 100%;
+  position: fixed;
+  top: 116px;
+  height: 7vh;
   width: 100%;
-  width: auto;
   font-weight: bold;
   text-align: center;
   border: none;
@@ -92,13 +104,4 @@
   cursor: pointer;
   background-color: #b2bec3;
   box-sizing: border-box;
-}
-.InvProdTable {
-  border-collapse: collapse;
-  background-color: #29335c;
-  width: 100%;
-  text-align: center;
-  table-layout: fixed;
-  color: white;
-  border: 0;
 }

@@ -1,23 +1,51 @@
+.ScrollWrap {
+  width: 100vw;
+  overflow-y: scroll;
+  height: 342px;
+  overflow-x: hidden;
+}
+
+.InvProdDropdown {
+  background-color: #221d23;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100vw;
+  color: white;
+}
+
+.InvProdDropdown:hover {
+  cursor: auto;
+}
+
 .InvProd {
-  background-color: #363636;
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  table-layout: fixed;
   text-align: left;
   transition: transform 0.1s; /* Animation */
-  width: 100%;
-  text-align: center;
-  z-index: 7;
+  z-index: 10;
+  background-color: #221d23;
+  border-spacing: 0;
 }
 
 .InvProd td {
+  font-weight: bold;
+  width: 53px;
+  border-collapse: collapse;
+  border-spacing: 0;
   text-align: center;
+  margin: auto;
   padding: 12px;
   transition: all 0.2s ease-in-out;
   border-color: #221d23;
-  z-index: 7;
+  z-index: 9;
 }
 
 .InvProd td input {
+  width: 80%;
   outline: none;
-  width: 100%;
   color: white;
   font-weight: bold;
   background-color: #221d23;
@@ -29,6 +57,7 @@
   width: 4px;
   background-color: #221d23;
 }
+
 .InvPrd td.highlight div {
   width: 4px;
   height: 60px;
@@ -37,15 +66,10 @@
   transition: all 0.2s ease-in-out;
 }
 
-.InvProd:hover td {
+.InvProd:hover {
   cursor: pointer;
   color: #363636;
-  font-weight: bold;
-  border-top: 1px solid #221d23;
-  border-bottom: 1px solid #221d23;
-}
-
-.InvProd:hover {
+  font-weight: bolder;
   border-top: #363636;
   border-bottom: #363636;
   text-align: center;
@@ -74,9 +98,12 @@ tr:hover td.highlight div {
 }
 
 .InvProd.CVProdActive.OnSale,
-.InvProd.OGProdActive.OnSale {
-  box-sizing: border-box;
-  border-left: 15px solid #fdcb6e;
+.InvProd.OGProdActive.OnSale,
+.InvProd.CVProdInactive.OnSale,
+.InvProd.OGProdInactive.OnSale {
+  border-top: 5px solid #fdcb6e;
+  border-bottom: 5px solid #fdcb6e;
+  font-weight: bold;
 }
 
 .InvProd.CVProdActive.OnSale:hover td,
@@ -84,17 +111,5 @@ tr:hover td.highlight div {
 .InvProd.CVProdInactive.OnSale:hover td,
 .InvProd.OGProdInactive.OnSale:hover td {
   color: #fdcb6e;
-}
-
-.InvProd.CVProdInactive.OnSale,
-.InvProd.OGProdInactive.OnSale {
-  box-sizing: border-box;
-  border-left: 15px solid #fdcb6e;
-}
-
-.InvProdDropdown {
-  background-color: #221d23;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  font-weight: bolder;
 }

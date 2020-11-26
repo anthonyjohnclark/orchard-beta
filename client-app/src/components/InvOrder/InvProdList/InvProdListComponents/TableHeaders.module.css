@@ -1,8 +1,8 @@
 .InvProdHeader {
   background-color: #29335c;
   color: white;
-  position: sticky;
   top: 56px;
+  position: sticky;
   z-index: 1;
 }
 

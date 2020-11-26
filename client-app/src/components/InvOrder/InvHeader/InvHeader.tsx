@@ -5,6 +5,7 @@ import Countdown from "./InvHeaderComponents/Countdown";
 import SearchBar from "./InvHeaderComponents/SearchBar";
 import SalesPredictor from "./InvHeaderComponents/SalesPredictor";
 import TodaysSales from "./InvHeaderComponents/TodaysSales";
+import Auxil from "../../../hoc/Auxil";
 
 const InvHeader = (props: any) => {
   //here we need to create a new array with blank fields for each product object
@@ -173,7 +174,7 @@ const InvHeader = (props: any) => {
   });
 
   return (
-    <div>
+      <Auxil>
       <div className={classes.InvHeader}>
         <Countdown />
         <SalesPredictor
@@ -187,6 +188,7 @@ const InvHeader = (props: any) => {
         />
         <SearchBar searchText={searchText} setNewSearch={setNewSearch} />
       </div>
+      <div className = {classes.InvProdWrapper}>
       <InvProdList
         updateInputChanged={updateInputChanged}
         products={filteredProducts}
@@ -196,7 +198,8 @@ const InvHeader = (props: any) => {
         todaysSales={todaysSales}
         salesPrediction={salesPrediction}
       />
-    </div>
+      </div>
+      </Auxil>
   );
 };
 

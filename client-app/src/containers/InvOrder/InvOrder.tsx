@@ -7,7 +7,6 @@ class InvOrd extends Component<any, any> {
     return (
       <Auxil>
         <InvHeader products={this.props.products} />
-        <h1>InvOrderSummary</h1>
       </Auxil>
     );
   }

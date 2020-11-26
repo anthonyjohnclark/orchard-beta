@@ -3,6 +3,7 @@ import Auxil from "../../../../hoc/Auxil";
 import classes from "../InvProd/InvProduct.module.css";
 
 const InvProduct = (props: any) => {
+  
 	const handleKeypress =  (e:any) => {
     const characterCode = e.key
      const characterNumber = Number(characterCode)
@@ -95,8 +96,9 @@ const InvProduct = (props: any) => {
 
 
       return (
-        <Auxil key={id}>
-        <tr className={styles.join(" ")} key={id} onClick={(e) => toggleDropdownForOneRow(id, e)}>
+        <tr>
+          <td colSpan = {15}>
+      <tr className={styles.join(" ")} key={id} onClick={(e) => toggleDropdownForOneRow(id, e)}>         
           <td>{id}</td>
           <td>{name}</td>
           <td>{cost}</td>
@@ -152,12 +154,18 @@ const InvProduct = (props: any) => {
             </td>
           </tr>)
             : null}
-        </Auxil>
+            </td>
+            </tr>
        )});
   };
-
   {
-    return <tbody>{renderProductRows()}</tbody>;
+    return(
+    <Auxil>
+      <div className = {classes.ScrollWrap}>
+      <tbody>{renderProductRows()}</tbody>
+      </div>
+    </Auxil>
+    );
   }
 };
 export default InvProduct;

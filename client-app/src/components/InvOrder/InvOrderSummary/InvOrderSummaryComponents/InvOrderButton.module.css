@@ -1,10 +1,10 @@
-.SortButton {
+.InvOrderButton {
   box-sizing: border-box;
   outline: none;
-  width: 5vw;
+  width: 20vw;
   float: inline-start;
   padding: 8px 8px;
-  background-color: #29335c;
+  background-color: #a4031f;
   color: white;
   font-weight: bold;
   text-align: center;
@@ -13,7 +13,7 @@
   border-bottom: 4px solid transparent;
 }
 
-.SortButton:hover {
+.InvOrderButton:hover {
   cursor: pointer;
   background-color: #b2bec3;
   border-bottom: 4px solid #fdcb6e;

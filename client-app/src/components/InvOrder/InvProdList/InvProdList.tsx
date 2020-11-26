@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import classes from "../InvProdList/InvProdList.module.css";
 import InvProduct from "./InvProd/InvProduct";
 import Auxil from "../../../hoc/Auxil";
-import ButtonList from "./InvProdComponents/ButtonList";
-import TableHeaders from "./InvProdComponents/TableHeaders";
-import SortFilterButton from "./InvProdComponents/SortFilterButton";
+import ButtonList from "./InvProdListComponents/ButtonList";
+import TableHeaders from "./InvProdListComponents/TableHeaders";
+import SortFilterButton from "./InvProdListComponents/SortFilterButton";
+import InvOrderSummary from "../InvOrderSummary/InvOrderSummary";
 
 const InvProdList = (props: any) => {
   const  products = props.products;
@@ -234,6 +235,7 @@ const InvProdList = (props: any) => {
           renderProductRows={props.renderProductRows}
         />
       </table>
+      <InvOrderSummary></InvOrderSummary>
     </Auxil>
   );
 };
