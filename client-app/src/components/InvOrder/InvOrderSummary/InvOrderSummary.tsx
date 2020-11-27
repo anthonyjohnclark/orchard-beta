@@ -10,7 +10,9 @@ const InvOrderSummary = (props:any) => {
         <div className = {classes.InvOrderSummary}>
         <div className = {classes.InvOrderStatsHeader}>
          <h1>Order Summary</h1> 
-         <InvProdSetToSuggest></InvProdSetToSuggest>
+         <InvProdSetToSuggest
+            setOrderToSuggested = {props.setOrderToSuggested}>
+        </InvProdSetToSuggest>
          </div>
          <div className = {classes.InvOrderStatsFooter}>
          <p>Total pieces ordered: 352</p>

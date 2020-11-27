@@ -235,7 +235,9 @@ const InvProdList = (props: any) => {
           renderProductRows={props.renderProductRows}
         />
       </table>
-      <InvOrderSummary></InvOrderSummary>
+      <InvOrderSummary
+      setOrderToSuggested = {props.setOrderToSuggested}
+      ></InvOrderSummary>
     </Auxil>
   );
 };

@@ -110,6 +110,28 @@ const InvHeader = (props: any) => {
  
   const [todaysSales, setTodaysSales] = useState(Number);
 
+  const setOrderToSuggested = (roundingDirection:boolean, e:any) => { 
+    let productsWithOrderSetToSuggested = [...inputs];
+
+    if (e.target.id === 'revert'){
+      productsWithOrderSetToSuggested.forEach((products) => {
+        products.order = ""
+      })
+    }
+
+    if (e.target.id ==='set')
+    productsWithOrderSetToSuggested.forEach((products) => {
+      if (roundingDirection){
+      products.order = Math.floor(products.suggested)
+      }
+      else if(!roundingDirection) {
+        products.order = Math.ceil(products.suggested)
+      };
+    })
+
+    setProductInput(productsWithOrderSetToSuggested);
+  }
+
   const setNewTodaysSales = (newToddaysSales: any, name:any) => {
     setTodaysSales(newToddaysSales);
     updateSellSelling(name);
@@ -120,15 +142,11 @@ const InvHeader = (props: any) => {
      updateSellSelling("SalesPrediction");
    }, [salesPrediction,todaysSales]);
 
-  // useEffect(() => {
-
   const [filterConfig, setFilterConfig] = useState(props);
 
   const requestFilterConfig = (id: any, primaryKey: any, secondaryKey: any) => {
     setFilterConfig({ id, primaryKey, secondaryKey });
   };
-
-  // console.log(filterConfig);
 
   let searchfilteredProducts = inputs.filter((products: any) => {
     return (
@@ -197,6 +215,7 @@ const InvHeader = (props: any) => {
         setFilterConfig={setFilterConfig}
         todaysSales={todaysSales}
         salesPrediction={salesPrediction}
+        setOrderToSuggested = {setOrderToSuggested}
       />
       </div>
       </Auxil>
