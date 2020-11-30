@@ -13,7 +13,6 @@ const toggleModal = () => {
   console.log(isShowing)
 }
 
-
 return(
     <Auxil>
     <button className = {classes.InvOrderButton} onClick={()=>toggleModal()}>Order</button>
