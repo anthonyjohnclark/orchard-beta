@@ -7,6 +7,7 @@ import SalesPredictor from "./InvHeaderComponents/SalesPredictor";
 import TodaysSales from "./InvHeaderComponents/TodaysSales";
 import Auxil from "../../../hoc/Auxil";
 
+
 const InvHeader = (props: any) => {
   //here we need to create a new array with blank fields for each product object
   let productsNew = props.products.map((products: any) => ({
