@@ -236,6 +236,9 @@ const InvProdList = (props: any) => {
         />
       </table>
       <InvOrderSummary
+      todaysSales={props.todaysSales}
+      salesPrediction={props.salesPrediction}
+      products = {props.products}
       setOrderToSuggested = {props.setOrderToSuggested}
       ></InvOrderSummary>
     </Auxil>

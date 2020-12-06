@@ -4,7 +4,7 @@ import Modal from "../../../../hoc/Modal";
 import Auxil from "../../../../hoc/Auxil";
 import InvPreviewModal from "./InvPreviewModal";
 
-const InvOrderButton = () => {
+const InvOrderButton = (props:any) => {
 
 const [isShowing, setIsShowing] = useState(false);
 
@@ -17,7 +17,13 @@ return(
     <Auxil>
     <button className = {classes.InvOrderButton} onClick={()=>toggleModal()}>Order</button>
     <Modal show = {isShowing} modalClosed = {toggleModal}>
-    <InvPreviewModal></InvPreviewModal>
+    <InvPreviewModal
+    salesPrediction = {props.salesPrediction}
+    todaysSales = {props.todaysSales}
+    orderedProducts = {props.orderedProducts}
+    totalPieces = {props.totalPieces}
+    totalCost = {props.totalCost}
+    ></InvPreviewModal>
     </Modal>
     </Auxil>
 )
