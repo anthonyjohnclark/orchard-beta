@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import classes from "./SalesPredictor.module.css";
 
-const SalesPredictor = (props: any) => {
-  let value = props.salesPrediction;
+interface IProps {
+  setNewSalesPrediction: (newSalesNumber: any, name: string) => void;
+  salesPrediction: number;
+}
+
+const SalesPredictor: React.FC<IProps> = ({ setNewSalesPrediction,salesPrediction }) => {
+  let value = salesPrediction;
 
   const [isEditing, theEditingState] = useState(false);
 
@@ -11,13 +16,13 @@ const SalesPredictor = (props: any) => {
     console.log(isEditing);
   };
 
-  const handleKeyPress = (e: any) => {
+  const handleKeyPress = (e:React.KeyboardEvent<HTMLInputElement>) => {
     if (e.keyCode === 13) {
       setEditingState();
     }
   };
 
-  const formatSalesPrediction = (value: any) => {
+  const formatSalesPrediction = (value: number) => {
     const formatter = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
@@ -37,7 +42,7 @@ const SalesPredictor = (props: any) => {
           type="number"
           placeholder="Enter predicted sales here..."
           onChange={(e) => {
-            props.setNewSalesPrediction(e.target.value, e.target.name);
+            setNewSalesPrediction(e.target.value, e.target.name);
           }}
           onBlur={setEditingState}
           value={value ? value : undefined}

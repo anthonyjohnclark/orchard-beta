@@ -1,9 +1,19 @@
 import React from 'react';
 import classes from './InvPreviewModal.module.css'
 import buttonClasses from './InvOrderButton.module.css'
+import { IOrderedProducts } from "../../../../models/Products"
 
-const InvPreviewModal = (props:any) => {
+interface IProps  {
+    orderedProducts: IOrderedProducts[]; 
+    totalPieces: number; 
+    totalCost: string;  
+}
 
+const InvPreviewModal: React.FC<IProps> = ({
+    orderedProducts, 
+    totalPieces, 
+    totalCost  }) => 
+    {
     var formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
@@ -25,7 +35,7 @@ return (
             <tr>
                 <td colSpan = {4}>
 
-            {props.orderedProducts.map((products:any) => { 
+            {orderedProducts.map((products) => { 
             if (products.ordered > 0)
           return(
                 <tr className = {classes.InvSummaryModalRow}>
@@ -42,8 +52,8 @@ return (
             </table>
     <div className = {classes.InvModalSummary}>
         <div className = {classes.InvModalTotals}>
-        <span>Pieces: </span><p>{props.totalPieces}</p>
-        <span>Total: </span><p>{props.totalCost}</p>
+        <span>Pieces: </span><p>{totalPieces}</p>
+        <span>Total: </span><p>{totalCost}</p>
         </div>
         <div>
             <button className = {buttonClasses.InvOrderButton}>
@@ -54,5 +64,4 @@ return (
     </div>
     )
 }
-
 export default InvPreviewModal;

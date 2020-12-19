@@ -1,31 +1,30 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "./components/Layout/Layout";
 import InvOrd from "./containers/InvOrder/InvOrder";
-import classes from "./App.module.css";
 import axios from "axios";
+import {IProducts} from './models/Products'
 
-class App extends Component {
-  // state = { ProductInventory: [] };
-  state = { products: [] };
 
-  componentDidMount() {
-    axios.get("http://localhost:5000/api/products").then((response) => {
-      console.log(response);
-      this.setState({
-        products: response.data,
-      });
-    });
-  }
+const App = () => {
 
-  render() {
+  const [products, getProducts] = useState<IProducts[]>([])
+
+  useEffect(() => {
+     axios
+     .get<IProducts[]>("http://localhost:5000/api/products")
+     .then((response) => {
+       console.log(response);
+       getProducts(response.data)
+     });
+  }, [])
+
     return (
       <div>
         <Layout>
-          <InvOrd products={this.state.products} />
+          <InvOrd products={products} />
         </Layout>
       </div>
     );
-  }
 }
 
 export default App;

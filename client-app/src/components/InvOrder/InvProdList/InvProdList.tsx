@@ -6,17 +6,39 @@ import ButtonList from "./InvProdListComponents/ButtonList";
 import TableHeaders from "./InvProdListComponents/TableHeaders";
 import SortFilterButton from "./InvProdListComponents/SortFilterButton";
 import InvOrderSummary from "../InvOrderSummary/InvOrderSummary";
+import { IProductsWithInput } from "../../../models/Products"
+import { ISortConfig, ISortConfigForHeaders } from "../../../models/SortFilterConfig"
+import { IFilterConfig } from "../../../models/SortFilterConfig"
 
-const InvProdList = (props: any) => {
-  const  products = props.products;
+interface IProps  {
+  products: IProductsWithInput[];
+  requestFilterConfig: ( id: number, primaryKey: string, secondaryKey: string) => void
+  updateInputChanged: (id: number) => (e: React.ChangeEvent<HTMLInputElement>) => void
+  setOrderToSuggested: (roundingDirection: boolean, e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
+  setFilterConfig: (value: React.SetStateAction<IFilterConfig>) => void
+  filterConfig: IFilterConfig;
+  todaysSales: number;
+  salesPrediction: number;
+}
+
+const InvProdList: React.FC<IProps> = ({
+  products, 
+  requestFilterConfig, 
+  filterConfig, 
+  updateInputChanged,
+  setFilterConfig,
+  setOrderToSuggested,
+  todaysSales,
+  salesPrediction
+ }) => {
 
   const [activeSort, toggleActiveSort] = useState({ buttonKey: 0 });
-  const setButtonActive = (buttonKey: any) => {
+  const setButtonActive = (buttonKey: number) => {
     toggleActiveSort({ buttonKey });
   };
   
   const [activeHeaderSort, toggleHeaderActiveSort] = useState({ headerKey: 0 });
-  const setHeaderActive = (headerKey: any) => {
+  const setHeaderActive = (headerKey: number) => {
     toggleHeaderActiveSort({ headerKey });
   };
 
@@ -25,11 +47,11 @@ const InvProdList = (props: any) => {
   const [filterEnabled, toggleFilter] = useState(false);
 
   const requestSort = (
-    id: any,
-    primaryKey: any,
-    secondaryKey: any,
-    tertiaryKey: any,
-    direction: any
+    id: number,
+    primaryKey: string,
+    secondaryKey: string,
+    tertiaryKey: string,
+    direction: string
   ) => {
     setSortConfig({
       id,
@@ -44,15 +66,15 @@ const InvProdList = (props: any) => {
       toggleActiveSort({ buttonKey: 0 });
       setSortConfig({
         id: 0,
-        primaryKey: 0,
-        secondaryKey: 0,
-        tertiaryKey: 0,
-        direction: 0,
+        primaryKey: "",
+        secondaryKey: "",
+        tertiaryKey: "",
+        direction: "",
       });
     }
 
     if (!filterEnabled) {
-      props.requestFilterConfig(
+      requestFilterConfig(
         //only primary and secondary key are passed for the filter
         0,
         primaryKey,
@@ -60,7 +82,7 @@ const InvProdList = (props: any) => {
       );
     }
     if (filterEnabled) {
-      props.requestFilterConfig(
+      requestFilterConfig(
         //only primary and secondary key are passed for the filter
         id,
         primaryKey,
@@ -68,8 +90,8 @@ const InvProdList = (props: any) => {
       );
     }
 
-    if (filterEnabled && props.filterConfig.id === id) {
-      props.requestFilterConfig(
+    if (filterEnabled && filterConfig.id === id) {
+        requestFilterConfig(
         //only primary and secondary key are passed for the filter
         0,
         primaryKey,
@@ -78,21 +100,21 @@ const InvProdList = (props: any) => {
 
       setSortConfig({
         id: 0,
-        primaryKey: 0,
-        secondaryKey: 0,
-        tertiaryKey: 0,
-        direction: 0,
+        primaryKey: "",
+        secondaryKey: "",
+        tertiaryKey: "",
+        direction: "",
       });
       toggleActiveSort({ buttonKey: 0 });
     }
   };
 
-  const setFilterEnabled = (filterEnabled: any, e: any) => {
+  const setFilterEnabled = (filterEnabled: boolean, e:React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
     toggleFilter(!filterEnabled);
     e.stopPropagation();
 
     if (sortConfig) {
-      props.requestFilterConfig(
+        requestFilterConfig(
         //only primary and secondary key are passed for the filter
         sortConfig.id,
         sortConfig.primaryKey,
@@ -100,40 +122,50 @@ const InvProdList = (props: any) => {
       );
     }
     //'resets' the config id to 0 so that filtering stops if you have a sortConfig
-    if (sortConfig.id === props.filterConfig.id) {
-      props.requestFilterConfig(
+    if (sortConfig.id === filterConfig.id) {
+        requestFilterConfig(
         //only primary and secondary key are passed for the filter
         0,
         sortConfig.primaryKey,
         sortConfig.secondaryKey
       );
     }
-    if (filterEnabled && props.filterConfig.id === 0) {
-      props.setFilterConfig({
+    if (filterEnabled && filterConfig.id === 0) {
+        setFilterConfig({
         id: 0,
-        primaryKey: 0,
-        secondaryKey: 0,
+        primaryKey: "",
+        secondaryKey: "",
       });
-      setSortConfig({
+        setSortConfig({
         id: 0,
-        primaryKey: 0,
-        secondaryKey: 0,
-        tertiaryKey: 0,
-        direction: 0,
+        primaryKey: "",
+        secondaryKey: "",
+        tertiaryKey: "",
+        direction: "",
       });
     }
   };
 
   // console.log(filterEnabled);
 
-  const [sortConfig, setSortConfig] = useState(props);
-  const [sortConfigForHeaders, setSortConfigForHeaders] = useState(props);
+  const [sortConfig, setSortConfig] = useState<ISortConfig>({
+    id: 0,
+    primaryKey: "",
+    secondaryKey: "",
+    tertiaryKey: "",
+    direction: "",
+  });
+
+  const [sortConfigForHeaders, setSortConfigForHeaders] = useState<ISortConfigForHeaders>({
+    key: "",
+    direction: ""
+  });
 
   let sortedProducts = [...products];
 
-  // console.log(sortConfig);
+  //the key here needs to be the column name which is of type string
 
-  const requestSortForHeaders = (key: any) => {
+  const requestSortForHeaders = (key: string) => {
     let direction = "ascending";
     if (
       sortConfigForHeaders.key === key &&
@@ -141,11 +173,17 @@ const InvProdList = (props: any) => {
     ) {
       direction = "descending";
     }
+    
     if (sortConfig !== null) {
-      setSortConfig(products);
+      setSortConfig({
+        id: 0,
+        primaryKey: "",
+        secondaryKey: "",
+        tertiaryKey: "",
+        direction: "",
+      });
     }
-    setSortConfigForHeaders({ key, direction });
-
+     setSortConfigForHeaders({ key, direction });
     if (!filterEnabled) toggleActiveSort({ buttonKey: 0 });
   };
 
@@ -163,7 +201,7 @@ const InvProdList = (props: any) => {
   }
   if (sortConfig !== null) {
     if (sortConfig.direction === "normal") {
-      sortedProducts.sort((a, b) => {
+      sortedProducts.sort((a:any, b:any) => {
         return (
           b[sortConfig.primaryKey] - a[sortConfig.primaryKey] ||
           b[sortConfig.secondaryKey] - a[sortConfig.secondaryKey] ||
@@ -171,7 +209,7 @@ const InvProdList = (props: any) => {
         );
       });
     } else if (sortConfig.direction === "reverse1") {
-      sortedProducts.sort((a, b) => {
+      sortedProducts.sort((a:any, b:any) => {
         return (
           a[sortConfig.primaryKey] - b[sortConfig.primaryKey] ||
           b[sortConfig.secondaryKey] - a[sortConfig.secondaryKey] ||
@@ -179,7 +217,7 @@ const InvProdList = (props: any) => {
         );
       });
     } else if (sortConfig.direction === "reverse2") {
-      sortedProducts.sort((a, b) => {
+      sortedProducts.sort((a:any, b:any) => {
         return (
           b[sortConfig.primaryKey] - a[sortConfig.primaryKey] ||
           a[sortConfig.secondaryKey] - b[sortConfig.secondaryKey] ||
@@ -187,7 +225,7 @@ const InvProdList = (props: any) => {
         );
       });
     } else if (sortConfig.direction === "reverse1and2") {
-      sortedProducts.sort((a, b) => {
+      sortedProducts.sort((a:any, b:any) => {
         return (
           a[sortConfig.primaryKey] - b[sortConfig.primaryKey] ||
           a[sortConfig.secondaryKey] - b[sortConfig.secondaryKey] ||
@@ -227,19 +265,19 @@ const InvProdList = (props: any) => {
           />
         </thead>
         <InvProduct
-          key={props.id}
-          updateInputChanged={props.updateInputChanged}
+          //  key={props.id}
+          updateInputChanged={updateInputChanged}
           sortedAndFilteredProducts={sortedProducts}
-          salesPrediction={props.salesPrediction}
-          todaysSales={props.todaysSales}
-          renderProductRows={props.renderProductRows}
+          // salesPrediction={salesPrediction}
+          // todaysSales={todaysSales}
+          // renderProductRows={renderProductRows}
         />
       </table>
       <InvOrderSummary
-      todaysSales={props.todaysSales}
-      salesPrediction={props.salesPrediction}
-      products = {props.products}
-      setOrderToSuggested = {props.setOrderToSuggested}
+      todaysSales={todaysSales}
+      salesPrediction={salesPrediction}
+      products = {products}
+      setOrderToSuggested = {setOrderToSuggested}
       ></InvOrderSummary>
     </Auxil>
   );

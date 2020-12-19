@@ -31,7 +31,7 @@ const Countdown = () => {
     return () => clearTimeout(timer);
   });
 
-  let styles: any = [classes.CountdownTimeLeft];
+  let styles: string[] = [classes.CountdownTimeLeft];
 
   if (!!timeLeft && timeLeft.getTime() < 600000) {
     styles.push(classes.Warning);

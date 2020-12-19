@@ -1,27 +1,39 @@
 import React from "react";
 import classes from "./SortFilterButton.module.css";
 
-let SortFilterButton = (props: any) => {
-  console.log(props.filterEnabled);
+interface IProps {
+  filterEnabled: boolean; 
+  setFilterEnabled: (filterEnabled: boolean, e:React.MouseEvent<HTMLSpanElement, MouseEvent>) => void; 
+  dropdown: boolean; 
+  toggleDropdown: React.Dispatch<React.SetStateAction<boolean>>
+  activeSort:{buttonKey: number;}
+}
+
+let SortFilterButton: React.FC<IProps> = ({
+  filterEnabled,
+  setFilterEnabled, 
+  dropdown, 
+  toggleDropdown,
+  activeSort }) => {
 
   return (
     <button
       className={
-        props.dropdown === true || props.activeSort.buttonKey
+        dropdown === true || activeSort.buttonKey
           ? classes.Active
           : classes.SortButton
       }
-      onClick={() => props.toggleDropdown(!props.dropdown)}
+      onClick={() => toggleDropdown(!dropdown)}
     >
       <div>
         <span
           onClick={(e) => {
-            props.setFilterEnabled(props.filterEnabled, e);
+            setFilterEnabled(filterEnabled, e);
           }}
         >
-          {props.filterEnabled ? <span>▼</span> : <span>☰</span>}
+          {filterEnabled ? <span>▼</span> : <span>☰</span>}
         </span>{" "}
-        {props.filterEnabled ? <span>Filter</span> : <span>Sort</span>}
+        {filterEnabled ? <span>Filter</span> : <span>Sort</span>}
       </div>
     </button>
   );

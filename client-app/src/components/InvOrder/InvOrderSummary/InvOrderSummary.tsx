@@ -3,20 +3,31 @@ import Auxil from "../../../hoc/Auxil";
 import classes from "./InvOrderSummary.module.css"
 import InvProdSetToSuggest from "./InvOrderSummaryComponents/InvProdSetToSuggest";
 import InvOrderButton from "./InvOrderSummaryComponents/InvOrderButton";
+import { IProductsWithInput } from "../../../models/Products"
 
 //to-do - find how to calculate blended margin? 
+interface IProps  {
+    todaysSales: number; 
+    salesPrediction: number; 
+    products: IProductsWithInput[]; 
+    setOrderToSuggested: (roundingDirection: boolean, e:React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  }
 
-const InvOrderSummary = (props:any) => {
+const InvOrderSummary: React.FC<IProps>  = ({
+    todaysSales, 
+    salesPrediction, 
+    products, 
+    setOrderToSuggested}) => {
 
-let orderedProducts = props.products.map((products: any) =>  (
+let orderedProducts = products.map((products) =>  (
     {
     productVIN: products.id,
     productName: products.name,
-    ordered: products.order ==="" ? 0 : products.order,
+    ordered:  products.order,
     totalCost: products.order * products.cost
   }));
 
-  console.log(orderedProducts)
+//   console.log(orderedProducts)
 
   //can maybe these next two functions get refactored to one function that returns both?
 
@@ -61,7 +72,7 @@ useEffect(() => {
         <div className = {classes.InvOrderStatsHeader}>
          <h1>Order Summary</h1> 
          <InvProdSetToSuggest
-            setOrderToSuggested = {props.setOrderToSuggested}>
+            setOrderToSuggested = {setOrderToSuggested}>
         </InvProdSetToSuggest>
          </div>
          <div className = {classes.InvOrderStatsFooter}>
@@ -69,8 +80,8 @@ useEffect(() => {
          <p>Total order cost: {totalCost}</p>
          <p>Blended gig margin: 8%</p>
          <InvOrderButton
-         todaysSales={props.todaysSales}
-         salesPrediction={props.salesPrediction}
+         todaysSales={todaysSales}
+         salesPrediction={salesPrediction}
          orderedProducts = {orderedProducts}
          totalCost = {totalCost}
          totalPieces = {totalPieces}

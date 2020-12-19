@@ -3,8 +3,21 @@ import classes from "../InvOrderSummaryComponents/InvOrderButton.module.css"
 import Modal from "../../../../hoc/Modal";
 import Auxil from "../../../../hoc/Auxil";
 import InvPreviewModal from "./InvPreviewModal";
+import { IOrderedProducts } from "../../../../models/Products"
 
-const InvOrderButton = (props:any) => {
+
+interface IProps  {
+  todaysSales: number; 
+  salesPrediction: number; 
+  orderedProducts: IOrderedProducts[]; 
+  totalCost: string; 
+  totalPieces: number;
+}
+
+const InvOrderButton:React.FC<IProps>  = ({
+  orderedProducts,
+  totalCost,
+  totalPieces }) => {
 
 const [isShowing, setIsShowing] = useState(false);
 
@@ -18,11 +31,9 @@ return(
     <button className = {classes.InvOrderButton} onClick={()=>toggleModal()}>Order</button>
     <Modal show = {isShowing} modalClosed = {toggleModal}>
     <InvPreviewModal
-    salesPrediction = {props.salesPrediction}
-    todaysSales = {props.todaysSales}
-    orderedProducts = {props.orderedProducts}
-    totalPieces = {props.totalPieces}
-    totalCost = {props.totalCost}
+    orderedProducts = {orderedProducts}
+    totalPieces = {totalPieces}
+    totalCost = {totalCost}
     ></InvPreviewModal>
     </Modal>
     </Auxil>

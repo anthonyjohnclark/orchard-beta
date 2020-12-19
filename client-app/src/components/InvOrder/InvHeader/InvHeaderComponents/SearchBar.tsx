@@ -1,7 +1,11 @@
 import React from "react";
 import classes from "./SearchBar.module.css";
 
-const SearchBar = (props: any) => {
+interface IProps {
+  setNewSearch: (newSearchText: string) => void;
+}
+
+const SearchBar: React.FC<IProps> = ({setNewSearch}) => {
   return (
     <div className={classes.SearchBar}>
       <div className={classes.SearchBarText}>
@@ -10,7 +14,7 @@ const SearchBar = (props: any) => {
       <input
         type="text"
         placeholder="by Name or VIN..."
-        onChange={(text) => props.setNewSearch(text.target.value)}
+        onChange={(text) => setNewSearch(text.target.value)}
       />
     </div>
   );

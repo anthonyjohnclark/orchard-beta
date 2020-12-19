@@ -1,5 +1,14 @@
 import React from "react";
 import classes from "./TableHeaders.module.css";
+import { ISortConfigForHeaders } from "../../../../models/SortFilterConfig"
+
+
+interface IProps {
+  activeHeaderSort: {headerKey: number};
+  sortConfigForHeaders: ISortConfigForHeaders;
+  requestSortForHeaders: (key: string) => void;
+  setHeaderActive: (headerKey: number) => void;
+}
 
 let tableHeaders = [
   { headerKey: 1, name: "VIN", column: "id" },
@@ -19,23 +28,27 @@ let tableHeaders = [
   { headerKey: 15, name: "Order", column: "id" },
 ];
 
-const TableHeaders = (props: any) => (
+const TableHeaders: React.FC<IProps> = ({
+  activeHeaderSort, 
+  sortConfigForHeaders, 
+  requestSortForHeaders, 
+  setHeaderActive}) => (
   <tr className={classes.InvProdHeader}>
     {tableHeaders.map((headers) => (
       <th
         key={headers.headerKey}
         className={
-          headers.headerKey == props.activeHeaderSort.headerKey &&
-          props.sortConfigForHeaders.direction == "descending"
+          headers.headerKey === activeHeaderSort.headerKey &&
+          sortConfigForHeaders.direction === "descending"
             ? classes.InvProdHeaderAsc
-            : headers.headerKey == props.activeHeaderSort.headerKey &&
-              props.sortConfigForHeaders.direction == "ascending"
+            : headers.headerKey === activeHeaderSort.headerKey &&
+              sortConfigForHeaders.direction === "ascending"
             ? classes.InvProdHeaderDesc
             : classes.InvProdHeader
         }
         onClick={() => {
-          props.requestSortForHeaders(headers.column);
-          props.setHeaderActive(headers.headerKey);
+          requestSortForHeaders(headers.column);
+          setHeaderActive(headers.headerKey);
         }}
         scope="col"
       >

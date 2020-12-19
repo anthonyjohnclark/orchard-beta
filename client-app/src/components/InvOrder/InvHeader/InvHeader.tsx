@@ -6,27 +6,34 @@ import SearchBar from "./InvHeaderComponents/SearchBar";
 import SalesPredictor from "./InvHeaderComponents/SalesPredictor";
 import TodaysSales from "./InvHeaderComponents/TodaysSales";
 import Auxil from "../../../hoc/Auxil";
+import { IProducts, IProductsWithInput } from "../../../models/Products";
+import { IFilterConfig } from "../../../models/SortFilterConfig";
 
+interface IProps  {
+  products: IProducts[];    
+}
 
-const InvHeader = (props: any) => {
+const InvHeader: React.FC<IProps> = ({products}) => {
   //here we need to create a new array with blank fields for each product object
-  let productsNew = props.products.map((products: any) => ({
+  let productsNew = products.map((products) => ({
     ...products,
-    inTheBack: "",
-    onTheFloor: "",
-    order: "",
-    sell: "",
-    selling: "",
-    suggested: "",
+    inTheBack: 0,
+    onTheFloor: 0,
+    order: 0,
+    sell: 0,
+    selling: 0,
+    suggested: 0
   }));
 
-  console.log(productsNew);
+  const [inputs, setProductInput] = useState<IProductsWithInput[]>([]);
 
-  const [inputs, setProductInput] = useState(productsNew);
-
-  console.log(inputs);
-
-  const calculateSuggestedValue = (onTheFloorValue: any,intheBackValue: any,sellingValue:any,sellValue: any,fillValue: any,parValue:any) => { 
+  const calculateSuggestedValue = 
+  ( onTheFloorValue: number,
+    intheBackValue: number,
+    sellingValue:number,
+    sellValue: number,
+    fillValue: number,
+    parValue:number ) => { 
     if (sellingValue){
     let neededValue = (sellValue + sellingValue)
     let onHand = (onTheFloorValue + intheBackValue)
@@ -38,10 +45,10 @@ const InvHeader = (props: any) => {
   return 0
     }
 
-  const updateInputChanged = (id: any) => (e: any) => {
+  const updateInputChanged = (id: number) => (e: React.ChangeEvent<HTMLInputElement>) => {
     let productsWithInput = [...inputs];
     let prodID = id;
-    let property = e.target.name;
+    const property = e.target.name;
     const prodIndex = productsWithInput.findIndex(({ id }) => id === prodID);
     console.log(prodIndex);
 
@@ -55,7 +62,14 @@ const InvHeader = (props: any) => {
       let fillValue = Number(productsWithInput[prodIndex].fill);
       let parValue = Number(productsWithInput[prodIndex].par);
 
-      productsWithInput[prodIndex].suggested = parseFloat(calculateSuggestedValue(onTheFloorValue,intheBackValue,sellingValue,sellValue,fillValue,parValue).toFixed(1))
+      productsWithInput[prodIndex].suggested= 
+      parseFloat(calculateSuggestedValue(
+        onTheFloorValue,
+        intheBackValue,
+        sellingValue,
+        sellValue,
+        fillValue,
+        parValue).toFixed(1))
     }
     setProductInput(productsWithInput);
   };
@@ -69,20 +83,18 @@ const InvHeader = (props: any) => {
 
   const [searchText, setSearch] = useState("");
 
-  const setNewSearch = (newSearchText: any) => {
+  const setNewSearch = (newSearchText: string) => {
     setSearch(newSearchText);
   };
 
   const [salesPrediction, setSalesPrediction] = useState(Number);
 
-  console.log(salesPrediction)
-
-  const setNewSalesPrediction = (newSalesNumber: number, name:any) => {
+  const setNewSalesPrediction = (newSalesNumber: number, name:string) => {
     setSalesPrediction(newSalesNumber)
     updateSellSelling(name);
   };
 
-  const updateSellSelling = (name:any) => {
+  const updateSellSelling = (name:string) => {
     let productsWithSellSelling = [...inputs];
       productsWithSellSelling.forEach((products) => { 
       if (name ==="TodaysSales"){
@@ -103,7 +115,14 @@ const InvHeader = (props: any) => {
       let fillValue = Number(products.fill);
       let parValue = Number(products.par);
 
-       products.suggested = parseFloat(calculateSuggestedValue(onTheFloorValue,intheBackValue,sellingValue,sellValue,fillValue,parValue).toFixed(1))
+       products.suggested = 
+       parseFloat(calculateSuggestedValue(
+         onTheFloorValue,
+         intheBackValue,
+         sellingValue,
+         sellValue,
+         fillValue,
+         parValue).toFixed(1))
       });
     setProductInput(productsWithSellSelling);
     return name;
@@ -111,16 +130,18 @@ const InvHeader = (props: any) => {
  
   const [todaysSales, setTodaysSales] = useState(Number);
 
-  const setOrderToSuggested = (roundingDirection:boolean, e:any) => { 
+  const setOrderToSuggested = (roundingDirection:boolean, e:React.MouseEvent<HTMLDivElement, MouseEvent>) => { 
     let productsWithOrderSetToSuggested = [...inputs];
+  
+    const element = e.target as HTMLInputElement
 
-    if (e.target.id === 'revert'){
+    if (element.id === 'revert'){
       productsWithOrderSetToSuggested.forEach((products) => {
-        products.order = ""
+        products.order = 0
       })
     }
 
-    if (e.target.id ==='set')
+    if (element.id ==='set')
     productsWithOrderSetToSuggested.forEach((products) => {
       if (roundingDirection){
       products.order = Math.floor(products.suggested)
@@ -133,7 +154,7 @@ const InvHeader = (props: any) => {
     setProductInput(productsWithOrderSetToSuggested);
   }
 
-  const setNewTodaysSales = (newToddaysSales: any, name:any) => {
+  const setNewTodaysSales = (newToddaysSales: number, name:string) => {
     setTodaysSales(newToddaysSales);
     updateSellSelling(name);
   };
@@ -143,13 +164,13 @@ const InvHeader = (props: any) => {
      updateSellSelling("SalesPrediction");
    }, [salesPrediction,todaysSales]);
 
-  const [filterConfig, setFilterConfig] = useState(props);
+  const [filterConfig, setFilterConfig] = useState<IFilterConfig>({id:0, primaryKey:"", secondaryKey:""});
 
-  const requestFilterConfig = (id: any, primaryKey: any, secondaryKey: any) => {
+  const requestFilterConfig = (id: number, primaryKey: string, secondaryKey: string) => {
     setFilterConfig({ id, primaryKey, secondaryKey });
   };
 
-  let searchfilteredProducts = inputs.filter((products: any) => {
+  let searchfilteredProducts = inputs.filter((products) => {
     return (
       products.name.toString().toLowerCase().indexOf(searchText) >= 0 ||
       products.id.toString().indexOf(searchText) >= 0
@@ -157,7 +178,7 @@ const InvHeader = (props: any) => {
   });
 
   let filteredProducts = [...searchfilteredProducts].filter((products) => {
-    if (filterConfig !== 0) {
+    if (filterConfig !== null) {
       switch (filterConfig.id) {
         case 1:
           return products[filterConfig.primaryKey];
@@ -205,7 +226,7 @@ const InvHeader = (props: any) => {
           todaysSales={todaysSales}
           
         />
-        <SearchBar searchText={searchText} setNewSearch={setNewSearch} />
+        <SearchBar setNewSearch={setNewSearch} />
       </div>
       <div className = {classes.InvProdWrapper}>
       <InvProdList

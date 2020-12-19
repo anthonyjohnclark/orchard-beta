@@ -3,7 +3,7 @@ import classes from "./NavBar.module.css";
 import NavBarItems from "../NavBarItems/NavBarItems";
 import Logo from "../../Logo/Logo";
 
-const NavBar = (props: any) => {
+const NavBar = () => {
   return (
     <header className={classes.NavBar}>
       <Logo />

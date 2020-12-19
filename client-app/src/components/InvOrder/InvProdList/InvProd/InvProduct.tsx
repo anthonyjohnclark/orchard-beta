@@ -1,10 +1,16 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Auxil from "../../../../hoc/Auxil";
 import classes from "../InvProd/InvProduct.module.css";
+import { IProductsWithInput } from "../../../../models/Products"
 
-const InvProduct = (props: any) => {
+interface IProps {
+  updateInputChanged: (id: number) => (e: React.ChangeEvent<HTMLInputElement>) => void
+  sortedAndFilteredProducts: IProductsWithInput[];
+}
+
+const InvProduct: React.FC<IProps> = ({updateInputChanged, sortedAndFilteredProducts}) => {
   
-	const handleKeypress =  (e:any) => {
+	const handleKeypress =  (e:React.KeyboardEvent<HTMLInputElement>) => {
     const characterCode = e.key
      const characterNumber = Number(characterCode)
     if (characterNumber >= 0 && characterNumber <= 9) {
@@ -18,14 +24,15 @@ const InvProduct = (props: any) => {
     }
   }
 
-  const [dropDownId, setDropdownId] = useState(null)
+  const [dropDownId, setDropdownId] = useState(Number)
 
   const [dropdown, toggleDropdown] = useState(false);
 
-  const toggleDropdownForOneRow = (id: any, e:any) => {
+  const toggleDropdownForOneRow = (id: number, e:React.MouseEvent<HTMLTableRowElement, MouseEvent>) => {
       //I'm not really sure why this stopPropogation  
       //works the way it does or why I do it this way to be honest.
-    if (e.target.name !== "order" && e.target.name !== "inTheBack" && e.target.name !== "onTheFloor"){
+      const element = e.target as HTMLInputElement
+    if (element.name !== "order" && element.name !== "inTheBack" && element.name !== "onTheFloor"){
         e.stopPropagation()   
     
       //above conditional wraps the whole rest of the logic. 
@@ -43,7 +50,7 @@ const InvProduct = (props: any) => {
       }
 
   const renderProductRows = () => {
-    return props.sortedAndFilteredProducts.map((productTableValues: any) => {
+    return sortedAndFilteredProducts.map((sortedAndFilteredProducts) => {
       const {
         id,
         name,
@@ -68,9 +75,9 @@ const InvProduct = (props: any) => {
         percentSales,
         shrink,
         sold
-      } = productTableValues;
+      } = sortedAndFilteredProducts;
 
-      let styles: any = [classes.InvProd];
+      let styles: string[] = [classes.InvProd];
 
       switch (true) {
         case productActive:
@@ -78,7 +85,6 @@ const InvProduct = (props: any) => {
             organic
               ? styles.push(classes.OGProdActive)
               : styles.push(classes.CVProdActive);
-
             if (onSale === true) {
               styles.push(classes.OnSale);
             }
@@ -108,9 +114,9 @@ const InvProduct = (props: any) => {
           <td>
             <input
               type="number"
-              value={inTheBack}
+              value={inTheBack == 0 ? "" :inTheBack}
               name="inTheBack"
-              onChange={props.updateInputChanged(id)}
+              onChange={updateInputChanged(id)}
               min= "0">
             </input>{" "}
           </td>
@@ -118,30 +124,30 @@ const InvProduct = (props: any) => {
           <td>
             <input
               type="number"
-              value={onTheFloor}
+              value={onTheFloor == 0 ? "" :onTheFloor}
               name="onTheFloor"
-              onChange={props.updateInputChanged(id)}
+              onChange={updateInputChanged(id)}
               max = {fill}
               min= "0"
             ></input>{" "}
           </td>
-          <td>{sell}</td>
-          <td>{selling}</td>
+          <td>{sell == 0 ? "" : sell}</td>
+          <td>{selling == 0 ? "" :selling}</td>
           <td>{par}</td>
           <td>{fill}</td>
           <td>{suggested}</td>
           <td>
             <input
               type="number"
-              value={order}
+              value={order == 0 ? "" :order}
               name="order"
-              onChange={props.updateInputChanged(id)}
+              onChange={updateInputChanged(id)}
               onKeyPress={handleKeypress}
               min = "1"
             ></input>
           </td>
         </tr>
-        {dropdown && productTableValues.id == dropDownId ? 
+        {dropdown && sortedAndFilteredProducts.id == dropDownId ? 
         (<tr>
           <td colSpan={15}>
             <div className = {classes.InvProdDropdown}>

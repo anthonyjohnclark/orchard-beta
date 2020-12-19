@@ -1,6 +1,12 @@
 import React from "react";
 import classes from "./ButtonList.module.css";
 
+interface IProps {
+  requestSort: (id: number, primaryKey: string, secondaryKey:string, tertiaryKey:string, direction:string) => void; 
+  setButtonActive: (buttonKey: number) => void;
+  activeSort: { buttonKey: number };
+}
+
 const buttonList = [
   {
     id: 1,
@@ -85,20 +91,19 @@ const buttonList = [
   },
 ];
 
-const ButtonList = (props: any) => (
+const ButtonList: React.FC<IProps> = ({activeSort, requestSort, setButtonActive}) => (
   <ul>
     {buttonList.map((button) => (
       <li key={button.id}>
         <button
           className={
-            props.activeSort.buttonKey === button.id
+              activeSort.buttonKey === button.id
               ? classes.ActiveSort
               : classes.SortDropdownButton
           }
           onClick={() => {
-            props.setButtonActive(button.id);
-
-            props.requestSort(
+            setButtonActive(button.id);
+            requestSort(
               button.id,
               button.primaryKey,
               button.secondaryKey,

@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import classes from "./TodaysSales.module.css";
 
-const TodaysSales = (props: any) => {
-  let value = props.todaysSales;
+interface IProps {
+  setNewTodaysSales: (newToddaysSales: any, name: string) => void;
+  todaysSales: number;
+}
+
+const TodaysSales: React.FC<IProps> = ({setNewTodaysSales, todaysSales}) => {
+  let value = todaysSales;
 
   const [isEditing, theEditingState] = useState(false);
 
@@ -11,7 +16,7 @@ const TodaysSales = (props: any) => {
     console.log(isEditing);
   };
 
-  const formatTodaysSales = (value: any) => {
+  const formatTodaysSales = (value: number) => {
     const formatter = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
@@ -20,7 +25,7 @@ const TodaysSales = (props: any) => {
     return formatter.format(value);
   };
 
-  const handleKeyPress = (e: any) => {
+  const handleKeyPress = (e:React.KeyboardEvent<HTMLInputElement>) => {
     if (e.keyCode === 13) {
       setEditingState();
     }
@@ -37,7 +42,7 @@ const TodaysSales = (props: any) => {
           type="number"
           placeholder="Enter today's sales here..."
           onChange={(e) => {
-            props.setNewTodaysSales(e.target.value, e.target.name);
+            setNewTodaysSales(e.target.value, e.target.name);
           }}
           onBlur={setEditingState}
           value={value ? value : undefined}
