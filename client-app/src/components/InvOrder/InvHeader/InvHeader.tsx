@@ -8,6 +8,7 @@ import TodaysSales from "./InvHeaderComponents/TodaysSales";
 import Auxil from "../../../hoc/Auxil";
 import { IProducts, IProductsWithInput } from "../../../models/Products";
 import { IFilterConfig } from "../../../models/SortFilterConfig";
+import { WSAEWOULDBLOCK } from "constants";
 
 interface IProps  {
   products: IProducts[];    
@@ -238,6 +239,7 @@ const InvHeader: React.FC<IProps> = ({products}) => {
         todaysSales={todaysSales}
         salesPrediction={salesPrediction}
         setOrderToSuggested = {setOrderToSuggested}
+        productsWithInputs = {inputs}
       />
       </div>
       </Auxil>

@@ -11,6 +11,7 @@ import { ISortConfig, ISortConfigForHeaders } from "../../../models/SortFilterCo
 import { IFilterConfig } from "../../../models/SortFilterConfig"
 
 interface IProps  {
+  productsWithInputs: IProductsWithInput[];
   products: IProductsWithInput[];
   requestFilterConfig: ( id: number, primaryKey: string, secondaryKey: string) => void
   updateInputChanged: (id: number) => (e: React.ChangeEvent<HTMLInputElement>) => void
@@ -22,6 +23,7 @@ interface IProps  {
 }
 
 const InvProdList: React.FC<IProps> = ({
+  productsWithInputs,
   products, 
   requestFilterConfig, 
   filterConfig, 
@@ -276,7 +278,7 @@ const InvProdList: React.FC<IProps> = ({
       <InvOrderSummary
       todaysSales={todaysSales}
       salesPrediction={salesPrediction}
-      products = {products}
+      products = {productsWithInputs}
       setOrderToSuggested = {setOrderToSuggested}
       ></InvOrderSummary>
     </Auxil>

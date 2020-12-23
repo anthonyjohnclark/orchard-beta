@@ -1,27 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Layout from "./components/Layout/Layout";
-import InvOrd from "./containers/InvOrder/InvOrder";
-import axios from "axios";
-import {IProducts} from './models/Products'
-
+import InvOrder from "./containers/InvOrder/InvOrder";
 
 const App = () => {
-
-  const [products, getProducts] = useState<IProducts[]>([])
-
-  useEffect(() => {
-     axios
-     .get<IProducts[]>("http://localhost:5000/api/products")
-     .then((response) => {
-       console.log(response);
-       getProducts(response.data)
-     });
-  }, [])
-
-    return (
+     return (
       <div>
         <Layout>
-          <InvOrd products={products} />
+          <InvOrder/>
         </Layout>
       </div>
     );
