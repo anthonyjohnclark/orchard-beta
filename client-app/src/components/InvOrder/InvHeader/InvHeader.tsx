@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import InvProdList from "../InvProdList/InvProdList";
 import classes from "../InvHeader/InvHeader.module.css";
 import Countdown from "./InvHeaderComponents/Countdown";
@@ -6,27 +6,47 @@ import SearchBar from "./InvHeaderComponents/SearchBar";
 import SalesPredictor from "./InvHeaderComponents/SalesPredictor";
 import TodaysSales from "./InvHeaderComponents/TodaysSales";
 import Auxil from "../../../hoc/Auxil";
-import { IProducts, IProductsWithInput } from "../../../models/Products";
+import { IProductsWithInput } from "../../../models/Products";
 import { IFilterConfig } from "../../../models/SortFilterConfig";
-import { WSAEWOULDBLOCK } from "constants";
+import axios from "axios";
 
 interface IProps  {
-  products: IProducts[];    
+  products: IProductsWithInput[];    
 }
 
 const InvHeader: React.FC<IProps> = ({products}) => {
-  //here we need to create a new array with blank fields for each product object
-  let productsNew = products.map((products) => ({
-    ...products,
-    inTheBack: 0,
-    onTheFloor: 0,
-    order: 0,
-    sell: 0,
-    selling: 0,
-    suggested: 0
-  }));
+  
+  const [inputs, setProductInput] = useState<IProductsWithInput[]>(products);
 
-  const [inputs, setProductInput] = useState<IProductsWithInput[]>([]);
+  useEffect(() => {
+    axios
+    .get<IProductsWithInput[]>("http://localhost:5000/api/products")
+    .then((response) => {
+     //  console.log(response);
+     let productsNew = response.data.map((prods) => ({
+      ...prods,
+      inTheBack: 0,
+      onTheFloor: 0,
+      order: 0,
+      sell: 0,
+      selling: 0,
+      suggested: 0
+    }))
+    setProductInput(productsNew)
+    });}, [])
+
+  //here we need to create a new array with these additional blank fields for each product object
+  // let productsNew = products.map((products) => ({
+  //   ...products,
+  //   inTheBack: 0,
+  //   onTheFloor: 0,
+  //   order: 0,
+  //   sell: 0,
+  //   selling: 0,
+  //   suggested: 0
+  // }));
+
+  // console.log(productsNew)
 
   const calculateSuggestedValue = 
   ( onTheFloorValue: number,
@@ -39,7 +59,7 @@ const InvHeader: React.FC<IProps> = ({products}) => {
     let neededValue = (sellValue + sellingValue)
     let onHand = (onTheFloorValue + intheBackValue)
     
-      let suggestedValue = Math.max(0,(neededValue - onHand))
+    let suggestedValue = Math.max(0,(neededValue - onHand))
 
     return suggestedValue
   }
@@ -51,7 +71,7 @@ const InvHeader: React.FC<IProps> = ({products}) => {
     let prodID = id;
     const property = e.target.name;
     const prodIndex = productsWithInput.findIndex(({ id }) => id === prodID);
-    console.log(prodIndex);
+    // console.log(prodIndex);
 
     productsWithInput[prodIndex][property] = e.target.value;
 
@@ -76,11 +96,14 @@ const InvHeader: React.FC<IProps> = ({products}) => {
   };
 
   //update the initial state of inputs just once when it's blank to be a copy of the new array
-  useEffect(() => {
-    if (inputs.length < 1) {
-      setProductInput([...productsNew]);
-    }
-  }, [inputs, setProductInput]);
+      // useEffect(() => {
+      //   if (productsNew !== []){
+      //     setProductInput(productsNew);
+      //   }
+      //   setProductInput([])
+      // }, [ setProductInput, productsNew ]);
+
+  
 
   const [searchText, setSearch] = useState("");
 
@@ -95,7 +118,17 @@ const InvHeader: React.FC<IProps> = ({products}) => {
     updateSellSelling(name);
   };
 
-  const updateSellSelling = (name:string) => {
+  const [todaysSales, setTodaysSales] = useState(Number);
+
+  
+  const setNewTodaysSales = (newToddaysSales: number, name:string) => {
+    setTodaysSales(newToddaysSales);
+    updateSellSelling(name);
+  };
+
+// had to use React setState callback
+  const updateSellSelling = useCallback((name:string) => {
+    setProductInput(inputs => {
     let productsWithSellSelling = [...inputs];
       productsWithSellSelling.forEach((products) => { 
       if (name ==="TodaysSales"){
@@ -125,11 +158,9 @@ const InvHeader: React.FC<IProps> = ({products}) => {
          fillValue,
          parValue).toFixed(1))
       });
-    setProductInput(productsWithSellSelling);
-    return name;
-  };
+    return productsWithSellSelling;})
+  }, [salesPrediction,todaysSales]);
  
-  const [todaysSales, setTodaysSales] = useState(Number);
 
   const setOrderToSuggested = (roundingDirection:boolean, e:React.MouseEvent<HTMLDivElement, MouseEvent>) => { 
     let productsWithOrderSetToSuggested = [...inputs];
@@ -155,15 +186,10 @@ const InvHeader: React.FC<IProps> = ({products}) => {
     setProductInput(productsWithOrderSetToSuggested);
   }
 
-  const setNewTodaysSales = (newToddaysSales: number, name:string) => {
-    setTodaysSales(newToddaysSales);
-    updateSellSelling(name);
-  };
-
    useEffect(() => {
      updateSellSelling("TodaysSales");
      updateSellSelling("SalesPrediction");
-   }, [salesPrediction,todaysSales]);
+   }, [salesPrediction,todaysSales, updateSellSelling ]);
 
   const [filterConfig, setFilterConfig] = useState<IFilterConfig>({id:0, primaryKey:"", secondaryKey:""});
 

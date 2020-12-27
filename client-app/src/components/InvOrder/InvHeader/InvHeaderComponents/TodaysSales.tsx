@@ -45,7 +45,7 @@ const TodaysSales: React.FC<IProps> = ({setNewTodaysSales, todaysSales}) => {
             setNewTodaysSales(e.target.value, e.target.name);
           }}
           onBlur={setEditingState}
-          value={value ? value : undefined}
+          value={value ? value : undefined || ""}
           onKeyDown={(e) => handleKeyPress(e)}
           min= "0"
         />
@@ -54,7 +54,7 @@ const TodaysSales: React.FC<IProps> = ({setNewTodaysSales, todaysSales}) => {
           type="text"
           placeholder="Enter predicted sales here..."
           onFocus={setEditingState}
-          value={formatTodaysSales(value)}
+          value={formatTodaysSales(value) || ""}
           readOnly
         />
       )}

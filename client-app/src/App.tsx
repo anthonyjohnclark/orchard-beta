@@ -4,11 +4,9 @@ import InvOrder from "./containers/InvOrder/InvOrder";
 
 const App = () => {
      return (
-      <div>
         <Layout>
           <InvOrder/>
         </Layout>
-      </div>
     );
 }
 

@@ -35,16 +35,17 @@ return (
             <tr>
                 <td colSpan = {4}>
 
-            {orderedProducts.map((products) => { 
-            if (products.ordered > 0)
-          return(
-                <tr className = {classes.InvSummaryModalRow}>
+            {orderedProducts.map(products => { 
+            if (products.ordered > 0) {
+                return(
+                <tr className = {classes.InvSummaryModalRow} key ={products.productVIN}>
                 <td>{products.productVIN}</td>
                 <td>{products.productName}</td>
                 <td>{products.ordered}</td>
                 <td>{formatter.format(products.totalCost)}</td>
                 </tr>
-                )})}
+                )} return null  
+            })}
                 </td>
                 </tr>
             </tbody>

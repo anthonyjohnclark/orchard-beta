@@ -45,7 +45,7 @@ const SalesPredictor: React.FC<IProps> = ({ setNewSalesPrediction,salesPredictio
             setNewSalesPrediction(e.target.value, e.target.name);
           }}
           onBlur={setEditingState}
-          value={value ? value : undefined}
+          value={value ? value : undefined || ""}
           onKeyDown={(e) => handleKeyPress(e)}
           min= "0"
         />
@@ -54,7 +54,7 @@ const SalesPredictor: React.FC<IProps> = ({ setNewSalesPrediction,salesPredictio
           type="text"
           placeholder="Enter predicted sales here..."
           onFocus={setEditingState}
-          value={formatSalesPrediction(value)}
+          value={formatSalesPrediction(value) || ""}
           readOnly
         />
       )}

@@ -40,12 +40,12 @@ const InvProduct: React.FC<IProps> = ({updateInputChanged, sortedAndFilteredProd
 
     if (id !== dropDownId ){
       setDropdownId(id);
-      if (dropdown == false)
+      if (dropdown === false)
       toggleDropdown(!dropdown);
     }
-      if(id == dropDownId || dropDownId == null){
+      if(id === dropDownId || dropDownId === null)
         toggleDropdown(!dropdown);
-      }
+  
     }
       }
 
@@ -81,14 +81,14 @@ const InvProduct: React.FC<IProps> = ({updateInputChanged, sortedAndFilteredProd
 
       switch (true) {
         case productActive:
-          {
+          
             organic
               ? styles.push(classes.OGProdActive)
               : styles.push(classes.CVProdActive);
             if (onSale === true) {
               styles.push(classes.OnSale);
             }
-          }
+          
           break;
         default: {
           organic
@@ -102,9 +102,9 @@ const InvProduct: React.FC<IProps> = ({updateInputChanged, sortedAndFilteredProd
 
 
       return (
-        <tr>
+        <tr key={id}>
           <td colSpan = {15}>
-      <tr className={styles.join(" ")} key={id} onClick={(e) => toggleDropdownForOneRow(id, e)}>         
+      <tr className={styles.join(" ")} onClick={(e) => toggleDropdownForOneRow(id, e)}>         
           <td>{id}</td>
           <td>{name}</td>
           <td>{cost}</td>
@@ -114,7 +114,7 @@ const InvProduct: React.FC<IProps> = ({updateInputChanged, sortedAndFilteredProd
           <td>
             <input
               type="number"
-              value={inTheBack == 0 ? "" :inTheBack}
+              value={inTheBack === 0 ? "" :inTheBack}
               name="inTheBack"
               onChange={updateInputChanged(id)}
               min= "0">
@@ -124,22 +124,22 @@ const InvProduct: React.FC<IProps> = ({updateInputChanged, sortedAndFilteredProd
           <td>
             <input
               type="number"
-              value={onTheFloor == 0 ? "" :onTheFloor}
+              value={onTheFloor === 0 ? "" :onTheFloor}
               name="onTheFloor"
               onChange={updateInputChanged(id)}
               max = {fill}
               min= "0"
             ></input>{" "}
           </td>
-          <td>{sell == 0 ? "" : sell}</td>
-          <td>{selling == 0 ? "" :selling}</td>
+          <td>{sell === 0 ? "" : sell}</td>
+          <td>{selling === 0 ? "" :selling}</td>
           <td>{par}</td>
           <td>{fill}</td>
           <td>{suggested}</td>
           <td>
             <input
               type="number"
-              value={order == 0 ? "" :order}
+              value={order === 0 ? "" :order}
               name="order"
               onChange={updateInputChanged(id)}
               onKeyPress={handleKeypress}
@@ -147,7 +147,7 @@ const InvProduct: React.FC<IProps> = ({updateInputChanged, sortedAndFilteredProd
             ></input>
           </td>
         </tr>
-        {dropdown && sortedAndFilteredProducts.id == dropDownId ? 
+        {dropdown && sortedAndFilteredProducts.id === dropDownId ? 
         (<tr>
           <td colSpan={15}>
             <div className = {classes.InvProdDropdown}>
@@ -164,7 +164,7 @@ const InvProduct: React.FC<IProps> = ({updateInputChanged, sortedAndFilteredProd
             </tr>
        )});
   };
-  {
+  
     return(
     <Auxil>
       <div className = {classes.ScrollWrap}>
@@ -172,6 +172,6 @@ const InvProduct: React.FC<IProps> = ({updateInputChanged, sortedAndFilteredProd
       </div>
     </Auxil>
     );
-  }
+
 };
 export default InvProduct;
