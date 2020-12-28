@@ -10,13 +10,9 @@ import { IProductsWithInput } from "../../../models/Products";
 import { IFilterConfig } from "../../../models/SortFilterConfig";
 import axios from "axios";
 
-interface IProps  {
-  products: IProductsWithInput[];    
-}
+const InvHeader = () => {
 
-const InvHeader: React.FC<IProps> = ({products}) => {
-  
-  const [inputs, setProductInput] = useState<IProductsWithInput[]>(products);
+  const [inputs, setProductInput] = useState<IProductsWithInput[]>([]);
 
   useEffect(() => {
     axios
@@ -34,19 +30,6 @@ const InvHeader: React.FC<IProps> = ({products}) => {
     }))
     setProductInput(productsNew)
     });}, [])
-
-  //here we need to create a new array with these additional blank fields for each product object
-  // let productsNew = products.map((products) => ({
-  //   ...products,
-  //   inTheBack: 0,
-  //   onTheFloor: 0,
-  //   order: 0,
-  //   sell: 0,
-  //   selling: 0,
-  //   suggested: 0
-  // }));
-
-  // console.log(productsNew)
 
   const calculateSuggestedValue = 
   ( onTheFloorValue: number,
@@ -94,16 +77,6 @@ const InvHeader: React.FC<IProps> = ({products}) => {
     }
     setProductInput(productsWithInput);
   };
-
-  //update the initial state of inputs just once when it's blank to be a copy of the new array
-      // useEffect(() => {
-      //   if (productsNew !== []){
-      //     setProductInput(productsNew);
-      //   }
-      //   setProductInput([])
-      // }, [ setProductInput, productsNew ]);
-
-  
 
   const [searchText, setSearch] = useState("");
 

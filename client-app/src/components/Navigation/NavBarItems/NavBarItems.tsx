@@ -5,11 +5,10 @@ import NavBarItem from "./NavBarItem/NavBarItem";
 const NavBarItems = () => {
   return (
     <ul className={classes.NavBarItems}>
-      <NavBarItem link="/" active={true}>
-        Inventory & Order
-      </NavBarItem>
-      <NavBarItem link="/">Sales & Shrink</NavBarItem>
-      <NavBarItem link="/">On the Floor</NavBarItem>
+      <NavBarItem link="/salesShrink">Sales & Shrink</NavBarItem>
+      <NavBarItem link="/onTheFloor">On the Floor</NavBarItem>
+      <NavBarItem link="/laborTasks">Labor & Tasks</NavBarItem>
+      <NavBarItem link="/">Inventory & Order</NavBarItem>
     </ul>
   );
 };
