@@ -14,7 +14,7 @@ interface IProps  {
     setOrderToSuggested: (roundingDirection: boolean, e:React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
     totalCost: string;
     // saveTotalPieces: () => void;
-    saveTotalCost: () => void
+    // saveTotalCost: () => void
     totalPieces: number 
   }
 
