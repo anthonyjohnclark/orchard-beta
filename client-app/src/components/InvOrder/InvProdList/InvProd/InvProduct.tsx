@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Auxil from "../../../../hoc/Auxil";
 import classes from "../InvProd/InvProduct.module.css";
-import { IProductsWithInput } from "../../../../models/Products"
+import { IProductsWithInput } from "../../../../models/IProducts"
 
 interface IProps {
   updateInputChanged: (id: number) => (e: React.ChangeEvent<HTMLInputElement>) => void

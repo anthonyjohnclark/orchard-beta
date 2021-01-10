@@ -1,9 +1,14 @@
 import React from 'react'
+import Auxil from "../../hoc/Auxil";
+import OnTheFloorHeader from "../../components/OnTheFloor/OnTheFloorHeader/OnTheFloorHeader";
+
 
 const onTheFloor = () => {
     return (
-        <h1>onTHEFLOOR UNDER CONSTRUCTION</h1>
-    )
+        <Auxil>
+        <OnTheFloorHeader/>
+        </Auxil>
+)
 }
 
 export default onTheFloor; 

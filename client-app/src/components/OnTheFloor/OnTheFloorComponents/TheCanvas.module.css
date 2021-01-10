@@ -1,0 +1,8 @@
+.TheCanvas {
+  position: relative;
+  left: 75px;
+  top: 85px;
+  width: 90vw;
+  max-height: 75vh;
+  border: 2px solid white;
+}

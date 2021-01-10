@@ -1,70 +1,31 @@
-import React, {useState, useEffect} from "react";
+import React from "react";
 import Auxil from "../../../hoc/Auxil";
 import classes from "./InvOrderSummary.module.css"
 import InvProdSetToSuggest from "./InvOrderSummaryComponents/InvProdSetToSuggest";
 import InvOrderButton from "./InvOrderSummaryComponents/InvOrderButton";
-import { IProductsWithInput } from "../../../models/Products"
+import { IOrderedProducts } from "../../../models/IProducts";
+
 
 //to-do - find how to calculate blended margin? 
 interface IProps  {
     todaysSales: number; 
     salesPrediction: number; 
-    products: IProductsWithInput[]; 
+    orderedProducts: IOrderedProducts[]; 
     setOrderToSuggested: (roundingDirection: boolean, e:React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+    totalCost: string;
+    // saveTotalPieces: () => void;
+    saveTotalCost: () => void
+    totalPieces: number 
   }
 
 const InvOrderSummary: React.FC<IProps>  = ({
     todaysSales, 
     salesPrediction, 
-    products, 
-    setOrderToSuggested}) => {
-
-let orderedProducts = products.map((products) =>  (
-    {
-    productVIN: products.id,
-    productName: products.name,
-    ordered:  products.order,
-    totalCost: products.order * products.cost
-  }));
-
-//   console.log(orderedProducts)
-
-  //can maybe these next two functions get refactored to one function that returns both?
-
-const [totalPieces, setTotalPieces] = useState(0)
-
-const saveTotalPieces = () => {
-let initialValue = 0
-let sum = orderedProducts.reduce(
-    (accumulator:any, currentValue:any) => accumulator + parseInt(currentValue.ordered)
-    , initialValue
-)
-setTotalPieces(sum);
-}
-
-const [totalCost, setTotalCost] = useState("0")
-
-const saveTotalCost = () => {
-    let initialValue = 0
-    let sum = orderedProducts.reduce(
-        (accumulator:any, currentValue:any) => accumulator + currentValue.totalCost
-        , initialValue
-    )
-    var formatter = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-      });
-
-       let formattedSum = formatter.format(sum)
-
-    setTotalCost(formattedSum);
-    }
-    
-useEffect(() => {
-    saveTotalCost();
-    saveTotalPieces();
-  });
-
+    orderedProducts, 
+    setOrderToSuggested,
+    totalPieces,
+    totalCost
+  }) => {
 
     return (
         <Auxil>

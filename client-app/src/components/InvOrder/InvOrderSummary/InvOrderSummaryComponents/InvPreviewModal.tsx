@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './InvPreviewModal.module.css'
 import buttonClasses from './InvOrderButton.module.css'
-import { IOrderedProducts } from "../../../../models/Products"
+import { IOrderedProducts } from "../../../../models/IProducts"
 
 interface IProps  {
     orderedProducts: IOrderedProducts[]; 

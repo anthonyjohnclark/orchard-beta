@@ -2,7 +2,6 @@ using System;
 
 namespace Domain
 {
-
     public class Product
     {
         public int Id { get; set; }
@@ -22,7 +21,5 @@ namespace Domain
         public double percentSales { get; set; }
         public double netGIG { get; set; }
         public double fill { get; set; }
-
-
     }
 }
