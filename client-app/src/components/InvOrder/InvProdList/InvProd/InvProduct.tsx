@@ -4,11 +4,11 @@ import classes from "../InvProd/InvProduct.module.css";
 import { IProductsWithInput } from "../../../../models/IProducts"
 
 interface IProps {
-  updateInputChanged: (id: number) => (e: React.ChangeEvent<HTMLInputElement>) => void
+   updateInputChanged: (id: number) => (e: React.ChangeEvent<HTMLInputElement>) => void
   sortedAndFilteredProducts: IProductsWithInput[];
 }
 
-const InvProduct: React.FC<IProps> = ({updateInputChanged, sortedAndFilteredProducts}) => {
+const InvProduct: React.FC<IProps> = ({ sortedAndFilteredProducts, updateInputChanged}) => {
   
 	const handleKeypress =  (e:React.KeyboardEvent<HTMLInputElement>) => {
     const characterCode = e.key

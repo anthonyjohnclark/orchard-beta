@@ -1,0 +1,4 @@
+export const GET_PRODUCTS:any = 'GET_PRODUCTS'
+export const UPDATE_INPUT:any = 'UPDATE_INPUT';
+export const UPDATE_SELLSELLING:any = 'UPDATE_SELLSELLING'
+export const SET_TO_SUGGESTED:any ='SET_TO_SUGGESTED'

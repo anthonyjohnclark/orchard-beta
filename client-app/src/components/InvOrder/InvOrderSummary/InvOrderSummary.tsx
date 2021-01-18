@@ -5,7 +5,6 @@ import InvProdSetToSuggest from "./InvOrderSummaryComponents/InvProdSetToSuggest
 import InvOrderButton from "./InvOrderSummaryComponents/InvOrderButton";
 import { IOrderedProducts } from "../../../models/IProducts";
 
-
 //to-do - find how to calculate blended margin? 
 interface IProps  {
     todaysSales: number; 
@@ -32,9 +31,7 @@ const InvOrderSummary: React.FC<IProps>  = ({
         <div className = {classes.InvOrderSummary}>
         <div className = {classes.InvOrderStatsHeader}>
          <h1>Order Summary</h1> 
-         <InvProdSetToSuggest
-            setOrderToSuggested = {setOrderToSuggested}>
-        </InvProdSetToSuggest>
+        <InvProdSetToSuggest  setOrderToSuggested={setOrderToSuggested}/>
          </div>
          <div className = {classes.InvOrderStatsFooter}>
          <p>Total pieces ordered: {totalPieces}</p>

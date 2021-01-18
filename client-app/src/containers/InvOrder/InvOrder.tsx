@@ -11,7 +11,6 @@ import UseRequestSortFilter from "../../hooks/useRequestSortFilter";
 
 
 const InvOrder = () => {
-  
 
   const [searchText, setSearch] = useState("");
 
@@ -20,10 +19,10 @@ const InvOrder = () => {
   };
 
   const [salesPrediction, setSalesPrediction] = useState(Number);
-
+ 
   const setNewSalesPrediction = (newSalesNumber: number, name:string) => {
     setSalesPrediction(newSalesNumber)
-    updateSellSelling(name);
+     updateSellSelling(name);
   };
 
   const [todaysSales, setTodaysSales] = useState(Number);
@@ -31,7 +30,7 @@ const InvOrder = () => {
   
   const setNewTodaysSales = (newToddaysSales: number, name:string) => {
     setTodaysSales(newToddaysSales);
-    updateSellSelling(name);
+     updateSellSelling(name);
   };
 
   const [ baseProducts, updateInputChanged, updateSellSelling, setOrderToSuggested ] = useGetBaseProducts(todaysSales,salesPrediction)
@@ -94,7 +93,7 @@ const InvOrder = () => {
           orderedProducts = {orderedProducts}
           setOrderToSuggested = {setOrderToSuggested}
           totalCost = {totalCost}
-          //  saveTotalPieces = {saveTotalPieces}
+          // saveTotalPieces = {saveTotalPieces}
           // saveTotalCost = {saveTotalCost}
           totalPieces = {totalPieces}
         />
