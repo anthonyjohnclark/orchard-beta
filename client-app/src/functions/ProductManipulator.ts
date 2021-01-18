@@ -66,7 +66,6 @@ public static FilterProducts = (inputs:IProductsWithInput[], filterConfig:IFilte
 public static SortProducts = (inputs:IProductsWithInput[], sortConfig:ISortConfig, sortConfigForHeaders:ISortConfigForHeaders) => 
 {
 if (sortConfigForHeaders.key !== "" && sortConfig.primaryKey === "") {
-  console.log(sortConfigForHeaders)
   let sortedProductsHeaders =
   inputs.sort((a, b) => {
     if (a[sortConfigForHeaders.key] < b[sortConfigForHeaders.key]) {
@@ -77,6 +76,7 @@ if (sortConfigForHeaders.key !== "" && sortConfig.primaryKey === "") {
     }
     return 0;
   });
+  console.log(sortConfigForHeaders)
   return sortedProductsHeaders;
 }
 
@@ -129,8 +129,5 @@ if (sortConfig.primaryKey !== "") {
 }
 return [...inputs];
 }
-
-
-
   }
 export default ProductManipulator; 

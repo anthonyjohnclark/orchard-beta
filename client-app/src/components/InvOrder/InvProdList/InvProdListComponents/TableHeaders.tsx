@@ -25,7 +25,7 @@ let tableHeaders = [
   { headerKey: 12, name: "Par", column: "par" },
   { headerKey: 13, name: "Fill", column: "fill" },
   { headerKey: 14, name: "Suggested", column: "suggested" },
-  { headerKey: 15, name: "Order", column: "id" },
+  { headerKey: 15, name: "Order", column: "order" },
 ];
 
 const TableHeaders: React.FC<IProps> = ({
