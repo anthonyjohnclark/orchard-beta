@@ -104,7 +104,7 @@ const TheCanvas = () => {
         width={window.innerWidth * 0.9}
         height={window.innerHeight - 150}
         ref={stageEl}
-        onMouseDown={e => {
+        onMouseDown={(e:any) => {
           // deselect when clicked on empty area
           const clickedOnEmpty = e.target === e.target.getStage();
           if (clickedOnEmpty) {

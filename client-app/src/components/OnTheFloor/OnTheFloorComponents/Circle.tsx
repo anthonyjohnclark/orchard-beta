@@ -24,14 +24,14 @@ const Circ = ({ shapeProps, isSelected, onSelect, onChange }: IProps) => {
         ref={shapeRef}
         {...shapeProps}
         draggable
-        onDragEnd={e => {
+        onDragEnd={(e:any) => {
           onChange({
             ...shapeProps,
             x: e.target.x(),
             y: e.target.y(),
           });
         }}
-        onTransformEnd={e => {
+        onTransformEnd={(e:any) => {
           // transformer is changing scale
           const node = shapeRef.current;
           const scaleX = node.scaleX();
