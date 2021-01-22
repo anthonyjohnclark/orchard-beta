@@ -1,8 +1,6 @@
-import React, {useRef} from "react"
-import OTFSideBar from "../OnTheFloorComponents/OTFSideBar"
+import React  from "react"
 import Auxil from "../../../hoc/Auxil"
 import classes from "./OnTheFloorHeader.module.css"
-import TheCanvas from "../OnTheFloorComponents/TheCanvas"
 
 const OnTheFloorHeader = () => {
 
@@ -13,10 +11,9 @@ const OnTheFloorHeader = () => {
         <h1>Current Floor</h1>
         <button className = {classes.Button}>Clear</button>
         <button className = {classes.Button}>Undo</button>
+        <button className = {classes.Button}>Save</button>
         </div>
-        <OTFSideBar />
-        </div>
-        <TheCanvas />
+        </div>        
         </Auxil>
         )
 }
