@@ -1,13 +1,13 @@
 import React from 'react'
 import Auxil from "../../hoc/Auxil";
-import OnTheFloorHeader from "../../components/OnTheFloor/OnTheFloorHeader/OnTheFloorHeader";
+import OTFHeader from "../../components/OnTheFloor/OnTheFloorHeader/OTFHeader";
 import TheCanvas from '../../components/OnTheFloor/OnTheFloorComponents/TheCanvas';
 
 
 const onTheFloor = () => {
     return (
         <Auxil>
-        <OnTheFloorHeader/>
+        <OTFHeader/>
         <TheCanvas />
         </Auxil>
 )
