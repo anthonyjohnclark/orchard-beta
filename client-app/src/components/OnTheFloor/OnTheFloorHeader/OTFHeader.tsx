@@ -13,6 +13,8 @@ const OnTheFloorHeader = () => {
         <button className = {classes.Button}>Undo</button>
         <button className = {classes.Button}>Save</button>
         </div>
+        <button className = {classes.Button}>Rectangle</button>
+        <button className = {classes.Button}>Circle</button>
         </div>        
         </Auxil>
         )

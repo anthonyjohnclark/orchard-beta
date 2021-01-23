@@ -2,6 +2,8 @@ import React, { useState, createRef, useCallback } from "react";
 import { Stage, Layer } from "react-konva";
 import Rectangle from "./Rectangle";
 import Circle from "./Circle";
+import classes from "./TheCanvas.module.css"
+import Auxil from "../../../hoc/Auxil";
 
 const TheCanvas = () => {
 
@@ -54,6 +56,7 @@ const TheCanvas = () => {
 
   
   const Undo = () => {
+      console.log("undo function")
     const lastId = shapes[shapes.length - 1];
     let index = circles.findIndex((c:any) => c.id === lastId);
     if (index !== -1) {
@@ -88,8 +91,7 @@ const TheCanvas = () => {
   });
 
   return (
-    <div>
-      <h1>Whiteboard</h1>
+      <Auxil>      
         <div  onClick={addRectangle}>
           Rectangle
         </div>
@@ -99,10 +101,10 @@ const TheCanvas = () => {
         <div  onClick={Undo}>
           Undo
         </div>
-     
       <Stage
-        width={window.innerWidth * 0.9}
-        height={window.innerHeight - 150}
+        height={1000}
+        width={1000}
+        class
         ref={stageEl}
         onMouseDown={(e:any) => {
           // deselect when clicked on empty area
@@ -149,7 +151,7 @@ const TheCanvas = () => {
           })}
             </Layer>
       </Stage>
-    </div>
+    </Auxil>
   );
 }
 export default TheCanvas;

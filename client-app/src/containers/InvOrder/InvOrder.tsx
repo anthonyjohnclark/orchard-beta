@@ -7,7 +7,7 @@ import useSaveTotalPieces from "../../hooks/useSaveTotalPieces";
 import useSaveTotalCost from "../../hooks/useSaveTotalCost";
 import useGetBaseProducts from "../../hooks/useGetBaseProducts";
 import ProductManipulator  from "../../functions/ProductManipulator";
-import UseRequestSortFilter from "../../hooks/useRequestSortFilter";
+import useRequestSortFilter from "../../hooks/useRequestSortFilter";
 
 
 const InvOrder = () => {
@@ -47,7 +47,7 @@ const InvOrder = () => {
     requestSort,
     setButtonActive,
     activeHeaderSort,
-    setHeaderActive] = UseRequestSortFilter()
+    setHeaderActive] = useRequestSortFilter()
 
   let filteredProducts = ProductManipulator.FilterProducts([...searchFilteredProducts], filterConfig)
   

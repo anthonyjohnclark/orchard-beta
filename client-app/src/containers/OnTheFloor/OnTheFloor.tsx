@@ -5,6 +5,9 @@ import TheCanvas from '../../components/OnTheFloor/OnTheFloorComponents/TheCanva
 
 
 const onTheFloor = () => {
+
+    // const [ ] = useSetOTF
+
     return (
         <Auxil>
         <OTFHeader/>
