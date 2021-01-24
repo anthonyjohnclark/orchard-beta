@@ -1,19 +1,28 @@
-.OTFWrapper {
-  display: inline-flex;
-  flex-direction: row;
-  height: 100%;
-  width: 100%;
-  justify-content: space-around;
+.OTFHeaderWrapper {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
 }
 
 .TopHeader {
   width: 75vw;
   color: white;
   left: 75px;
-  position: absolute;
   display: inline-flex;
   flex-direction: row;
   justify-content: space-around;
+}
+
+.BottomHeader {
+  width: 75vw;
+  color: white;
+  display: inline-flex;
+  flex-direction: row;
+}
+
+.BottomHeader h3 {
+  margin-left: 35px;
+  margin-top: 0;
 }
 
 .Button {

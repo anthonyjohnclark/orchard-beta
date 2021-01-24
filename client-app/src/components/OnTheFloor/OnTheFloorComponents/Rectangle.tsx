@@ -5,20 +5,24 @@ interface IProps {
     shapeProps:any, 
     isSelected:any, 
     onSelect:any, 
-    onChange:any
+    onChange:any,
+
 }
 
 const Rectangle = ({ shapeProps, isSelected, onSelect, onChange }: IProps) => {
+
   const shapeRef = useRef() as any;
   const trRef = useRef() as any;
 
-  useEffect(() => {
+   useEffect(() => {
     if (isSelected) {
       // we need to attach transformer manually
       trRef.current.setNode(shapeRef.current);
       trRef.current.getLayer().batchDraw();
     }
-  }, [isSelected]);
+  },[isSelected, trRef, shapeRef]);
+
+
   return (
     <React.Fragment>
       <Rect

@@ -1,116 +1,87 @@
-import React, { useState, createRef, useCallback } from "react";
+import React, { useEffect } from "react";
 import { Stage, Layer } from "react-konva";
 import Rectangle from "./Rectangle";
 import Circle from "./Circle";
 import classes from "./TheCanvas.module.css"
 import Auxil from "../../../hoc/Auxil";
 
-const TheCanvas = () => {
+interface IProps  {
+    stageEl: any; 
+    layerEl: any; 
+    rectangles: any; 
+    circles: any; 
+    selectedId: any;
+    shapes:any;
+    setSelectedShape: (shape: any) => void; 
+    setRectangleShape: (rectangle: any) => void; 
+    setCircleShape: (rectangle: any) => void; 
+    setShapeArray: (shapes: any) => void; 
+ }
 
-  const [rectangles, setRectangles] = useState([]) as any;
-  const [circles, setCircles] = useState([]) as any;
-  const [images, setImages] = useState([]) as any;
-  const [selectedId, selectShape] = useState(null) as any;
-  const [shapes, setShapes] = useState([]) as any;
-  const [, updateState] = useState() as any;
+const TheCanvas:React.FC<IProps> = (
+    {stageEl, 
+    layerEl,
+    rectangles, 
+    circles, 
+    selectedId,
+    setSelectedShape, 
+    setRectangleShape, 
+    setCircleShape,
+    setShapeArray,
+    shapes
+  }) => {
 
-  const stageEl = createRef() as any;
-  const layerEl = createRef() as any;
+      // const forceUpdate = React.useCallback(() => setSelectedShape(selectedId), []);
+    const handleKeyDown = (ev:any) => {
+      if (ev.code === "Delete"|| "Backspace") {
 
-  const getRandomInt = (max:number) => {
-    return Math.floor(Math.random() * Math.floor(max));
-  };
+        let index = circles.findIndex((circles:any) => circles.id === selectedId);
+        if (index !== -1) {
+          let circlesSpliced = [...circles]
+          circlesSpliced.splice(index, 1);
+          setCircleShape(circlesSpliced);
 
-  const addRectangle = () => {
-    const rect = {
-      x: getRandomInt(100),
-      y: getRandomInt(100),
-      width: 100,
-      height: 100,
-      fill: "red",
-      id: `rect${rectangles.length + 1}`,
-    };
-    const rects = rectangles.concat([rect]);
-    setRectangles(rects);
-    const shs = shapes.concat([`rect${rectangles.length + 1}`]);
-    setShapes(shs);
-  };
+          const shs = [...shapes]
+          shs.splice(index, 1);
+          setShapeArray(shs)
+        }
 
+        index = rectangles.findIndex((rectangles:any) => rectangles.id === selectedId);
+        if (index !== -1) {
+          let rectanglesSpliced = [...rectangles]
+          rectanglesSpliced.splice(index, 1);
+          setRectangleShape(rectanglesSpliced);
 
-  const addCircle = () => {
-    const circ = {
-      x: getRandomInt(100),
-      y: getRandomInt(100),
-      width: 100,
-      height: 100,
-      fill: "red",
-      id: `circ${circles.length + 1}`,
-    };
-    const circs = circles.concat([circ]);
-    setCircles(circs);
-    const shs = shapes.concat([`circ${circles.length + 1}`]);
-    setShapes(shs);
-  };
+          const shs = [...shapes]
+          shs.splice(index, 1);
+          setShapeArray(shs)
+        }        }
+      }
 
-  const forceUpdate = useCallback(() => updateState({}), []);
+      
+    useEffect(() => {
+      document.addEventListener("keydown", handleKeyDown)
+        // forceUpdate()
+        
+     return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+     };
+        
+    }, [selectedId]);
 
   
-  const Undo = () => {
-      console.log("undo function")
-    const lastId = shapes[shapes.length - 1];
-    let index = circles.findIndex((c:any) => c.id === lastId);
-    if (index !== -1) {
-      circles.splice(index, 1);
-      setCircles(circles);
-    }
-    index = rectangles.findIndex((r:any) => r.id === lastId);
-    if (index !== -1) {
-      rectangles.splice(index, 1);
-      setRectangles(rectangles);
-    }
-}
-  document.addEventListener("keydown", ev => {
-    if (ev.code === "Delete") {
-      let index = circles.findIndex((c:any) => c.id === selectedId);
-      if (index !== -1) {
-        circles.splice(index, 1);
-        setCircles(circles);
-      }
-      index = rectangles.findIndex((r:any) => r.id === selectedId);
-      if (index !== -1) {
-        rectangles.splice(index, 1);
-        setRectangles(rectangles);
-      }
-      index = images.findIndex((r:any) => r.id === selectedId);
-      if (index !== -1) {
-        images.splice(index, 1);
-        setImages(images);
-      }
-      forceUpdate();
-    }
-  });
-
   return (
       <Auxil>      
-        <div  onClick={addRectangle}>
-          Rectangle
-        </div>
-        <div  onClick={addCircle}>
-          Circle
-        </div>
-        <div  onClick={Undo}>
-          Undo
-        </div>
+          <div className = {classes.TheCanvas}>
       <Stage
-        height={1000}
-        width={1000}
-        class
+         width={1300}
+        height={750}        
         ref={stageEl}
         onMouseDown={(e:any) => {
           // deselect when clicked on empty area
           const clickedOnEmpty = e.target === e.target.getStage();
           if (clickedOnEmpty) {
-            selectShape(null);
+            setSelectedShape(null);
           }
         }}
       >
@@ -122,12 +93,12 @@ const TheCanvas = () => {
                 shapeProps={rect}
                 isSelected={rect.id === selectedId}
                 onSelect={() => {
-                  selectShape(rect.id);
+                setSelectedShape(rect.id);
                 }}
                 onChange={(newAttrs:any) => {
                   const rects = rectangles.slice();
                   rects[i] = newAttrs;
-                  setRectangles(rects);
+                  setRectangleShape(rects);
                 }}
               />
             );
@@ -139,18 +110,19 @@ const TheCanvas = () => {
                 shapeProps={circle}
                 isSelected={circle.id === selectedId}
                 onSelect={() => {
-                  selectShape(circle.id);
+                setSelectedShape(circle.id);
                 }}
                 onChange={(newAttrs:any) => {
                   const circs = circles.slice();
                   circs[i] = newAttrs;
-                  setCircles(circs);
+                  setCircleShape(circs);
                 }}
               />
             );
           })}
             </Layer>
       </Stage>
+      </div>
     </Auxil>
   );
 }

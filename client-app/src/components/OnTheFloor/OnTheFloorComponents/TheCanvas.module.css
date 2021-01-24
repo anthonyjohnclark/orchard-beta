@@ -1,8 +1,7 @@
 .TheCanvas {
   position: relative;
-  left: 75px;
-  top: 85px;
-  width: 90vw;
-  max-height: 75vh;
+  width: 1300px;
+  height: 750px;
   border: 2px solid white;
+  box-sizing: border-box;
 }

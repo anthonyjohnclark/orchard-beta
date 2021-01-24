@@ -35,19 +35,6 @@ const InvHeader: React.FC<IProps> = ({
         />
         <SearchBar setNewSearch={setNewSearch} />
       </div>
-      {/* <div className = {classes.InvProdWrapper}>
-      <InvProdList
-        updateInputChanged={updateInputChanged}
-        products={filteredProducts}
-        requestFilterConfig={requestFilterConfig}
-        filterConfig={filterConfig}
-        setFilterConfig={setFilterConfig}
-        todaysSales={todaysSales}
-        salesPrediction={salesPrediction}
-        setOrderToSuggested = {setOrderToSuggested}
-        productsWithInputs = {inputs}
-      />
-      </div> */}
       </Auxil>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { Circle, Transformer } from "react-konva";
 
 interface IProps {
@@ -9,14 +9,17 @@ interface IProps {
 }
 
 const Circ = ({ shapeProps, isSelected, onSelect, onChange }: IProps) => {
-  const shapeRef = useRef() as any;
-  const trRef = useRef() as any;
-  React.useEffect(() => {
+  const shapeRef = useRef(null) as any;
+  const trRef = useRef(null) as any;
+
+    useEffect(() => {
     if (isSelected) {
       trRef.current.setNode(shapeRef.current);
       trRef.current.getLayer().batchDraw();
     }
-  }, [isSelected]);
+  }, [isSelected, shapeRef, trRef]);
+
+
   return (
     <React.Fragment>
       <Circle
@@ -50,5 +53,5 @@ const Circ = ({ shapeProps, isSelected, onSelect, onChange }: IProps) => {
       {isSelected && <Transformer ref={trRef} />}
     </React.Fragment>
   );
-};
+};;
 export default Circ;
