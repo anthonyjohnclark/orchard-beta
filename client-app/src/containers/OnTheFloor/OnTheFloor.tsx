@@ -18,11 +18,6 @@ const OnTheFloor = () => {
   const stageEl = createRef() as any;
   const layerEl = createRef() as any;
 
-
-  const setShapeArray = (shapes:any) => {
-        setShapes(shapes)
-  }
-
   const setSelectedShape = (selectedId:any) => {
     selectShape(selectedId);
   };
@@ -72,6 +67,31 @@ const OnTheFloor = () => {
     setShapes(shs.concat([`circ${circles.length + 1}`]));
   }; 
 
+  const deleteShapes = () => {
+
+    let index = circles.findIndex((circles:any) => circles.id === selectedId);
+    if (index !== -1) {
+      let circlesSpliced = [...circles]
+      circlesSpliced.splice(index, 1);
+      setCircles(circlesSpliced);
+
+      const shs = [...shapes]
+      shs.splice(index, 1);
+      setShapes(shs)
+    }
+
+    index = rectangles.findIndex((rectangles:any) => rectangles.id === selectedId);
+    if (index !== -1) {
+      let rectanglesSpliced = [...rectangles]
+      rectanglesSpliced.splice(index, 1);
+      setRectangles(rectanglesSpliced);
+
+      const shs = [...shapes]
+      shs.splice(index, 1);
+      setShapes(shs)
+    }   
+  }
+
 
 
     return (
@@ -90,8 +110,7 @@ const OnTheFloor = () => {
             setSelectedShape = {setSelectedShape}
             setRectangleShape = {setRectangleShape}
             setCircleShape = {setCircleShape}
-            setShapeArray = {setShapeArray}
-            shapes = {shapes}
+            deleteShapes = {deleteShapes}
         />
         </Auxil>
 )

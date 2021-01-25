@@ -11,11 +11,10 @@ interface IProps  {
     rectangles: any; 
     circles: any; 
     selectedId: any;
-    shapes:any;
     setSelectedShape: (shape: any) => void; 
     setRectangleShape: (rectangle: any) => void; 
     setCircleShape: (rectangle: any) => void; 
-    setShapeArray: (shapes: any) => void; 
+    deleteShapes: () => void; 
  }
 
 const TheCanvas:React.FC<IProps> = (
@@ -27,35 +26,14 @@ const TheCanvas:React.FC<IProps> = (
     setSelectedShape, 
     setRectangleShape, 
     setCircleShape,
-    setShapeArray,
-    shapes
+    deleteShapes
   }) => {
 
       // const forceUpdate = React.useCallback(() => setSelectedShape(selectedId), []);
     const handleKeyDown = (ev:any) => {
       if (ev.code === "Delete"|| "Backspace") {
-
-        let index = circles.findIndex((circles:any) => circles.id === selectedId);
-        if (index !== -1) {
-          let circlesSpliced = [...circles]
-          circlesSpliced.splice(index, 1);
-          setCircleShape(circlesSpliced);
-
-          const shs = [...shapes]
-          shs.splice(index, 1);
-          setShapeArray(shs)
-        }
-
-        index = rectangles.findIndex((rectangles:any) => rectangles.id === selectedId);
-        if (index !== -1) {
-          let rectanglesSpliced = [...rectangles]
-          rectanglesSpliced.splice(index, 1);
-          setRectangleShape(rectanglesSpliced);
-
-          const shs = [...shapes]
-          shs.splice(index, 1);
-          setShapeArray(shs)
-        }        }
+        deleteShapes()
+      }
       }
 
       
