@@ -31,8 +31,8 @@ const TheCanvas:React.FC<IProps> = (
 
       // const forceUpdate = React.useCallback(() => setSelectedShape(selectedId), []);
     const handleKeyDown = (ev:any) => {
-      if (ev.code === "Delete"|| "Backspace") {
-        deleteShapes()
+      if (ev.code === "Delete" || ev.code ==="Backspace") 
+      {        deleteShapes()
       }
       }
 
