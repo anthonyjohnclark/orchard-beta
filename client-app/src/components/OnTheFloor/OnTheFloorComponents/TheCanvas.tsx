@@ -14,7 +14,8 @@ interface IProps  {
     setSelectedShape: (shape: any) => void; 
     setRectangleShape: (rectangle: any) => void; 
     setCircleShape: (rectangle: any) => void; 
-    deleteShapes: () => void; 
+    addRectangle: (x:number, y:number) => void;
+    deleteFloor: () => void; 
  }
 
 const TheCanvas:React.FC<IProps> = (
@@ -26,13 +27,16 @@ const TheCanvas:React.FC<IProps> = (
     setSelectedShape, 
     setRectangleShape, 
     setCircleShape,
-    deleteShapes
+    deleteFloor,
+    addRectangle
   }) => {
+
+
 
       // const forceUpdate = React.useCallback(() => setSelectedShape(selectedId), []);
     const handleKeyDown = (ev:any) => {
       if (ev.code === "Delete" || ev.code ==="Backspace") 
-      {        deleteShapes()
+      {        deleteFloor()
       }
       }
 
@@ -49,10 +53,21 @@ const TheCanvas:React.FC<IProps> = (
 
   
   return (
-      <Auxil>      
-          <div className = {classes.TheCanvas}>
+  <Auxil>      
+  <div className = {classes.TheCanvas}
+          onDrop={(e) => {
+            e.preventDefault();
+            // register event position
+            stageEl.current.setPointersPositions(e);
+            const x = stageEl.current.getPointerPosition().x-50
+            const y = stageEl.current.getPointerPosition().y-50
+            // add image
+            addRectangle(x,y);
+          }}
+          onDragOver={(e) => e.preventDefault() }>  
+
       <Stage
-         width={1300}
+        width={1300}
         height={750}        
         ref={stageEl}
         onMouseDown={(e:any) => {

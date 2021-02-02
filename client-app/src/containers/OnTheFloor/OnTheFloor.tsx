@@ -11,9 +11,12 @@ const OnTheFloor = () => {
   const [rectangles, setRectangles] = useState([]) as any;
   const [circles, setCircles] = useState([]) as any;
   const [selectedId, selectShape] = useState(null) as any;
-  const [shapes, setShapes] = useState([]) as any;
+  const [floor, setfloor] = useState([]) as any;
 
     //   console.log("set selected shape: ", selectedId)
+
+    console.log(floor)
+    console.log(rectangles)
 
   const stageEl = createRef() as any;
   const layerEl = createRef() as any;
@@ -34,20 +37,22 @@ const OnTheFloor = () => {
     return Math.floor(Math.random() * Math.floor(max));
   };
 
-  const addRectangle = () => {
+  const addRectangle = (xPos:number, yPos:number) => {
     const rect = {
-      x: getRandomInt(100),
-      y: getRandomInt(100),
+      x: xPos,
+      y: yPos,
       width: 100,
       height: 100,
       stroke: "white",
-      id: `rect${rectangles.length + 1}`,
+      id: `rect${rectangles.length + 1}`, 
+      text: "Product Table",
+      fontSize: 14
     };
     const rects = [...rectangles];
     setRectangles(rects.concat([rect]));
 
-    const shs = [...shapes]
-    setShapes(shs.concat([`rect${rectangles.length + 1}`]));
+    const shs = [...floor]
+    setfloor(shs.concat([`rect${rectangles.length + 1}`]));
   };
 
    
@@ -63,11 +68,11 @@ const OnTheFloor = () => {
     const circs = [...circles];
     setCircles(circs.concat([circ]));
 
-    const shs = [...shapes];
-    setShapes(shs.concat([`circ${circles.length + 1}`]));
+    const shs = [...floor];
+    setfloor(shs.concat([`circ${circles.length + 1}`]));
   }; 
 
-  const deleteShapes = () => {
+  const deleteFloor = () => {
 
     let index = circles.findIndex((circles:any) => circles.id === selectedId);
     if (index !== -1) {
@@ -75,9 +80,9 @@ const OnTheFloor = () => {
       circlesSpliced.splice(index, 1);
       setCircles(circlesSpliced);
 
-      const shs = [...shapes]
+      const shs = [...floor]
       shs.splice(index, 1);
-      setShapes(shs)
+      setfloor(shs)
     }
 
     index = rectangles.findIndex((rectangles:any) => rectangles.id === selectedId);
@@ -86,9 +91,9 @@ const OnTheFloor = () => {
       rectanglesSpliced.splice(index, 1);
       setRectangles(rectanglesSpliced);
 
-      const shs = [...shapes]
+      const shs = [...floor]
       shs.splice(index, 1);
-      setShapes(shs)
+      setfloor(shs)
     }   
   }
 
@@ -97,8 +102,10 @@ const OnTheFloor = () => {
     return (
         <Auxil>
         <OTFHeader
-            addRectangle = {addRectangle}
+            // addRectangle = {addRectangle}
             addCircle = {addCircle}
+            rectangles = {rectangles}
+
             // undo = {undo}
         />
         <TheCanvas 
@@ -110,7 +117,8 @@ const OnTheFloor = () => {
             setSelectedShape = {setSelectedShape}
             setRectangleShape = {setRectangleShape}
             setCircleShape = {setCircleShape}
-            deleteShapes = {deleteShapes}
+            deleteFloor = {deleteFloor}
+            addRectangle = {addRectangle}
         />
         </Auxil>
 )

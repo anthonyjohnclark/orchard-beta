@@ -3,29 +3,38 @@ import Auxil from "../../../hoc/Auxil"
 import classes from "./OnTheFloorHeader.module.css"
 
 interface IProps  {
-     addRectangle: () => void; 
-     addCircle: () => void; 
+    //  addRectangle: () => void; 
+     addCircle: () => void;
+     rectangles: any; 
+ 
     //  undo: any; 
   }
 
-const OnTheFloorHeader: React.FC<IProps> = ({addRectangle, addCircle}) => {
+const OnTheFloorHeader: React.FC<IProps> = ({addCircle, rectangles}) => {
 
     return (
         <Auxil>
         <div className = {classes.OTFHeaderWrapper}>
         <div className = {classes.TopHeader}>
-        <h1>Current Floor</h1>
-        <button className = {classes.Button}>Clear</button>
+          <div className={classes.HeaderFloorTitle}> 
+          <h1>Current Floor: </h1><select></select>
+          </div>
         <button className = {classes.Button}>Save</button>
-        <button className = {classes.Button} onClick={addRectangle}>
-          Rectangle
-        </button>
-        <button className = {classes.Button}  onClick={addCircle}>
-          Circle
-        </button>
+        <button className = {classes.Button}>Save As</button>
         </div>
         <div className = {classes.BottomHeader}>
-            <h3>Template:</h3>
+        <div className = {classes.ProductTable}
+          draggable="true"
+          onDragStart={(e) => {
+            rectangles.id = e.currentTarget.id;
+          }}
+        // onClick={addRectangle}
+        >
+          <p>Product Table</p>
+        </div>
+        <button className = {classes.Button}  onClick={addCircle}>
+          Add Hardscaping
+        </button>
         </div>
         </div>
         </Auxil>

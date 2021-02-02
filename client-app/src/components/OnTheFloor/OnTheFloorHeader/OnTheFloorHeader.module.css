@@ -10,7 +10,8 @@
   left: 75px;
   display: inline-flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
+  margin-bottom: 5px;
 }
 
 .BottomHeader {
@@ -18,11 +19,23 @@
   color: white;
   display: inline-flex;
   flex-direction: row;
+  justify-content: space-around;
 }
 
-.BottomHeader h3 {
-  margin-left: 35px;
-  margin-top: 0;
+.HeaderFloorTitle {
+  display: flex;
+  flex-direction: row;
+  width: 50vw;
+}
+
+.HeaderFloorTitle h1 {
+  margin-right: 15px;
+}
+
+.HeaderFloorTitle select {
+  margin-top: 34px;
+  width: 200px;
+  height: 30px;
 }
 
 .Button {
@@ -50,4 +63,30 @@
   background-color: #b2bec3;
   border-bottom: 4px solid #fdcb6e;
   box-sizing: border-box;
+}
+
+.ProductTable {
+  display: flex;
+  height: 100px;
+  width: 100px;
+  border: 2px solid #29335c;
+  margin-bottom: 15px;
+  justify-content: center;
+  align-items: center;
+}
+
+.ProductTable p {
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+  height: auto;
+  width: 60px;
+}
+
+.ProductTable:hover {
+  height: 100px;
+  width: 100px;
+  border: 2px solid #29335c;
+  background-color: #b2bec3;
+  cursor: pointer;
 }
