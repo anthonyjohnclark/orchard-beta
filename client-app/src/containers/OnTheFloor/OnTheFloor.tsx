@@ -96,9 +96,7 @@ const OnTheFloor = () => {
       setfloor(shs)
     }   
   }
-
-
-
+  
     return (
         <Auxil>
         <OTFHeader

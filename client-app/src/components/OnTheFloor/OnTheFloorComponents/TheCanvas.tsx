@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { Stage, Layer } from "react-konva";
 import Rectangle from "./Rectangle";
 import Circle from "./Circle";
 import classes from "./TheCanvas.module.css"
 import Auxil from "../../../hoc/Auxil";
+import Modal from "../../../../src/hoc/Modal";
+
 
 interface IProps  {
     stageEl: any; 
@@ -32,6 +34,11 @@ const TheCanvas:React.FC<IProps> = (
   }) => {
 
 
+    const [isShowing, setIsShowing] = useState(false);
+
+    const toggleModal = () => {
+      setIsShowing(!isShowing);
+      console.log(isShowing)}
 
       // const forceUpdate = React.useCallback(() => setSelectedShape(selectedId), []);
     const handleKeyDown = (ev:any) => {
@@ -83,6 +90,8 @@ const TheCanvas:React.FC<IProps> = (
             return (
               <Rectangle
                 key={i}
+                deleteFloor={deleteFloor}
+                toggleModal={toggleModal}
                 shapeProps={rect}
                 isSelected={rect.id === selectedId}
                 onSelect={() => {
@@ -116,6 +125,8 @@ const TheCanvas:React.FC<IProps> = (
             </Layer>
       </Stage>
       </div>
+      <Modal show = {isShowing} modalClosed = {toggleModal}/>
+
     </Auxil>
   );
 }
