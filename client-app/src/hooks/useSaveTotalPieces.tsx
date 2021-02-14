@@ -9,7 +9,7 @@ const useSaveTotalPieces = (orderedProducts: IOrderedProducts[]) => {
 
      let initialValue = 0
      let sum = orderedProducts.reduce(
-       (accumulator:any, currentValue:any) => accumulator + parseInt(currentValue.ordered)
+       (accumulator:any, currentValue:any) => accumulator + parseInt(currentValue.order)
        , initialValue
     )
      setTotalPieces(sum);

@@ -1,7 +1,7 @@
 .InvProdTable {
-  border-collapse: collapse;
+  border-collapse: separate;
   background-color: #221d23;
-  width: 100vw;
+  width: 98.7vw;
   text-align: center;
   table-layout: fixed;
   color: white;

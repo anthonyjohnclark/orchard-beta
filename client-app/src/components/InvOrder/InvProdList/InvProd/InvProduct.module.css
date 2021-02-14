@@ -1,7 +1,7 @@
 .ScrollWrap {
   width: 100vw;
   overflow-y: scroll;
-  height: 342px;
+  height: 338px;
   overflow-x: hidden;
 }
 
@@ -21,12 +21,12 @@
 .InvProd {
   display: flex;
   flex-direction: row;
-  width: 100vw;
+  width: 98.2vw;
   table-layout: fixed;
   text-align: left;
   transition: transform 0.1s; /* Animation */
   z-index: 10;
-  background-color: #221d23;
+  background-color: #29335c;
   border-spacing: 0;
   font-weight: bold;
 }
@@ -34,13 +34,10 @@
 .InvProd td {
   font-weight: bold;
   width: 53px;
-  border-collapse: collapse;
-  border-spacing: 0;
   text-align: center;
   margin: auto;
   padding: 12px;
   transition: all 0.2s ease-in-out;
-  border-color: #221d23;
   z-index: 9;
 }
 

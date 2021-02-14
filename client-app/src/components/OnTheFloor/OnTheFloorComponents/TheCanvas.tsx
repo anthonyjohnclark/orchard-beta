@@ -5,6 +5,7 @@ import Circle from "./Circle";
 import classes from "./TheCanvas.module.css"
 import Auxil from "../../../hoc/Auxil";
 import Modal from "../../../../src/hoc/Modal";
+import ProductSelectionModal from "./ProductSelectionModal";
 
 
 interface IProps  {
@@ -122,10 +123,12 @@ const TheCanvas:React.FC<IProps> = (
               />
             );
           })}
-            </Layer>
+      </Layer>
       </Stage>
       </div>
-      <Modal show = {isShowing} modalClosed = {toggleModal}/>
+      <Modal show = {isShowing} modalClosed = {toggleModal}>
+        <ProductSelectionModal/>
+      </Modal>
 
     </Auxil>
   );

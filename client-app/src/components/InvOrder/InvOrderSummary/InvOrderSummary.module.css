@@ -32,8 +32,9 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border-bottom: 4px solid #fdcb6e;
-  border-top: 2px solid white;
+  border-bottom: 4px solid #221d23;
+  margin-top: 4px;
+  /* border-top: 2px solid white; */
 }
 
 .InvOrderStatsFooter {

@@ -4,6 +4,7 @@
   top: 56px;
   position: sticky;
   z-index: 1;
+  border: none;
 }
 
 .InvProdHeaderAsc {

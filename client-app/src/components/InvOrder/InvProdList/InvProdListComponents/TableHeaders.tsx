@@ -33,9 +33,10 @@ const TableHeaders: React.FC<IProps> = ({
   sortConfigForHeaders, 
   requestSortForHeaders, 
   setHeaderActive}) => (
+
   <tr className={classes.InvProdHeader}>
     {tableHeaders.map((headers) => (
-      <th
+      <th 
         key={headers.headerKey}
         className={
           headers.headerKey === activeHeaderSort.headerKey &&

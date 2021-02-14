@@ -2,6 +2,7 @@ import React from 'react';
 import classes from './InvPreviewModal.module.css'
 import buttonClasses from './InvOrderButton.module.css'
 import { IOrderedProducts } from "../../../../models/IProducts"
+import ProductRows from '../../../../hoc/ProductRows';
 
 interface IProps  {
     orderedProducts: IOrderedProducts[]; 
@@ -14,16 +15,16 @@ const InvPreviewModal: React.FC<IProps> = ({
     totalPieces, 
     totalCost  }) => 
     {
-    var formatter = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-      });
+   
 
 return (
     <div className={classes.InvPreviewModal}>
              <table>
                 <thead>
-                <tr>
+                <tr style={{backgroundColor: "#221d23", width: 472}}>
+                    <h3>Confirm Your Order:</h3>
+                </tr>
+                <tr style={{width: 472}}>
                     <th>VIN</th>
                     <th>Name</th>
                     <th>Ordered</th>
@@ -32,26 +33,32 @@ return (
             </thead> 
             <div className = {classes.ScrollWrap}>
             <tbody>
-            <tr>
-                <td colSpan = {4}>
-
-            {orderedProducts.map(products => { 
-            if (products.ordered > 0) {
-                return(
-                <tr className = {classes.InvSummaryModalRow} key ={products.productVIN}>
-                <td>{products.productVIN}</td>
-                <td>{products.productName}</td>
-                <td>{products.ordered}</td>
-                <td>{formatter.format(products.totalCost)}</td>
-                </tr>
-                )} return null  
-            })}
-                </td>
-                </tr>
+            <ProductRows
+            productArray ={orderedProducts}
+            rowsType = {"orderedProducts"}
+            />
             </tbody>
             </div>
+            <tfoot >
+            <tr style = {{width: 472}}>
+                <td colSpan = {4} style = {{width: 472}}>
+                <td style = {{width: 118}}>
+                <button className = {buttonClasses.InvOrderButton} style = {{width: 236}}>
+                Confirm Order
+                </button>
+                </td>
+                <td style = {{width: 118, textAlign: "center"}}  >
+                {totalPieces}
+                </td>
+                <td style = {{width: 120, textAlign: "center"}}>
+                {totalCost}
+                </td>
+                </td>
+            </tr>
+            </tfoot>
             </table>
-    <div className = {classes.InvModalSummary}>
+            </div>
+    /* <div className = {classes.InvModalSummary}>
         <div className = {classes.InvModalTotals}>
         <span>Pieces: </span><p>{totalPieces}</p>
         <span>Total: </span><p>{totalCost}</p>
@@ -63,6 +70,6 @@ return (
         </div>
     </div>
     </div>
-    )
-}
+    ) */
+)}
 export default InvPreviewModal;

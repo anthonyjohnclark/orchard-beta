@@ -49,8 +49,11 @@ export interface IProductsWithInput  extends IObjectKeys {
 }
 
 export interface IOrderedProducts extends IObjectKeys {
- productVIN: number; 
- productName: string; 
- ordered: number; 
- totalCost: number;
+    organic: boolean,
+    onSale:boolean,
+    productActive:boolean,
+    id: number; 
+    name: string; 
+    order: number; 
+    totalCost: number;
 }

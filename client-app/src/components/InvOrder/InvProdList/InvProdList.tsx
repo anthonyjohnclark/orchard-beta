@@ -29,7 +29,7 @@ const InvProdList: React.FC<IProps> = ({
   filterEnabled,
   setFilterEnabled, 
   dropdown, 
-  toggleDropdown, 
+  toggleDropdown,
   activeSort,
   requestSort,
   setButtonActive,

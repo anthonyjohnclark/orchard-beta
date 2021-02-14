@@ -1,0 +1,49 @@
+.ScrollWrap {
+  width: 100%;
+  overflow-y: scroll;
+  height: 227px;
+  overflow-x: hidden;
+}
+
+.ProdSelModalSummary button {
+  width: 200px;
+  border: 2px solid #221d23;
+}
+
+.ProdSelModal h3 {
+  background-color: #221d23;
+  color: white;
+  font-weight: bolder;
+  margin: 3px;
+  padding: 0;
+}
+
+.ProdSelModal {
+  background-color: #221d23;
+  position: relative;
+}
+
+.ProdSelModal table {
+  width: 500px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  table-layout: fixed;
+  border-collapse: "collapse";
+}
+
+.ProdSelModal table thead tr {
+  width: 100%;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  background-color: #29335c;
+  text-align: center;
+  color: white;
+}
+
+.ProdSelModal table th {
+  width: 100%;
+  height: 25px;
+  border: 1px solid #221d23;
+}
