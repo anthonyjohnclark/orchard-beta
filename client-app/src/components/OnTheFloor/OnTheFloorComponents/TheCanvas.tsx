@@ -1,37 +1,47 @@
 import React, { useEffect,useState } from "react";
 import { Stage, Layer } from "react-konva";
-import Rectangle from "./Rectangle";
+import ProductTable from "./ProductTable";
 import Circle from "./Circle";
 import classes from "./TheCanvas.module.css"
 import Auxil from "../../../hoc/Auxil";
 import Modal from "../../../../src/hoc/Modal";
 import ProductSelectionModal from "./ProductSelectionModal";
+import AlertModal from "../../../hoc/AlertModal";
+import ProductFillModal from "./ProductFillModal";
 
 
 interface IProps  {
     stageEl: any; 
     layerEl: any; 
-    rectangles: any; 
+    tables: any; 
     circles: any; 
     selectedId: any;
+    selectedProduct: any;
     setSelectedShape: (shape: any) => void; 
-    setRectangleShape: (rectangle: any) => void; 
-    setCircleShape: (rectangle: any) => void; 
-    addRectangle: (x:number, y:number) => void;
+    setTable: (table: any) => void; 
+    setCircleShape: (circle: any) => void; 
+    addTable: (x:number, y:number) => void;
     deleteFloor: () => void; 
+    setProductForTable: (id: number, organic: boolean, onSale: boolean, name: string) => void;
+    addProductToTable: () => void;
+    updateNewFillValue: (newFillValue: any) => void
  }
 
 const TheCanvas:React.FC<IProps> = (
     {stageEl, 
     layerEl,
-    rectangles, 
+    tables, 
     circles, 
     selectedId,
-    setSelectedShape, 
-    setRectangleShape, 
+    setSelectedShape,
+    selectedProduct, 
+    setTable, 
     setCircleShape,
     deleteFloor,
-    addRectangle
+    addTable,
+    setProductForTable,
+    addProductToTable,
+    updateNewFillValue
   }) => {
 
 
@@ -39,7 +49,19 @@ const TheCanvas:React.FC<IProps> = (
 
     const toggleModal = () => {
       setIsShowing(!isShowing);
-      console.log(isShowing)}
+     }
+
+      const [alertIsShowing, setAlertIsShowing] = useState(false);
+
+      const toggleAlertModal = () => {
+        setAlertIsShowing(!alertIsShowing);    
+        setIsShowing(!isShowing);
+        }
+
+      const closeBothModals = () => {
+        setAlertIsShowing(false);    
+        setIsShowing(false);
+      }
 
       // const forceUpdate = React.useCallback(() => setSelectedShape(selectedId), []);
     const handleKeyDown = (ev:any) => {
@@ -70,7 +92,7 @@ const TheCanvas:React.FC<IProps> = (
             const x = stageEl.current.getPointerPosition().x-50
             const y = stageEl.current.getPointerPosition().y-50
             // add image
-            addRectangle(x,y);
+            addTable(x,y);
           }}
           onDragOver={(e) => e.preventDefault() }>  
 
@@ -87,9 +109,9 @@ const TheCanvas:React.FC<IProps> = (
         }}
       >
         <Layer ref={layerEl}>
-          {rectangles.map((rect:any, i:any) => {
+          {tables.map((rect:any, i:any) => {
             return (
-              <Rectangle
+              <ProductTable
                 key={i}
                 deleteFloor={deleteFloor}
                 toggleModal={toggleModal}
@@ -99,9 +121,9 @@ const TheCanvas:React.FC<IProps> = (
                 setSelectedShape(rect.id);
                 }}
                 onChange={(newAttrs:any) => {
-                  const rects = rectangles.slice();
+                  const rects = tables.slice();
                   rects[i] = newAttrs;
-                  setRectangleShape(rects);
+                  setTable(rects);
                 }}
               />
             );
@@ -127,9 +149,20 @@ const TheCanvas:React.FC<IProps> = (
       </Stage>
       </div>
       <Modal show = {isShowing} modalClosed = {toggleModal}>
-        <ProductSelectionModal/>
+        <ProductSelectionModal
+        toggleAlertModal = {toggleAlertModal}
+        setProductForTable = {setProductForTable}
+        />
       </Modal>
-
+      <AlertModal show = {alertIsShowing} modalClosed = {toggleAlertModal}>
+        <ProductFillModal
+          closeBothModals = {closeBothModals}
+          toggleAlertModal = {toggleAlertModal}
+          selectedProduct = {selectedProduct}
+          addProductToTable = {addProductToTable}
+          updateNewFillValue = {updateNewFillValue}
+        />
+      </AlertModal>
     </Auxil>
   );
 }

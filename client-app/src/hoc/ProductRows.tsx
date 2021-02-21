@@ -6,9 +6,11 @@ interface IProps  {
   productArray: (IProductsWithInput | IOrderedProducts)[]
   updateInputChanged?: (id: number) => (e: React.ChangeEvent<HTMLInputElement>) => void;
   rowsType:string;
+  toggleAlertModal?: () => void;
+  setProductForTable?: (id: number, organic: boolean, onSale: boolean, name: string) => void;
 }
 
-const ProductRows: React.FC<IProps> = ({productArray,updateInputChanged,rowsType}) => {
+const ProductRows: React.FC<IProps> = ({productArray,updateInputChanged,rowsType,toggleAlertModal,setProductForTable}) => {
 
   const handleKeypress =  (e:React.KeyboardEvent<HTMLInputElement>) => {
     const characterCode = e.key
@@ -44,7 +46,6 @@ const ProductRows: React.FC<IProps> = ({productArray,updateInputChanged,rowsType
   
     }
       }
-
       var formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
@@ -56,11 +57,9 @@ const [dropDownId, setDropdownId] = useState(Number)
 
 const [dropdown, toggleDropdown] = useState(false);
 
-
     return ( 
     <React.Fragment>
-      {
-      productArray.map((products:any) => {
+      {productArray.map((products:any) => {
       const {
         id,
         name,
@@ -84,7 +83,7 @@ const [dropdown, toggleDropdown] = useState(false);
         netGIG, 
         percentSales,
         shrink,
-        sold,
+        sold, 
         totalCost
       } = products;
 
@@ -177,9 +176,9 @@ const [dropdown, toggleDropdown] = useState(false);
             </tr>
        )
 
-       else if (rowsType ==='selectProduct')
+       else if (rowsType ==='selectProduct' && setProductForTable && toggleAlertModal )
         return(
-          <tr key={id}>
+          <tr key={id} onClick={() => {toggleAlertModal(); setProductForTable(id,organic,onSale,name)}}>
           <td colSpan = {2}>
           <tr className={styles.join(" ")} style={{width: 469}}>         
           <td >{id}</td>
@@ -190,20 +189,24 @@ const [dropdown, toggleDropdown] = useState(false);
         )
 
         else if (rowsType === 'orderedProducts')
-        console.log(productArray)
-          if (order >0)
-        return(
-          <tr key = {id}>
-          <td colSpan = {4}>
-          <tr className = {styles.join(" ")} style={{width: 469}}>
-          <td>{id}</td>
-          <td>{name}</td>
-          <td>{order}</td>
-          <td>{formatter.format(totalCost)}</td>
-          </tr>
-          </td>
-          </tr>
-                  )
+        if (order >0)
+           return(
+        <tr key = {id}>
+        <td colSpan = {4}>
+        <tr className = {styles.join(" ")} style={{width: 469}}>
+        <td>{id}</td>
+        <td>{name}</td>
+        <td>{order}</td>
+        <td>{formatter.format(totalCost)}</td>
+        </tr>
+        </td>
+        </tr> 
+      )
+
+
+
+       
+       
        })}
         </React.Fragment>);
   };

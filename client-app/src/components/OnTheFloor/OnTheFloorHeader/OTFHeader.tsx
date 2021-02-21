@@ -5,12 +5,12 @@ import classes from "./OnTheFloorHeader.module.css"
 interface IProps  {
     //  addRectangle: () => void; 
      addCircle: () => void;
-     rectangles: any; 
+     tables: any; 
  
     //  undo: any; 
   }
 
-const OnTheFloorHeader: React.FC<IProps> = ({addCircle, rectangles}) => {
+const OnTheFloorHeader: React.FC<IProps> = ({addCircle, tables}) => {
 
     return (
         <Auxil>
@@ -26,7 +26,7 @@ const OnTheFloorHeader: React.FC<IProps> = ({addCircle, rectangles}) => {
         <div className = {classes.ProductTable}
           draggable="true"
           onDragStart={(e) => {
-            rectangles.id = e.currentTarget.id;
+            tables.id = e.currentTarget.id;
           }}
         // onClick={addRectangle}
         >

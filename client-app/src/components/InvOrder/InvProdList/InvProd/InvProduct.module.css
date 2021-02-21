@@ -1,7 +1,7 @@
 .ScrollWrap {
   width: 100vw;
   overflow-y: scroll;
-  height: 338px;
+  height: 334px;
   overflow-x: hidden;
 }
 
@@ -68,8 +68,8 @@
   cursor: pointer;
   color: #363636;
   font-weight: bolder;
-  border-top: #363636;
-  border-bottom: #363636;
+  border-top: 5px solid #363636;
+  border-bottom: 5px solid #363636;
   text-align: center;
   opacity: 90%;
   box-shadow: 0px 9px 4px -6px #221d23;

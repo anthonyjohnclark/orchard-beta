@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import { Label, Transformer, Text, Tag, Image, Group } from "react-konva";
 import useImage from "use-image"
 import cancelSymbol from "../../../assets/images/cancelSymbol.svg";
@@ -13,7 +13,14 @@ interface IProps {
     toggleModal: () => void;
   }
 
-const Rectangle = ({ shapeProps, isSelected, onSelect, onChange, deleteFloor, toggleModal }: IProps) => {
+const ProductTable = ({ 
+  shapeProps, 
+  isSelected, 
+  onSelect, 
+  onChange, 
+  deleteFloor, 
+  toggleModal 
+  }: IProps) => {
 
   const [deleteIcon] = useImage(cancelSymbol);
   const [addProductIcon] = useImage(addProduct);
@@ -83,7 +90,8 @@ const Rectangle = ({ shapeProps, isSelected, onSelect, onChange, deleteFloor, to
       >
 
         <Tag fill={shapeProps.fill}
-              stroke ={shapeProps.stroke} />
+              stroke ={shapeProps.stroke} 
+        />
 
         <Text
           text={shapeProps.text}
@@ -94,6 +102,18 @@ const Rectangle = ({ shapeProps, isSelected, onSelect, onChange, deleteFloor, to
           fontSize={shapeProps.fontSize}
           fill ={shapeProps.stroke}
           wrap="char"
+        />
+
+        <Text
+          text= {shapeProps.fillText}
+          width={shapeProps.width}
+          height={shapeProps.height}
+          verticalAlign="bottom"
+          align="center"
+          fontSize={shapeProps.fontSize}
+          fill ={shapeProps.stroke}
+          wrap="char"
+          padding = {25}
         />
       </Label>
       </Group>
@@ -159,4 +179,4 @@ const Rectangle = ({ shapeProps, isSelected, onSelect, onChange, deleteFloor, to
     </React.Fragment>
   );
 };
-export default Rectangle;
+export default ProductTable;
