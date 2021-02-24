@@ -90,3 +90,55 @@
   background-color: #b2bec3;
   cursor: pointer;
 }
+
+.Pillar {
+  display: flex;
+  height: 100px;
+  width: 100px;
+  border: 2px solid #29335c;
+  margin-bottom: 15px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+}
+
+.Pillar p {
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+  height: auto;
+  width: 60px;
+}
+
+.Pillar:hover {
+  height: 100px;
+  width: 100px;
+  border: 2px solid #29335c;
+  background-color: #b2bec3;
+  cursor: pointer;
+}
+
+.Hardscaping {
+  display: flex;
+  height: 100px;
+  width: 150px;
+  border: 2px solid #29335c;
+  margin-bottom: 15px;
+  justify-content: center;
+  align-items: center;
+}
+
+.Hardscaping p {
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+  height: auto;
+}
+
+.Hardscaping:hover {
+  height: 100px;
+  width: 150px;
+  border: 2px solid #29335c;
+  background-color: #b2bec3;
+  cursor: pointer;
+}

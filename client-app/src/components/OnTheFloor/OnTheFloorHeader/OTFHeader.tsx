@@ -4,13 +4,15 @@ import classes from "./OnTheFloorHeader.module.css"
 
 interface IProps  {
     //  addRectangle: () => void; 
-     addCircle: () => void;
      tables: any; 
- 
+     pillars:any;
+     setNewFloorType: (type:any) => void;
+     hardscapes:any;
     //  undo: any; 
   }
 
-const OnTheFloorHeader: React.FC<IProps> = ({addCircle, tables}) => {
+const OnTheFloorHeader: React.FC<IProps> = ({ tables, pillars,setNewFloorType,hardscapes}) => {
+
 
     return (
         <Auxil>
@@ -27,14 +29,24 @@ const OnTheFloorHeader: React.FC<IProps> = ({addCircle, tables}) => {
           draggable="true"
           onDragStart={(e) => {
             tables.id = e.currentTarget.id;
-          }}
-        // onClick={addRectangle}
-        >
+            setNewFloorType("product")
+          }}>
           <p>Product Table</p>
         </div>
-        <button className = {classes.Button}  onClick={addCircle}>
-          Add Hardscaping
-        </button>
+        <div className = {classes.Pillar}  draggable="true"
+          onDragStart={(e) => {
+            pillars.id = e.currentTarget.id;
+            setNewFloorType("pillar")
+          }}>
+          <p>Add Pillar</p>
+        </div>
+        <div className = {classes.Hardscaping}  draggable="true"
+          onDragStart={(e) => {
+            hardscapes.id = e.currentTarget.id;
+            setNewFloorType("hardscaping")
+          }}>
+          <p>Add Hardscaping</p>
+        </div>
         </div>
         </div>
         </Auxil>

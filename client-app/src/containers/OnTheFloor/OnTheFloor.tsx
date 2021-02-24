@@ -6,21 +6,28 @@ import TheCanvas from '../../components/OnTheFloor/OnTheFloorComponents/TheCanva
 
 const OnTheFloor = () => {
 
-    // const [addRectangle, addCircle, undo, stageEl ] = useSetOTF
+    // const [addRectangle, addPillar, undo, stageEl ] = useSetOTF
 
   const [tables, setTableShape] = useState([]) as any;
-  const [circles, setCircles] = useState([]) as any;
+  const [pillars, setPillars] = useState([]) as any;
   const [selectedId, selectShape] = useState(null) as any;
   const [floor, setFloor] = useState([]) as any;
   const [selectedProduct, setSelectedProduct] = useState({}) as any; 
+  const [floorType, setFloorType] = useState(null) as any;
+  const [hardscapes, setHardscapes] = useState([]) as any;
 
-    console.log(selectedProduct)
     //   console.log("set selected shape: ", selectedId)
 
+    console.log(hardscapes)
     console.log(tables)
+    console.log(pillars)
 
   const stageEl = createRef() as any;
   const layerEl = createRef() as any;
+
+  const setNewFloorType = (type:any) => {
+    setFloorType(type);
+  }
 
   const setSelectedShape = (selectedId:any) => {
     selectShape(selectedId);
@@ -32,7 +39,7 @@ const OnTheFloor = () => {
       organic: organic,
       onSale: onSale,
       name: name,
-      tableFill: null    
+      tableFill: 1    
     });
   }
 
@@ -40,7 +47,7 @@ const OnTheFloor = () => {
   //value is the cumulative total of all Fill values from the floor products. this is the fill value we 
   //set for each individual tables. 
 
-  const updateNewFillValue = (newFillValue:any) => {
+  const updateNewFillValue = (newFillValue:number) => {
     setSelectedProduct({
       ...selectedProduct, 
       tableFill: newFillValue
@@ -69,7 +76,10 @@ const OnTheFloor = () => {
 
     adjustedTables[prodTableIndex].fillText = selectedProduct.tableFill;
 
-      setFloor(adjustedTables)
+    adjustedTables[prodTableIndex].productId = selectedProduct.id;
+
+      setFloor(adjustedTables);
+      updateNewFillValue(1);
   }
 
      useEffect(() => {
@@ -78,7 +88,7 @@ const OnTheFloor = () => {
         organic:false,
         onSale:false,
         name:'',
-        tableFill: null
+        tableFill: 1
       })
      }, [setSelectedProduct])
  
@@ -87,12 +97,12 @@ const OnTheFloor = () => {
     setTableShape(table);
   };
 
-  const setCircleShape = (circle:any) => {
-    setCircles(circle);
+  const setPillarShape = (circle:any) => {
+    setPillars(circle);
   };
 
-  const getRandomInt = (max:number) => {
-    return Math.floor(Math.random() * Math.floor(max));
+  const setHardscapesShape = (hardscape:any) => {
+    setHardscapes(hardscape);
   };
 
   const addTable = (xPos:number, yPos:number) => {
@@ -106,42 +116,59 @@ const OnTheFloor = () => {
       text: "Product Table",
       fontSize: 14,
       fill: null,
-      fillText: null
+      fillText: null,
+      productId: null
     };
-    const rects = [...tables];
-    setTableShape(rects.concat([table]));;
+    const tabs = [...tables];
+    setTableShape(tabs.concat([table]));;
 
-    const shs = [...floor]
-    setFloor(shs.concat([`table${tables.length + 1}`]));
+    const flr = [...floor]
+    setFloor(flr.concat([`table${tables.length + 1}`]));
   };
   
-  const addCircle = () => {
-    const circ = {
-      x: getRandomInt(100),
-      y: getRandomInt(100),
+  const addPillar = (xPos:number, yPos:number) => {
+    const pillar = {
+      x: xPos + 50,
+      y: yPos + 50,
       width: 100,
       height: 100,
       stroke: "white",
-      id: `circ${circles.length + 1}`,
+      id: `circ${pillars.length + 1}`,
     };
-    const circs = [...circles];
-    setCircles(circs.concat([circ]));
+    const pills = [...pillars];
+    setPillars(pills.concat([pillar]));
 
-    const shs = [...floor];
-    setFloor(shs.concat([`circ${circles.length + 1}`]));
+    const flr = [...floor];
+    setFloor(flr.concat([`pillar${pillars.length + 1}`]));
+  };
+  
+  const addHardscape = (xPos:number, yPos:number) => {
+    const hard = {
+      x: xPos,
+      y: yPos,
+      width: 150,
+      height: 100,
+      stroke: "white",
+      id: `hardscape${hardscapes.length + 1}`,
+    };
+    const hards = [...hardscapes];
+    setHardscapes(hards.concat([hard]));
+
+    const flr = [...floor];   
+    setFloor(flr.concat([`hardscape${hardscapes.length + 1}`]));
   }; 
 
   const deleteFloor = () => {
 
-    let index = circles.findIndex((circles:any) => circles.id === selectedId);
+    let index = pillars.findIndex((pillars:any) => pillars.id === selectedId);
     if (index !== -1) {
-      let circlesSpliced = [...circles]
-      circlesSpliced.splice(index, 1);
-      setCircles(circlesSpliced);
+      let pillarsSpliced = [...pillars]
+      pillarsSpliced.splice(index, 1);
+      setPillars(pillarsSpliced);
 
-      const shs = [...floor]
-      shs.splice(index, 1);
-      setFloor(shs)
+      const flr = [...floor]
+      flr.splice(index, 1);
+      setFloor(flr)
     }
 
     index = tables.findIndex((tables:any) => tables.id === selectedId);
@@ -150,18 +177,31 @@ const OnTheFloor = () => {
       tablesSpliced.splice(index, 1);
       setTableShape(tablesSpliced);
 
-      const shs = [...floor]
-      shs.splice(index, 1);
-      setFloor(shs)
-    }   
+      const flr = [...floor]
+      flr.splice(index, 1);
+      setFloor(flr)
+    }  
+    
+    index = hardscapes.findIndex((hardscapes:any) => hardscapes.id === selectedId);
+    if (index !== -1) {
+      let hardscapesSpliced = [...hardscapes]
+      hardscapesSpliced.splice(index, 1);
+      setHardscapes(hardscapesSpliced);
+
+      const flr = [...floor]
+      flr.splice(index, 1);
+      setFloor(flr)
+    }  
   }
   
     return (
         <Auxil>
         <OTFHeader
             // addRectangle = {addRectangle}
-            addCircle = {addCircle}
             tables = {tables}
+            pillars = {pillars}
+            setNewFloorType = {setNewFloorType}
+            hardscapes = {hardscapes}
 
             // undo = {undo}
         />
@@ -169,17 +209,22 @@ const OnTheFloor = () => {
             stageEl = {stageEl}
             layerEl = {layerEl}
             tables = {tables}
-            circles = {circles}
+            pillars = {pillars}
             selectedId = {selectedId}
             setSelectedShape = {setSelectedShape}
             setTable = {setTable}
-            setCircleShape = {setCircleShape}
+            setPillarShape = {setPillarShape}
             deleteFloor = {deleteFloor}
             addTable = {addTable}
             setProductForTable = {setProductForTable}
             selectedProduct={selectedProduct}
             addProductToTable = {addProductToTable}
             updateNewFillValue = {updateNewFillValue}
+            floorType = {floorType}
+            addPillar= {addPillar}
+            hardscapes ={hardscapes}
+            addHardscape = {addHardscape}
+            setHardscapesShape = {setHardscapesShape}
         />
         </Auxil>
 )

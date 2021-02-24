@@ -22,9 +22,9 @@ return (
     <React.Fragment>
         <div className = {classes.ProdFillModal}>
             <h3>
-                How many boxes of {selectedProduct.name} fit on the table?:
+                How many boxes of <span style ={selectedProduct.organic ?{color: "#7fb069", fontSize: 24}:{color: "#7678ed", fontSize: 24} }>{selectedProduct.name}</span> fit on the table?:
             </h3>
-            <input type = 'number' min = "1" onChange ={(e) => {updateNewFillValue(e.target.value)}}>
+            <input value = {selectedProduct.tableFill} type = 'number' min = "1" onChange ={(e) => {updateNewFillValue(e.target.value)}}>
             </input>
             <button 
             className = {classes.ProdFillEnterButton}

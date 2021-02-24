@@ -1,7 +1,8 @@
 import React, { useEffect,useState } from "react";
 import { Stage, Layer } from "react-konva";
 import ProductTable from "./ProductTable";
-import Circle from "./Circle";
+import Pillar from "./Pillar";
+import Hardscape from "./Hardscape";
 import classes from "./TheCanvas.module.css"
 import Auxil from "../../../hoc/Auxil";
 import Modal from "../../../../src/hoc/Modal";
@@ -14,34 +15,44 @@ interface IProps  {
     stageEl: any; 
     layerEl: any; 
     tables: any; 
-    circles: any; 
+    pillars: any; 
     selectedId: any;
     selectedProduct: any;
+    floorType:any;
+    hardscapes:any;
     setSelectedShape: (shape: any) => void; 
     setTable: (table: any) => void; 
-    setCircleShape: (circle: any) => void; 
+    setPillarShape: (circle: any) => void; 
     addTable: (x:number, y:number) => void;
     deleteFloor: () => void; 
     setProductForTable: (id: number, organic: boolean, onSale: boolean, name: string) => void;
     addProductToTable: () => void;
     updateNewFillValue: (newFillValue: any) => void
+    addPillar: (x:number, y:number) => void;
+    addHardscape: (xPos: number, yPos: number) => void;
+    setHardscapesShape: (hardscape:any) => void;
  }
 
 const TheCanvas:React.FC<IProps> = (
     {stageEl, 
     layerEl,
     tables, 
-    circles, 
+    pillars, 
     selectedId,
     setSelectedShape,
     selectedProduct, 
     setTable, 
-    setCircleShape,
+    setPillarShape,
     deleteFloor,
     addTable,
     setProductForTable,
     addProductToTable,
-    updateNewFillValue
+    updateNewFillValue,
+    floorType,
+    addPillar,
+    hardscapes,
+    addHardscape,
+    setHardscapesShape
   }) => {
 
 
@@ -92,7 +103,16 @@ const TheCanvas:React.FC<IProps> = (
             const x = stageEl.current.getPointerPosition().x-50
             const y = stageEl.current.getPointerPosition().y-50
             // add image
+            console.log(floorType)
+            if(floorType ==='product'){
             addTable(x,y);
+            }
+            else if(floorType ==='pillar'){
+            addPillar(x,y)
+            }
+            else if(floorType ==='hardscaping'){
+            addHardscape(x,y)
+            }
           }}
           onDragOver={(e) => e.preventDefault() }>  
 
@@ -109,40 +129,59 @@ const TheCanvas:React.FC<IProps> = (
         }}
       >
         <Layer ref={layerEl}>
-          {tables.map((rect:any, i:any) => {
+           {tables.map((table:any, i:any) => {
             return (
               <ProductTable
                 key={i}
                 deleteFloor={deleteFloor}
                 toggleModal={toggleModal}
-                shapeProps={rect}
-                isSelected={rect.id === selectedId}
+                shapeProps={table}
+                isSelected={table.id === selectedId}
                 onSelect={() => {
-                setSelectedShape(rect.id);
+                setSelectedShape(table.id);
                 }}
                 onChange={(newAttrs:any) => {
-                  const rects = tables.slice();
-                  rects[i] = newAttrs;
-                  setTable(rects);
+                  const tabls = tables.slice();
+                  tabls[i] = newAttrs;
+                  setTable(tabls);
                 }}
               />
             );
           })}
-          {circles.map((circle:any, i:any) => {
+          {pillars.map((pillar:any, i:any) => {
             return (
-              <Circle
+              <Pillar
                 key={i}
-                shapeProps={circle}
-                isSelected={circle.id === selectedId}
+                shapeProps={pillar}
+                isSelected={pillar.id === selectedId}
+                deleteFloor={deleteFloor}
                 onSelect={() => {
-                setSelectedShape(circle.id);
+                setSelectedShape(pillar.id);
                 }}
                 onChange={(newAttrs:any) => {
-                  const circs = circles.slice();
-                  circs[i] = newAttrs;
-                  setCircleShape(circs);
+                  const pills = pillars.slice();
+                  pills[i] = newAttrs;
+                  setPillarShape(pills);
                 }}
               />
+            );
+          })}
+          {hardscapes.map((hard:any, i:any) => {
+            return (
+              <Hardscape
+                key={i}
+                shapeProps={hard}
+                isSelected={hard.id === selectedId}
+                deleteFloor={deleteFloor}
+                onSelect={() => {
+                setSelectedShape(hard.id);
+                }}
+                onChange={(newAttrs:any) => {
+                  const hards = hardscapes.slice();
+                  hards[i] = newAttrs;
+                  setHardscapesShape(hards);
+                }}
+              />  
             );
           })}
       </Layer>
