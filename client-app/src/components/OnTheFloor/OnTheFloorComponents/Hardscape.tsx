@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from "react";
 import { Label, Transformer, Image, Group, Text, Tag } from "react-konva";
 import useImage from "use-image"
 import cancelSymbol from "../../../assets/images/cancelSymbol.svg";
+import editButton from "../../../assets/images/editButton.svg";
 
 interface IProps {
     shapeProps:any, 
@@ -9,6 +10,7 @@ interface IProps {
     onSelect:any, 
     onChange:any,
     deleteFloor: () => void;
+    toggleNamingModal: () => void;
   }
 
   const Hardscape = ({ 
@@ -16,9 +18,12 @@ interface IProps {
     isSelected, 
     onSelect, 
     onChange,
-    deleteFloor }: IProps) => {
+    deleteFloor,
+    toggleNamingModal }: IProps) => {
 
   const [deleteIcon] = useImage(cancelSymbol);
+  const [editIcon] = useImage(editButton);
+
 
   const shapeRef = useRef(null) as any;
   const trRef = useRef(null) as any;
@@ -104,7 +109,25 @@ interface IProps {
             }
             return newBox;
           }}
-        >
+        > 
+          <Image
+            ref={trRef}
+            image ={editIcon}
+            onClick={toggleNamingModal}
+            offsetX = {-5}
+            offsetY = {25}
+            width={25}
+            height={25}
+            onMouseEnter={e => {
+              const container = e.target.getStage()!.container();
+              container.style.cursor = "pointer";
+            }}
+            onMouseLeave={e => {
+              const container = e.target.getStage()!.container();
+              container.style.cursor = "default";
+            }}
+            >
+          </Image>
           <Image
              ref={trRef}
               offsetX = {-shapeProps.width + 25}

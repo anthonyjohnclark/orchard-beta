@@ -3,6 +3,8 @@ import { Label, Transformer, Text, Tag, Image, Group } from "react-konva";
 import useImage from "use-image"
 import cancelSymbol from "../../../assets/images/cancelSymbol.svg";
 import addProduct from "../../../assets/images/addProduct.svg";
+import editButton from "../../../assets/images/editButton.svg";
+
 
 interface IProps {
     shapeProps:any, 
@@ -24,6 +26,8 @@ const ProductTable = ({
 
   const [deleteIcon] = useImage(cancelSymbol);
   const [addProductIcon] = useImage(addProduct);
+  const [editIcon] = useImage(editButton);
+
 
   const shapeRef = useRef(null) as any;
   const trRef = useRef(null) as any;
@@ -122,6 +126,7 @@ const ProductTable = ({
             return newBox;
           }}
         >
+        {shapeProps.inUse === false ?
           <Image
             ref={trRef}
             image ={addProductIcon}
@@ -140,6 +145,26 @@ const ProductTable = ({
             }}
             >
           </Image>
+          :
+          <Image
+            ref={trRef}
+            image ={editIcon}
+            onClick={toggleModal}
+            offsetX = {-5}
+            offsetY = {25}
+            width={25}
+            height={25}
+            onMouseEnter={e => {
+              const container = e.target.getStage()!.container();
+              container.style.cursor = "pointer";
+            }}
+            onMouseLeave={e => {
+              const container = e.target.getStage()!.container();
+              container.style.cursor = "default";
+            }}
+            >
+          </Image>
+          }
           <Image
              ref={trRef}
               offsetX = {-shapeProps.width + 25}

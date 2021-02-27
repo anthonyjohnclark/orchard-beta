@@ -9,6 +9,7 @@ import Modal from "../../../../src/hoc/Modal";
 import ProductSelectionModal from "./ProductSelectionModal";
 import AlertModal from "../../../hoc/AlertModal";
 import ProductFillModal from "./ProductFillModal";
+import HardscapeNameModal from "./HardscapeNameModal";
 
 
 interface IProps  {
@@ -20,6 +21,7 @@ interface IProps  {
     selectedProduct: any;
     floorType:any;
     hardscapes:any;
+    hardscapeLabelText: any;
     setSelectedShape: (shape: any) => void; 
     setTable: (table: any) => void; 
     setPillarShape: (circle: any) => void; 
@@ -31,6 +33,8 @@ interface IProps  {
     addPillar: (x:number, y:number) => void;
     addHardscape: (xPos: number, yPos: number) => void;
     setHardscapesShape: (hardscape:any) => void;
+    addLabelToHardscape: () => void;
+    setHardscapeLabelText: (text:string) => void;
  }
 
 const TheCanvas:React.FC<IProps> = (
@@ -52,7 +56,10 @@ const TheCanvas:React.FC<IProps> = (
     addPillar,
     hardscapes,
     addHardscape,
-    setHardscapesShape
+    setHardscapesShape,
+    addLabelToHardscape,
+    setHardscapeLabelText,
+    hardscapeLabelText
   }) => {
 
 
@@ -74,12 +81,38 @@ const TheCanvas:React.FC<IProps> = (
         setIsShowing(false);
       }
 
+      const [namingModalIsShowing, setNamingModal] = useState(false);
+
+     const toggleNamingModal = () => {
+          setNamingModal(!namingModalIsShowing);
+     }
+
+
+
+
       // const forceUpdate = React.useCallback(() => setSelectedShape(selectedId), []);
     const handleKeyDown = (ev:any) => {
-      if (ev.code === "Delete" || ev.code ==="Backspace") 
-      {        deleteFloor()
+      if (ev.code === "Delete" || ev.code ==="Backspace") {
+        if ((alertIsShowing || namingModalIsShowing || isShowing) === false) {
+          deleteFloor();
       }
+      else if (namingModalIsShowing === true){
+        return;
+            }
+    }
+    if (ev.code === "Enter") {
+      if (alertIsShowing === true) {
+        closeBothModals(); 
+        addProductToTable();
       }
+      else if (namingModalIsShowing === true){
+        toggleNamingModal(); 
+        addLabelToHardscape(); 
+      }
+      else {
+        ev.preventDefault();
+      }
+  }}
 
       
     useEffect(() => {
@@ -90,7 +123,7 @@ const TheCanvas:React.FC<IProps> = (
       document.removeEventListener('keydown', handleKeyDown);
      };
         
-    }, [selectedId]);
+    }, [selectedId,namingModalIsShowing,alertIsShowing,isShowing,setHardscapeLabelText]);
 
   
   return (
@@ -103,7 +136,6 @@ const TheCanvas:React.FC<IProps> = (
             const x = stageEl.current.getPointerPosition().x-50
             const y = stageEl.current.getPointerPosition().y-50
             // add image
-            console.log(floorType)
             if(floorType ==='product'){
             addTable(x,y);
             }
@@ -170,6 +202,7 @@ const TheCanvas:React.FC<IProps> = (
             return (
               <Hardscape
                 key={i}
+                toggleNamingModal = {toggleNamingModal}
                 shapeProps={hard}
                 isSelected={hard.id === selectedId}
                 deleteFloor={deleteFloor}
@@ -202,6 +235,14 @@ const TheCanvas:React.FC<IProps> = (
           updateNewFillValue = {updateNewFillValue}
         />
       </AlertModal>
+      <AlertModal show = {namingModalIsShowing} modalClosed = {toggleNamingModal}>
+        <HardscapeNameModal
+             addLabelToHardscape = {addLabelToHardscape}
+             toggleNamingModal = {toggleNamingModal}
+             setHardscapeLabelText = {setHardscapeLabelText}
+             hardscapeLabelText = {hardscapeLabelText}
+        ></HardscapeNameModal>
+        </AlertModal>
     </Auxil>
   );
 }

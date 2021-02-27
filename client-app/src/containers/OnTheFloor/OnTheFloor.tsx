@@ -15,12 +15,8 @@ const OnTheFloor = () => {
   const [selectedProduct, setSelectedProduct] = useState({}) as any; 
   const [floorType, setFloorType] = useState(null) as any;
   const [hardscapes, setHardscapes] = useState([]) as any;
-
-    //   console.log("set selected shape: ", selectedId)
-
-    console.log(hardscapes)
-    console.log(tables)
-    console.log(pillars)
+  const [hardscapeLabelText, updateHardscapeLabelText] = useState(null) as any;
+    //   console.log("set selected shape: ", selectedId)    
 
   const stageEl = createRef() as any;
   const layerEl = createRef() as any;
@@ -32,6 +28,10 @@ const OnTheFloor = () => {
   const setSelectedShape = (selectedId:any) => {
     selectShape(selectedId);
   };
+
+  const setHardscapeLabelText = (text:any) => {
+    updateHardscapeLabelText(text);
+  }
 
   const setProductForTable =  (id:number, organic:boolean, onSale:boolean, name:string) => {
     setSelectedProduct({
@@ -61,6 +61,9 @@ const OnTheFloor = () => {
 
     adjustedTables[prodTableIndex].text = selectedProduct.name;
 
+    adjustedTables[prodTableIndex].inUse = true;
+
+
     adjustedTables[prodTableIndex].id = `productTable${selectedProduct.id}.${adjustedTables.length}`;
 
     if (selectedProduct.onSale){
@@ -80,6 +83,18 @@ const OnTheFloor = () => {
 
       setFloor(adjustedTables);
       updateNewFillValue(1);
+  }
+
+  const addLabelToHardscape = () => {
+
+    const editedHardscapes = [...hardscapes]
+
+    const hardscapeIndex = editedHardscapes.findIndex(( tables:any ) => tables.id === selectedId);
+
+    editedHardscapes[hardscapeIndex].text = hardscapeLabelText
+
+    setHardscapes(editedHardscapes);
+    setHardscapeLabelText(null);
   }
 
      useEffect(() => {
@@ -117,7 +132,8 @@ const OnTheFloor = () => {
       fontSize: 14,
       fill: null,
       fillText: null,
-      productId: null
+      productId: null,
+      inUse: false,
     };
     const tabs = [...tables];
     setTableShape(tabs.concat([table]));;
@@ -150,6 +166,8 @@ const OnTheFloor = () => {
       height: 100,
       stroke: "white",
       id: `hardscape${hardscapes.length + 1}`,
+      text: null,
+      fontSize: 14,
     };
     const hards = [...hardscapes];
     setHardscapes(hards.concat([hard]));
@@ -225,6 +243,9 @@ const OnTheFloor = () => {
             hardscapes ={hardscapes}
             addHardscape = {addHardscape}
             setHardscapesShape = {setHardscapesShape}
+            addLabelToHardscape = {addLabelToHardscape}
+            setHardscapeLabelText = {setHardscapeLabelText}
+            hardscapeLabelText = {hardscapeLabelText}
         />
         </Auxil>
 )

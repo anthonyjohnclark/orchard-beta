@@ -1,7 +1,6 @@
 import React from 'react';
 import classes from './ProductFillModal.module.css'
 
-
 interface IProps  {
     toggleAlertModal: () => void;
     closeBothModals: () => void
