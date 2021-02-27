@@ -22,7 +22,7 @@ return (
             <h3>
                Enter a name for the hardscape object:
             </h3>
-            <input type = "text" value = {hardscapeLabelText ? hardscapeLabelText:""} onChange={(e) => {setHardscapeLabelText(e.target.value)}}></input>
+            <input max-length = {200} type = "text" value = {hardscapeLabelText ? hardscapeLabelText:""} onChange={(e) => {setHardscapeLabelText(e.target.value)}}></input>
             <button 
             className = {classes.HardscapeNameEnterButton}
             onClick = {() => {addLabelToHardscape(); toggleNamingModal() }}
