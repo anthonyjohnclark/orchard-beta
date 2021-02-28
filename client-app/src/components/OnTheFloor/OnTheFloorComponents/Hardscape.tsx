@@ -60,6 +60,7 @@ interface IProps {
           const container = e.target.getStage()!.container();
           container.style.cursor = "default";
         }}
+        
         onTransformEnd={(e) => {
           
           const node = shapeRef.current;
@@ -141,6 +142,10 @@ interface IProps {
                 container.style.cursor = "pointer";
               }}
               onMouseLeave={e => {
+                const container = e.target.getStage()!.container();
+                container.style.cursor = "default";
+              }}
+              onMouseDown={e => {
                 const container = e.target.getStage()!.container();
                 container.style.cursor = "default";
               }}

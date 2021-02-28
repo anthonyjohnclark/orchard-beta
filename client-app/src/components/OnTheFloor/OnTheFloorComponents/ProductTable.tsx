@@ -182,6 +182,10 @@ const ProductTable = ({
                 const container = e.target.getStage()!.container();
                 container.style.cursor = "default";
               }}
+              onMouseDown={e => {
+                const container = e.target.getStage()!.container();
+                container.style.cursor = "default";
+              }}
             >
             </Image>
         </Transformer>

@@ -15,16 +15,18 @@ import HardscapeNameModal from "./HardscapeNameModal";
 interface IProps  {
     stageEl: any; 
     layerEl: any; 
-    tables: any; 
-    pillars: any; 
+    // tables: any; 
+    // pillars: any; 
     selectedId: any;
     selectedProduct: any;
     floorType:any;
-    hardscapes:any;
+    // hardscapes:any;
     hardscapeLabelText: any;
+    floor: any;
+
     setSelectedShape: (shape: any) => void; 
-    setTable: (table: any) => void; 
-    setPillarShape: (circle: any) => void; 
+    // setTable: (table: any) => void; 
+    // setPillarShape: (circle: any) => void; 
     addTable: (x:number, y:number) => void;
     deleteFloor: () => void; 
     setProductForTable: (id: number, organic: boolean, onSale: boolean, name: string) => void;
@@ -32,21 +34,18 @@ interface IProps  {
     updateNewFillValue: (newFillValue: any) => void
     addPillar: (x:number, y:number) => void;
     addHardscape: (xPos: number, yPos: number) => void;
-    setHardscapesShape: (hardscape:any) => void;
+    // setHardscapesShape: (hardscape:any) => void;
     addLabelToHardscape: () => void;
     setHardscapeLabelText: (text:string) => void;
+    updateFloor: (floor: any) => void;
  }
 
 const TheCanvas:React.FC<IProps> = (
     {stageEl, 
     layerEl,
-    tables, 
-    pillars, 
     selectedId,
     setSelectedShape,
-    selectedProduct, 
-    setTable, 
-    setPillarShape,
+    selectedProduct,
     deleteFloor,
     addTable,
     setProductForTable,
@@ -54,12 +53,12 @@ const TheCanvas:React.FC<IProps> = (
     updateNewFillValue,
     floorType,
     addPillar,
-    hardscapes,
     addHardscape,
-    setHardscapesShape,
     addLabelToHardscape,
     setHardscapeLabelText,
-    hardscapeLabelText
+    hardscapeLabelText,
+    floor,
+    updateFloor
   }) => {
 
 
@@ -146,7 +145,8 @@ const TheCanvas:React.FC<IProps> = (
             addHardscape(x,y)
             }
           }}
-          onDragOver={(e) => e.preventDefault() }>  
+          onDragOver={(e) => e.preventDefault() }
+         >  
 
       <Stage
         width={1300}
@@ -161,7 +161,8 @@ const TheCanvas:React.FC<IProps> = (
         }}
       >
         <Layer ref={layerEl}>
-           {tables.map((table:any, i:any) => {
+           {floor.filter((floorObjects:any) => floorObjects.type === 'table')
+            .map((table:any, i:any) => {
             return (
               <ProductTable
                 key={i}
@@ -173,14 +174,20 @@ const TheCanvas:React.FC<IProps> = (
                 setSelectedShape(table.id);
                 }}
                 onChange={(newAttrs:any) => {
-                  const tabls = tables.slice();
+                  const tabls = floor.slice();
+                  console.log(tabls)
+                  console.log(newAttrs)
+
                   tabls[i] = newAttrs;
-                  setTable(tabls);
+                  console.log(tabls[i])
+
+                  updateFloor(tabls);
                 }}
               />
             );
           })}
-          {pillars.map((pillar:any, i:any) => {
+          {floor.filter((floorObjects:any) => floorObjects.type === 'pillar')
+          .map((pillar:any, i:any) => {
             return (
               <Pillar
                 key={i}
@@ -191,14 +198,15 @@ const TheCanvas:React.FC<IProps> = (
                 setSelectedShape(pillar.id);
                 }}
                 onChange={(newAttrs:any) => {
-                  const pills = pillars.slice();
+                  const pills = floor.slice();
                   pills[i] = newAttrs;
-                  setPillarShape(pills);
+                  updateFloor(pills);
                 }}
               />
             );
           })}
-          {hardscapes.map((hard:any, i:any) => {
+          {floor.filter((floorObjects:any) => floorObjects.type === 'hardscape')
+          .map((hard:any, i:any) => {
             return (
               <Hardscape
                 key={i}
@@ -210,9 +218,9 @@ const TheCanvas:React.FC<IProps> = (
                 setSelectedShape(hard.id);
                 }}
                 onChange={(newAttrs:any) => {
-                  const hards = hardscapes.slice();
+                  const hards = floor.slice();
                   hards[i] = newAttrs;
-                  setHardscapesShape(hards);
+                  updateFloor(hards);
                 }}
               />  
             );
