@@ -3,17 +3,11 @@ import Auxil from "../../../hoc/Auxil"
 import classes from "./OnTheFloorHeader.module.css"
 
 interface IProps  {
-    //  addRectangle: () => void; 
-      tables: any; 
-      pillars:any;
      setNewFloorType: (type:any) => void;
-      hardscapes:any;
      floor: any;
-    //  undo: any; 
   }
 
-const OnTheFloorHeader: React.FC<IProps> = ({ tables, pillars, hardscapes,setNewFloorType, floor}) => {
-
+const OnTheFloorHeader: React.FC<IProps> = ({ setNewFloorType, floor}) => {
 
     return (
         <Auxil>
@@ -29,21 +23,21 @@ const OnTheFloorHeader: React.FC<IProps> = ({ tables, pillars, hardscapes,setNew
         <div className = {classes.ProductTable}
           draggable="true"
           onDragStart={(e) => {
-            tables.id = e.currentTarget.id;
+            floor.id = e.currentTarget.id;
             setNewFloorType("product")
           }}>
           <p>Product Table</p>
         </div>
         <div className = {classes.Pillar}  draggable="true"
           onDragStart={(e) => {
-            pillars.id = e.currentTarget.id;
+            floor.id = e.currentTarget.id;
             setNewFloorType("pillar")
           }}>
           <p>Add Pillar</p>
         </div>
         <div className = {classes.Hardscaping}  draggable="true"
           onDragStart={(e) => {
-            hardscapes.id = e.currentTarget.id;
+            floor.id = e.currentTarget.id;
             setNewFloorType("hardscaping")
           }}>
           <p>Add Hardscaping</p>
@@ -51,7 +45,5 @@ const OnTheFloorHeader: React.FC<IProps> = ({ tables, pillars, hardscapes,setNew
         </div>
         </div>
         </Auxil>
-        )
-}
-
+  )}
 export default OnTheFloorHeader; 

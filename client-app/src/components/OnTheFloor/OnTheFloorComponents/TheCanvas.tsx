@@ -10,24 +10,16 @@ import ProductSelectionModal from "./ProductSelectionModal";
 import AlertModal from "../../../hoc/AlertModal";
 import ProductFillModal from "./ProductFillModal";
 import HardscapeNameModal from "./HardscapeNameModal";
-import { AnyARecord } from "dns";
-
 
 interface IProps  {
     stageEl: any; 
     layerEl: any; 
-    tables: any; 
-    pillars: any; 
     selectedId: any;
     selectedProduct: any;
     floorType:any;
-    hardscapes:any;
     hardscapeLabelText: any;
     floor: any;
-
     setSelectedShape: (shape: any) => void; 
-    setTable: (table: any) => void; 
-    setPillarShape: (circle: any) => void; 
     addTable: (x:number, y:number) => void;
     deleteFloor: () => void; 
     setProductForTable: (id: number, organic: boolean, onSale: boolean, name: string) => void;
@@ -35,7 +27,6 @@ interface IProps  {
     updateNewFillValue: (newFillValue: any) => void
     addPillar: (x:number, y:number) => void;
     addHardscape: (xPos: number, yPos: number) => void;
-    setHardscapesShape: (hardscape:any) => void;
     addLabelToHardscape: () => void;
     setHardscapeLabelText: (text:string) => void;
     updateFloor: (floorObject:any) => void;
@@ -59,44 +50,33 @@ const TheCanvas:React.FC<IProps> = (
     setHardscapeLabelText,
     hardscapeLabelText,
     floor,
-    updateFloor,
-    hardscapes,
-    pillars,
-    tables,
-    setTable,
-    setHardscapesShape,
-    setPillarShape
+    updateFloor
   }) => {
 
+  const [isShowing, setIsShowing] = useState(false);
 
-    const [isShowing, setIsShowing] = useState(false);
+  const toggleModal = () => {
+    setIsShowing(!isShowing);
+    }
 
-    const toggleModal = () => {
+    const [alertIsShowing, setAlertIsShowing] = useState(false);
+
+    const toggleAlertModal = () => {
+      setAlertIsShowing(!alertIsShowing);    
       setIsShowing(!isShowing);
-     }
-
-      const [alertIsShowing, setAlertIsShowing] = useState(false);
-
-      const toggleAlertModal = () => {
-        setAlertIsShowing(!alertIsShowing);    
-        setIsShowing(!isShowing);
-        }
-
-      const closeBothModals = () => {
-        setAlertIsShowing(false);    
-        setIsShowing(false);
       }
 
-      const [namingModalIsShowing, setNamingModal] = useState(false);
+    const closeBothModals = () => {
+      setAlertIsShowing(false);    
+      setIsShowing(false);
+    }
 
-     const toggleNamingModal = () => {
-          setNamingModal(!namingModalIsShowing);
-     }
+    const [namingModalIsShowing, setNamingModal] = useState(false);
 
+    const toggleNamingModal = () => {
+        setNamingModal(!namingModalIsShowing);
+    }
 
-
-
-      // const forceUpdate = React.useCallback(() => setSelectedShape(selectedId), []);
     const handleKeyDown = (ev:any) => {
       if (ev.code === "Delete" || ev.code ==="Backspace") {
         if ((alertIsShowing || namingModalIsShowing || isShowing) === false) {
@@ -123,14 +103,18 @@ const TheCanvas:React.FC<IProps> = (
       
     useEffect(() => {
       document.addEventListener("keydown", handleKeyDown)
-        // forceUpdate()
-        
+              
      return () => {
       document.removeEventListener('keydown', handleKeyDown);
      };
         
-    }, [selectedId,namingModalIsShowing,alertIsShowing,isShowing,setHardscapeLabelText]);
-
+      }, [
+        selectedId,
+        namingModalIsShowing,
+        alertIsShowing,
+        isShowing,
+        setHardscapeLabelText
+      ]);
   
   return (
   <Auxil>      
