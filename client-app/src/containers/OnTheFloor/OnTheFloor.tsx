@@ -11,15 +11,13 @@ const OnTheFloor = () => {
 
     const userJson:any = localFloor !== null ? JSON.parse(localFloor) : null;
 
-      console.log(userJson)
-
-  // const [tables, setTableShape] = useState([]) as any;
-  // const [pillars, setPillars] = useState([]) as any;
+  const [tables, setTableShape] = useState([]) as any;
+  const [pillars, setPillars] = useState([]) as any;
   const [selectedId, selectShape] = useState(null) as any;
   const [floor, setFloor] = useState( userJson || []) as any;
   const [selectedProduct, setSelectedProduct] = useState({}) as any; 
   const [floorType, setFloorType] = useState(null) as any;
-  // const [hardscapes, setHardscapes] = useState([]) as any;
+  const [hardscapes, setHardscapes] = useState([]) as any;
   const [hardscapeLabelText, updateHardscapeLabelText] = useState(null) as any;
     //   console.log("set selected shape: ", selectedId)    
 
@@ -28,8 +26,9 @@ const OnTheFloor = () => {
   const stageEl = createRef() as any;
   const layerEl = createRef() as any;
 
-  const updateFloor = (floor:any) => {
-    setFloor(floor);
+  const updateFloor = (floorObject:any) => {
+
+    setFloor(floorObject);
   }
 
   const setNewFloorType = (type:any) => {
@@ -119,17 +118,17 @@ const OnTheFloor = () => {
      }, [setSelectedProduct])
  
 
-  // const setTable = (table:any) => {
-  //   setTableShape(table);
-  // };
+   const setTable = (table:any) => {
+     setTableShape(table);
+   };
 
-  // const setPillarShape = (circle:any) => {
-  //   setPillars(circle);
-  // };
+   const setPillarShape = (circle:any) => {
+     setPillars(circle);
+   };
 
-  // const setHardscapesShape = (hardscape:any) => {
-  //   setHardscapes(hardscape);
-  // };
+   const setHardscapesShape = (hardscape:any) => {
+     setHardscapes(hardscape);
+   };
 
   const addTable = (xPos:number, yPos:number) => {
     const table = {
@@ -209,22 +208,22 @@ const OnTheFloor = () => {
         <Auxil>
         <OTFHeader
             // addRectangle = {addRectangle}
-            // tables = {tables}
-            // pillars = {pillars}
+             tables = {tables}
+             pillars = {pillars}
             setNewFloorType = {setNewFloorType}
-            // hardscapes = {hardscapes}
+             hardscapes = {hardscapes}
             floor = {floor}
             // undo = {undo}
         />
         <TheCanvas 
             stageEl = {stageEl}
             layerEl = {layerEl}
-            // tables = {tables}
-            // pillars = {pillars}
+             tables = {tables}
+             pillars = {pillars}
             selectedId = {selectedId}
             setSelectedShape = {setSelectedShape}
-            // setTable = {setTable}
-            // setPillarShape = {setPillarShape}
+             setTable = {setTable}
+             setPillarShape = {setPillarShape}
             deleteFloor = {deleteFloor}
             addTable = {addTable}
             setProductForTable = {setProductForTable}
@@ -233,9 +232,9 @@ const OnTheFloor = () => {
             updateNewFillValue = {updateNewFillValue}
             floorType = {floorType}
             addPillar= {addPillar}
-            // hardscapes ={hardscapes}
+             hardscapes ={hardscapes}
             addHardscape = {addHardscape}
-            // setHardscapesShape = {setHardscapesShape}
+             setHardscapesShape = {setHardscapesShape}
             addLabelToHardscape = {addLabelToHardscape}
             setHardscapeLabelText = {setHardscapeLabelText}
             hardscapeLabelText = {hardscapeLabelText}

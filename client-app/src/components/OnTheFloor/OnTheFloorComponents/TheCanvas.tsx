@@ -10,23 +10,24 @@ import ProductSelectionModal from "./ProductSelectionModal";
 import AlertModal from "../../../hoc/AlertModal";
 import ProductFillModal from "./ProductFillModal";
 import HardscapeNameModal from "./HardscapeNameModal";
+import { AnyARecord } from "dns";
 
 
 interface IProps  {
     stageEl: any; 
     layerEl: any; 
-    // tables: any; 
-    // pillars: any; 
+    tables: any; 
+    pillars: any; 
     selectedId: any;
     selectedProduct: any;
     floorType:any;
-    // hardscapes:any;
+    hardscapes:any;
     hardscapeLabelText: any;
     floor: any;
 
     setSelectedShape: (shape: any) => void; 
-    // setTable: (table: any) => void; 
-    // setPillarShape: (circle: any) => void; 
+    setTable: (table: any) => void; 
+    setPillarShape: (circle: any) => void; 
     addTable: (x:number, y:number) => void;
     deleteFloor: () => void; 
     setProductForTable: (id: number, organic: boolean, onSale: boolean, name: string) => void;
@@ -34,10 +35,10 @@ interface IProps  {
     updateNewFillValue: (newFillValue: any) => void
     addPillar: (x:number, y:number) => void;
     addHardscape: (xPos: number, yPos: number) => void;
-    // setHardscapesShape: (hardscape:any) => void;
+    setHardscapesShape: (hardscape:any) => void;
     addLabelToHardscape: () => void;
     setHardscapeLabelText: (text:string) => void;
-    updateFloor: (floor: any) => void;
+    updateFloor: (floorObject:any) => void;
  }
 
 const TheCanvas:React.FC<IProps> = (
@@ -58,7 +59,13 @@ const TheCanvas:React.FC<IProps> = (
     setHardscapeLabelText,
     hardscapeLabelText,
     floor,
-    updateFloor
+    updateFloor,
+    hardscapes,
+    pillars,
+    tables,
+    setTable,
+    setHardscapesShape,
+    setPillarShape
   }) => {
 
 
@@ -174,14 +181,10 @@ const TheCanvas:React.FC<IProps> = (
                 setSelectedShape(table.id);
                 }}
                 onChange={(newAttrs:any) => {
-                  const tabls = floor.slice();
-                  console.log(tabls)
-                  console.log(newAttrs)
-
-                  tabls[i] = newAttrs;
-                  console.log(tabls[i])
-
-                  updateFloor(tabls);
+                  const flr = [...floor]
+                  var indexOfFloor = flr.findIndex((i:any) => i.id === table.id)
+                  flr[indexOfFloor] = newAttrs;
+                  updateFloor(flr);
                 }}
               />
             );
@@ -198,9 +201,10 @@ const TheCanvas:React.FC<IProps> = (
                 setSelectedShape(pillar.id);
                 }}
                 onChange={(newAttrs:any) => {
-                  const pills = floor.slice();
-                  pills[i] = newAttrs;
-                  updateFloor(pills);
+                  const flr = [...floor]
+                  var indexOfFloor = flr.findIndex((i:any) => i.id === pillar.id)
+                  flr[indexOfFloor] = newAttrs;
+                  updateFloor(flr);
                 }}
               />
             );
@@ -218,9 +222,10 @@ const TheCanvas:React.FC<IProps> = (
                 setSelectedShape(hard.id);
                 }}
                 onChange={(newAttrs:any) => {
-                  const hards = floor.slice();
-                  hards[i] = newAttrs;
-                  updateFloor(hards);
+                  const flr = [...floor]
+                  var indexOfFloor = flr.findIndex((i:any) => i.id === hard.id)
+                  flr[indexOfFloor] = newAttrs;
+                  updateFloor(flr);
                 }}
               />  
             );

@@ -4,15 +4,15 @@ import classes from "./OnTheFloorHeader.module.css"
 
 interface IProps  {
     //  addRectangle: () => void; 
-    //  tables: any; 
-    //  pillars:any;
+      tables: any; 
+      pillars:any;
      setNewFloorType: (type:any) => void;
-    //  hardscapes:any;
+      hardscapes:any;
      floor: any;
     //  undo: any; 
   }
 
-const OnTheFloorHeader: React.FC<IProps> = ({ setNewFloorType, floor}) => {
+const OnTheFloorHeader: React.FC<IProps> = ({ tables, pillars, hardscapes,setNewFloorType, floor}) => {
 
 
     return (
@@ -29,21 +29,21 @@ const OnTheFloorHeader: React.FC<IProps> = ({ setNewFloorType, floor}) => {
         <div className = {classes.ProductTable}
           draggable="true"
           onDragStart={(e) => {
-            floor.id = e.currentTarget.id;
+            tables.id = e.currentTarget.id;
             setNewFloorType("product")
           }}>
           <p>Product Table</p>
         </div>
         <div className = {classes.Pillar}  draggable="true"
           onDragStart={(e) => {
-            floor.id = e.currentTarget.id;
+            pillars.id = e.currentTarget.id;
             setNewFloorType("pillar")
           }}>
           <p>Add Pillar</p>
         </div>
         <div className = {classes.Hardscaping}  draggable="true"
           onDragStart={(e) => {
-            floor.id = e.currentTarget.id;
+            hardscapes.id = e.currentTarget.id;
             setNewFloorType("hardscaping")
           }}>
           <p>Add Hardscaping</p>
