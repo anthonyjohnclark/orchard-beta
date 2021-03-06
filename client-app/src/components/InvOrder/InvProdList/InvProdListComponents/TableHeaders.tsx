@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./TableHeaders.module.css";
-import { ISortConfigForHeaders } from "../../../../models/ISortFilterConfig"
+import { ISortConfigForHeaders } from "../../../../models/InvOrderModels/ISortFilterConfig"
 
 
 interface IProps {

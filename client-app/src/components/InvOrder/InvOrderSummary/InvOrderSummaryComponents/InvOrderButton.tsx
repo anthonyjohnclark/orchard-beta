@@ -3,7 +3,7 @@ import classes from "../InvOrderSummaryComponents/InvOrderButton.module.css"
 import Modal from "../../../../hoc/Modal";
 import Auxil from "../../../../hoc/Auxil";
 import InvPreviewModal from "./InvPreviewModal";
-import { IOrderedProducts } from "../../../../models/IProducts"
+import { IOrderedProducts } from "../../../../models/InvOrderModels/IProducts";
 
 
 interface IProps  {

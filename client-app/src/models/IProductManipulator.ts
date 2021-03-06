@@ -1,3 +1,0 @@
-// interface IProductManipulator {
-//     CreateOrderedProducts: () =>
-// }

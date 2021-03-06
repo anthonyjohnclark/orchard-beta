@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { IFilterConfig, ISortConfig } from "../../models/ISortFilterConfig";
-import { ISortConfigForHeaders } from "../../models/ISortFilterConfig";
+import { IFilterConfig, ISortConfig } from "../../models/InvOrderModels/ISortFilterConfig";
+import { ISortConfigForHeaders } from "../../models/InvOrderModels/ISortFilterConfig";
 
 
 const useRequestSortFilter = () => {
@@ -37,11 +37,6 @@ const useRequestSortFilter = () => {
     
     
       const [filterEnabled, toggleFilter] = useState(false);
-    
-      // console.log(sortConfig)
-      // console.log(sortConfigForHeaders)
-      // console.log(filterConfig)
-      // console.log(filterEnabled)
     
       const requestSort = (
         id: number,

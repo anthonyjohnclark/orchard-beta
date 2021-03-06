@@ -18,8 +18,8 @@ const OnTheFloor = () => {
   const stageEl = createRef() as any;
   const layerEl = createRef() as any;
 
-  const updateFloor = (floorObject:any) => {
-    setFloor(floorObject);
+  const updateFloor = (floor:any) => {
+    setFloor(floor);
   }
 
   const setNewFloorType = (type:any) => {

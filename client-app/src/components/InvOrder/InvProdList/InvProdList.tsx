@@ -5,8 +5,8 @@ import Auxil from "../../../hoc/Auxil";
 import ButtonList from "./InvProdListComponents/ButtonList";
 import TableHeaders from "./InvProdListComponents/TableHeaders";
 import SortFilterButton from "./InvProdListComponents/SortFilterButton";
-import { IProductsWithInput } from "../../../models/IProducts"
-import { ISortConfigForHeaders } from "../../../models/ISortFilterConfig"
+import { IProductsWithInput } from "../../../models/InvOrderModels/IProducts";
+import { ISortConfigForHeaders } from "../../../models/InvOrderModels/ISortFilterConfig";
 
 interface IProps  {
   setFilterEnabled: (filterEnabled: boolean, e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void

@@ -1,5 +1,5 @@
 import * as actionTypes from "./actionTypes"
-import { IProductsWithInput } from "../../models/IProducts";
+import { IProductsWithInput } from "../../models/InvOrderModels/IProducts";
 import axios from "axios";
 
 export const saveBaseProducts = (response:any) => {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IProductsWithInput, IOrderedProducts } from '../models/IProducts';
+import { IProductsWithInput, IOrderedProducts } from '../models/InvOrderModels/IProducts';
 import classes from "../components/InvOrder/InvProdList/InvProd/InvProduct.module.css";
 
 interface IProps  {

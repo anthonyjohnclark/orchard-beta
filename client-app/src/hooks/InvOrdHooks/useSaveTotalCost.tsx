@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { IOrderedProducts } from "../../models/IProducts";
+import { IOrderedProducts } from "../../models/InvOrderModels/IProducts";
 
 const useSaveTotalCost = (orderedProducts: IOrderedProducts[]) => {
 const [totalCost, setTotalCost] = useState("0")

@@ -3,7 +3,7 @@ import Auxil from "../../../hoc/Auxil";
 import classes from "./InvOrderSummary.module.css"
 import InvProdSetToSuggest from "./InvOrderSummaryComponents/InvProdSetToSuggest";
 import InvOrderButton from "./InvOrderSummaryComponents/InvOrderButton";
-import { IOrderedProducts } from "../../../models/IProducts";
+import { IOrderedProducts } from "../../../models/InvOrderModels/IProducts";
 
 //to-do - find how to calculate blended margin? 
 interface IProps  {
@@ -12,8 +12,6 @@ interface IProps  {
     orderedProducts: IOrderedProducts[]; 
     setOrderToSuggested: (roundingDirection: boolean, e:React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
     totalCost: string;
-    // saveTotalPieces: () => void;
-    // saveTotalCost: () => void
     totalPieces: number 
   }
 

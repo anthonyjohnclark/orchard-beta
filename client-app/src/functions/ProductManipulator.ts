@@ -1,5 +1,5 @@
-import { IProductsWithInput } from "../models/IProducts";
-import { IFilterConfig, ISortConfig, ISortConfigForHeaders } from "../models/ISortFilterConfig";
+import { IProductsWithInput } from "../models/InvOrderModels/IProducts";
+import { IFilterConfig, ISortConfig, ISortConfigForHeaders } from "../models/InvOrderModels/ISortFilterConfig";
 
 class ProductManipulator   {
 

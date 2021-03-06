@@ -1,6 +1,6 @@
 import React from "react";
 import Auxil from "../../../../hoc/Auxil";
-import { IProductsWithInput } from "../../../../models/IProducts"
+import { IProductsWithInput } from "../../../../models/InvOrderModels/IProducts"
 import classes from "../InvProd/InvProduct.module.css";
 import ProductRows from "../../../../hoc/ProductRows";
 

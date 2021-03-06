@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from './InvPreviewModal.module.css'
 import buttonClasses from './InvOrderButton.module.css'
-import { IOrderedProducts } from "../../../../models/IProducts"
+import { IOrderedProducts } from "../../../../models/InvOrderModels/IProducts"
 import ProductRows from '../../../../hoc/ProductRows';
 
 interface IProps  {
@@ -16,7 +16,6 @@ const InvPreviewModal: React.FC<IProps> = ({
     totalCost  }) => 
     {
    
-
 return (
     <div className={classes.InvPreviewModal}>
              <table>
