@@ -1,5 +1,5 @@
 import { useEffect, useCallback } from "react"
-import * as actionCreators from "../store/actions/index"
+import * as actionCreators from "../../store/actions/index"
 import { useDispatch, useSelector } from "react-redux"
 
 const useGetBaseProducts = (todaysSales:number,salesPrediction:number) => {
@@ -22,10 +22,10 @@ const useGetBaseProducts = (todaysSales:number,salesPrediction:number) => {
     dispatch(actionCreators.updateSellSelling(name,todaysSales,salesPrediction)), 
     [dispatch,todaysSales,salesPrediction])
   
-    const _setOrderToSuggested = useCallback(
-      (roundingDirection:boolean, e:React.MouseEvent<HTMLDivElement, MouseEvent>) => 
-      dispatch(actionCreators.setOrderToSuggested(roundingDirection,e)), 
-      [dispatch])
+  const _setOrderToSuggested = useCallback(
+    (roundingDirection:boolean, e:React.MouseEvent<HTMLDivElement, MouseEvent>) => 
+    dispatch(actionCreators.setOrderToSuggested(roundingDirection,e)), 
+    [dispatch])
 
    useEffect(() => {
       _updateSellSelling("TodaysSales");

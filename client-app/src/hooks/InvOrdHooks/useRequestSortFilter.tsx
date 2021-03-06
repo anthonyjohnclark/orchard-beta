@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { IFilterConfig, ISortConfig } from "../models/ISortFilterConfig";
-import { ISortConfigForHeaders } from "../models/ISortFilterConfig";
+import { IFilterConfig, ISortConfig } from "../../models/ISortFilterConfig";
+import { ISortConfigForHeaders } from "../../models/ISortFilterConfig";
 
 
 const useRequestSortFilter = () => {
