@@ -1,4 +1,6 @@
-import React, { useState,  useEffect } from "react";
+import  { useState,  useEffect } from "react";
+import FloorObjectManipulator from "../../functions/ProductTableManipulator";
+import FloorObjectCreator from "../../functions/FloorObjectCreator";
 
 const useUpdateProductFloor = (selectedId:any, hardscapeLabelText:any ) => {
 
@@ -9,7 +11,6 @@ const useUpdateProductFloor = (selectedId:any, hardscapeLabelText:any ) => {
     const [floor, setFloor] = useState( userJson || []) as any;
     const [selectedProduct, setSelectedProduct] = useState({}) as any; 
 
-    
     const setProductForTable =  (id:number, organic:boolean, onSale:boolean, name:string) => {
     setSelectedProduct({
         id: id,
@@ -36,80 +37,20 @@ const useUpdateProductFloor = (selectedId:any, hardscapeLabelText:any ) => {
       }
     
       const addProductToTable = () => {
-        const adjustedTables = [...floor]
-    
-        const prodTableIndex = adjustedTables.findIndex(( tables:any ) => tables.id === selectedId);
-    
-        adjustedTables[prodTableIndex].text = selectedProduct.name;
-        adjustedTables[prodTableIndex].inUse = true;
-        adjustedTables[prodTableIndex].id = `productTable${selectedProduct.id}.${adjustedTables.length}`;
-    
-        if (selectedProduct.onSale){
-          adjustedTables[prodTableIndex].stroke = "#fdcb6e"
-        }
-        
-        if (selectedProduct.organic){
-          adjustedTables[prodTableIndex].fill = "#7fb069"
-          }
-          else {
-          adjustedTables[prodTableIndex].fill = "#7678ed"
-        }
-    
-        adjustedTables[prodTableIndex].fillText = selectedProduct.tableFill;
-        adjustedTables[prodTableIndex].productId = selectedProduct.id;
-    
-          setFloor(adjustedTables);
+          setFloor(FloorObjectManipulator.AddProductToTable(floor, selectedId, selectedProduct));
           updateNewFillValue(1);
       }
       
       const addTable = (xPos:number, yPos:number) => {
-        const table = {
-          type: "table",
-          x: xPos,
-          y: yPos,
-          width: 100,
-          height: 100,
-          stroke: "white",
-          id: `emptyTable${floor.length + 1}`, 
-          text: "Product Table",
-          fontSize: 14,
-          fill: null,
-          fillText: null,
-          productId: null,
-          inUse: false,
-        };
-        const flr = [...floor]
-        setFloor(flr.concat([table]));
+        setFloor(FloorObjectCreator.AddTable(floor, xPos, yPos));
       };
       
       const addPillar = (xPos:number, yPos:number) => {
-        const pillar = {
-          type: "pillar",
-          x: xPos + 50,
-          y: yPos + 50,
-          width: 100,
-          height: 100,
-          stroke: "white",
-          id: `circ${floor.length + 1}`,
-        };
-        const flr = [...floor];
-        setFloor(flr.concat([pillar]));
+        setFloor(FloorObjectCreator.AddPillar(floor, xPos, yPos));
       };
       
       const addHardscape = (xPos:number, yPos:number) => {
-        const hard = {
-          type: "hardscape",
-          x: xPos,
-          y: yPos,
-          width: 150,
-          height: 100,
-          stroke: "white",
-          id: `hardscape${floor.length + 1}`,
-          text: null,
-          fontSize: 14,
-        };
-        const flr = [...floor];   
-        setFloor(flr.concat([hard]));
+        setFloor(FloorObjectCreator.AddHardscape(floor, xPos, yPos));
       }; 
     
       const deleteFloor = () => {
@@ -122,13 +63,9 @@ const useUpdateProductFloor = (selectedId:any, hardscapeLabelText:any ) => {
       }
 
       const addLabelToHardscape = () => {
-
-        const editedHardscapes = [...floor]
-    
+        const editedHardscapes = [...floor]  
         const hardscapeIndex = editedHardscapes.findIndex(( tables:any ) => tables.id === selectedId);
-    
         editedHardscapes[hardscapeIndex].text = hardscapeLabelText
-    
         setFloor(editedHardscapes);
       }
     
