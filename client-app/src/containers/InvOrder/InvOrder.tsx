@@ -3,11 +3,11 @@ import Auxil from "../../hoc/Auxil";
 import InvHeader from "../../components/InvOrder/InvHeader/InvHeader";
 import InvProdList from "../../components/InvOrder/InvProdList/InvProdList";
 import InvOrderSummary from "../../components/InvOrder/InvOrderSummary/InvOrderSummary";
-import useSaveTotalPieces from "../../hooks/InvOrdHooks/useSaveTotalPieces";
-import useSaveTotalCost from "../../hooks/InvOrdHooks/useSaveTotalCost";
-import useGetBaseProducts from "../../hooks/InvOrdHooks/useGetBaseProducts";
-import ProductManipulator  from "../../functions/ProductManipulator";
-import useRequestSortFilter from "../../hooks/InvOrdHooks/useRequestSortFilter";
+import useSaveTotalPieces from "./../../hooks/InvOrdHooks/useSaveTotalPieces";
+import useSaveTotalCost from "./../../hooks/InvOrdHooks/useSaveTotalCost";
+import useGetBaseProducts from "./../../hooks/InvOrdHooks/useGetBaseProducts";
+import ProductManipulator  from "./../../functions/ProductManipulator";
+import useRequestSortFilter from "./../../hooks/InvOrdHooks/useRequestSortFilter";
 
 
 const InvOrder = () => {
