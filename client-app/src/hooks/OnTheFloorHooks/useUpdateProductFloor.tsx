@@ -1,17 +1,24 @@
 import  { useState,  useEffect } from "react";
 import FloorObjectManipulator from "../../functions/ProductTableManipulator";
 import FloorObjectCreator from "../../functions/FloorObjectCreator";
+import { ISelectedProduct } from "../../models/OnTheFloorModels/FloorObjects"
+import { IFloorObjects } from "../../models/OnTheFloorModels/FloorObjects"
 
-const useUpdateProductFloor = (selectedId:any, hardscapeLabelText:any ) => {
+const useUpdateProductFloor = (selectedId:string, hardscapeLabelText:string ) => {
 
-    const localFloor = localStorage.getItem('on-the-floor');
+    // const localFloor = localStorage.getItem('on-the-floor');
 
-    const userJson:any = localFloor !== null ? JSON.parse(localFloor) : null;
+    // const userJson:string = localFloor !== null ? JSON.parse(localFloor) : null;
   
-    const [floor, setFloor] = useState( userJson || []) as any;
-    const [selectedProduct, setSelectedProduct] = useState({}) as any; 
+    const [floor, setFloor] = useState<IFloorObjects[]>([]);
+    const [selectedProduct, setSelectedProduct] = useState<ISelectedProduct>({
+        id: "",
+        organic: false,
+        onSale: false,
+        name: "",
+        tableFill: 1 }); 
 
-    const setProductForTable =  (id:number, organic:boolean, onSale:boolean, name:string) => {
+    const setProductForTable =  (id:string, organic:boolean, onSale:boolean, name:string) => {
     setSelectedProduct({
         id: id,
         organic: organic,
@@ -32,7 +39,7 @@ const useUpdateProductFloor = (selectedId:any, hardscapeLabelText:any ) => {
         })
     }
 
-    const updateFloor = (floor:any) => {
+    const updateFloor = (floor:IFloorObjects[]) => {
         setFloor(floor);
       }
     
@@ -76,7 +83,7 @@ const useUpdateProductFloor = (selectedId:any, hardscapeLabelText:any ) => {
 
       useEffect(() => {
         setSelectedProduct({
-          id:0,
+          id:"",
           organic:false,
           onSale:false,
           name:'',

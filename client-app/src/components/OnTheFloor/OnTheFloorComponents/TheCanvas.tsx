@@ -10,21 +10,23 @@ import ProductSelectionModal from "./ProductSelectionModal";
 import AlertModal from "../../../hoc/AlertModal";
 import ProductFillModal from "./ProductFillModal";
 import HardscapeNameModal from "./HardscapeNameModal";
+import { ISelectedProduct } from "../../../models/OnTheFloorModels/FloorObjects"
+import { IFloorObjects } from "../../../models/OnTheFloorModels/FloorObjects"
 
 interface IProps  {
     stageEl: any; 
     layerEl: any; 
-    selectedId: any;
-    selectedProduct: any;
-    floorType:any;
-    hardscapeLabelText: any;
-    floor: any;
-    setSelectedShape: (shape: any) => void; 
+    selectedId: string;
+    selectedProduct: ISelectedProduct;
+    floorType:string;
+    hardscapeLabelText: string;
+    floor: IFloorObjects[];
+    setSelectedShape: (shape: string) => void; 
     addTable: (x:number, y:number) => void;
     deleteFloor: () => void; 
-    setProductForTable: (id: number, organic: boolean, onSale: boolean, name: string) => void;
+    setProductForTable: (id: string, organic: boolean, onSale: boolean, name: string) => void;
     addProductToTable: () => void;
-    updateNewFillValue: (newFillValue: any) => void
+    updateNewFillValue: (newFillValue: number) => void
     addPillar: (x:number, y:number) => void;
     addHardscape: (xPos: number, yPos: number) => void;
     addLabelToHardscape: () => void;
@@ -77,8 +79,8 @@ const TheCanvas:React.FC<IProps> = (
         setNamingModal(!namingModalIsShowing);
     }
 
-    const handleKeyDown = (ev:any) => {
-      if (ev.code === "Delete" || ev.code ==="Backspace") {
+    const handleKeyDown = (event:KeyboardEvent) => {
+      if (event.key === "Delete" || event.key ==="Backspace") {
         if ((alertIsShowing || namingModalIsShowing || isShowing) === false) {
           deleteFloor();
       }
@@ -86,7 +88,7 @@ const TheCanvas:React.FC<IProps> = (
         return;
             }
     }
-    if (ev.code === "Enter") {
+    if (event.key === "Enter") {
       if (alertIsShowing === true) {
         closeBothModals(); 
         addProductToTable();
@@ -96,13 +98,12 @@ const TheCanvas:React.FC<IProps> = (
         addLabelToHardscape(); 
       }
       else {
-        ev.preventDefault();
+        event.preventDefault();
       }
   }}
-
       
     useEffect(() => {
-      document.addEventListener("keydown", handleKeyDown)
+      document.addEventListener('keydown', handleKeyDown);
               
      return () => {
       document.removeEventListener('keydown', handleKeyDown);
@@ -147,13 +148,13 @@ const TheCanvas:React.FC<IProps> = (
           // deselect when clicked on empty area
           const clickedOnEmpty = e.target === e.target.getStage();
           if (clickedOnEmpty) {
-            setSelectedShape(null);
+            setSelectedShape("");
           }
         }}
       >
         <Layer ref={layerEl}>
-           {floor.filter((floorObjects:any) => floorObjects.type === 'table')
-            .map((table:any, i:any) => {
+           {floor.filter((floorObjects:IFloorObjects) => floorObjects.type === 'table')
+            .map((table:IFloorObjects, i:number) => {
             return (
               <ProductTable
                 key={i}
@@ -173,8 +174,8 @@ const TheCanvas:React.FC<IProps> = (
               />
             );
           })}
-          {floor.filter((floorObjects:any) => floorObjects.type === 'pillar')
-          .map((pillar:any, i:any) => {
+          {floor.filter((floorObjects:IFloorObjects) => floorObjects.type === 'pillar')
+          .map((pillar:IFloorObjects, i:number) => {
             return (
               <Pillar
                 key={i}
@@ -193,8 +194,8 @@ const TheCanvas:React.FC<IProps> = (
               />
             );
           })}
-          {floor.filter((floorObjects:any) => floorObjects.type === 'hardscape')
-          .map((hard:any, i:any) => {
+          {floor.filter((floorObjects:IFloorObjects) => floorObjects.type === 'hardscape')
+          .map((hard:IFloorObjects, i:number) => {
             return (
               <Hardscape
                 key={i}

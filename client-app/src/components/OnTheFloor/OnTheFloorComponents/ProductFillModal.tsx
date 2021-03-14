@@ -1,12 +1,13 @@
 import React from 'react';
+import { ISelectedProduct } from '../../../models/OnTheFloorModels/FloorObjects';
 import classes from './ProductFillModal.module.css'
 
 interface IProps  {
     toggleAlertModal: () => void;
-    closeBothModals: () => void
-    selectedProduct: any;
+    closeBothModals: () => void;
+    selectedProduct: ISelectedProduct;
     addProductToTable: () => void;
-    updateNewFillValue: (newFillValue: any) => void;
+    updateNewFillValue: (newFillValue: number) => void;
 }
 
 const ProductFillModal: React.FC<IProps> = ({
@@ -23,7 +24,7 @@ return (
             <h3>
                 How many boxes of <span style ={selectedProduct.organic ?{color: "#7fb069", fontSize: 24}:{color: "#7678ed", fontSize: 24} }>{selectedProduct.name}</span> fit on the table?:
             </h3>
-            <input value = {selectedProduct.tableFill} type = 'number' min = "1" onChange ={(e) => {updateNewFillValue(e.target.value)}}>
+            <input value = {selectedProduct.tableFill} type = "number"  onChange ={(e:React.BaseSyntheticEvent) => {updateNewFillValue(e.target.value)}}>
             </input>
             <button 
             className = {classes.ProdFillEnterButton}

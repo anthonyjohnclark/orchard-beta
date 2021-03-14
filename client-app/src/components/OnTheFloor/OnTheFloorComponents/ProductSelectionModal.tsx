@@ -6,7 +6,7 @@ import ProductRows from '../../../hoc/ProductRows';
 
 interface IProps  {
     toggleAlertModal: () => void;
-    setProductForTable: (id: number, organic: boolean, onSale: boolean, name: string) => void;
+    setProductForTable: (id: string, organic: boolean, onSale: boolean, name: string) => void;
 }
 
 const ProductSelectionModal: React.FC<IProps> = ({ toggleAlertModal,setProductForTable }) => 

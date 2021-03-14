@@ -3,25 +3,26 @@ import Auxil from "../../hoc/Auxil";
 import OTFHeader from "../../components/OnTheFloor/OnTheFloorHeader/OTFHeader";
 import TheCanvas from '../../components/OnTheFloor/OnTheFloorComponents/TheCanvas';
 import useUpdateProductFloor from "./../../hooks/OnTheFloorHooks/useUpdateProductFloor";
+import * as Konva from "react-konva";
 
 const OnTheFloor = () => {
 
-  const [selectedId, selectShape] = useState(null) as any;
-  const [floorType, setFloorType] = useState(null) as any;
-  const [hardscapeLabelText, updateHardscapeLabelText] = useState(null) as any;
+  const [selectedId, selectShape] = useState(String);
+  const [floorType, setFloorType] = useState(String);
+  const [hardscapeLabelText, updateHardscapeLabelText] = useState(String);
 
-  const stageEl = createRef() as any;
-  const layerEl = createRef() as any;
+  const stageEl = createRef<typeof Konva.Stage>();
+  const layerEl = createRef<typeof Konva.Layer>();
 
-  const setNewFloorType = (type:any) => {
+  const setNewFloorType = (type:string) => {
     setFloorType(type);
   }
 
-  const setSelectedShape = (selectedId:any) => {
+  const setSelectedShape = (selectedId:string) => {
     selectShape(selectedId);
   };
 
-  const setHardscapeLabelText = (text:any) => {
+  const setHardscapeLabelText = (text:string) => {
     updateHardscapeLabelText(text);
   }
  
