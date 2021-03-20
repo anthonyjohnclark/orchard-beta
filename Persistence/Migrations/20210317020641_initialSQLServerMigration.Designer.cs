@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210317020641_initialSQLServerMigration")]
+    partial class initialSQLServerMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,6 +26,9 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("caseSize")
                         .HasColumnType("int");
@@ -39,9 +44,6 @@ namespace Persistence.Migrations
 
                     b.Property<double>("fill")
                         .HasColumnType("float");
-
-                    b.Property<string>("name")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("netGIG")
                         .HasColumnType("float");
@@ -72,9 +74,6 @@ namespace Persistence.Migrations
 
                     b.Property<string>("soldBy")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("vin")
-                        .HasColumnType("float");
 
                     b.HasKey("Id");
 

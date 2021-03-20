@@ -5,8 +5,9 @@ namespace Domain
     public class Product
     {
         public int Id { get; set; }
+        public double vin { get; set; }
         public Boolean organic { get; set; }
-        public string Name { get; set; }
+        public string name { get; set; }
         public Boolean onSale { get; set; }
         public string soldBy { get; set; }
         public int caseSize { get; set; }

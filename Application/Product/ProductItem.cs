@@ -29,10 +29,8 @@ namespace Application.Product
             public async Task<Domain.Product> Handle(Query request, CancellationToken cancellationToken)
             {
                 var product = await _context.Products.FindAsync(request.Id);
-
                 return product;
             }
-
         }
     }
 }

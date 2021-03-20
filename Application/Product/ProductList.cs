@@ -23,10 +23,8 @@ namespace Application.Product
             public async Task<List<Domain.Product>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var products = await _context.Products.ToListAsync();
-
                 return products;
             }
-
         }
     }
 }

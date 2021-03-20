@@ -62,6 +62,7 @@ const [dropdown, toggleDropdown] = useState(false);
       {productArray.map((products:any) => {
       const {
         id,
+        vin,
         name,
         organic,
         onSale,
@@ -117,7 +118,7 @@ const [dropdown, toggleDropdown] = useState(false);
         <tr key={id}>
           <td colSpan = {15}>
         <tr className={styles.join(" ")} onClick={(e) => toggleDropdownForOneRow(id, e)}>         
-          <td>{id}</td>
+          <td>{vin}</td>
           <td>{name}</td>
           <td>{cost}</td>
           <td>{caseSize}</td>
@@ -167,7 +168,7 @@ const [dropdown, toggleDropdown] = useState(false);
             <h2>netGIG: {netGIG}</h2>
             <h2>sold: {sold}</h2>
             <h2>percentSales: {percentSales}%</h2>
-            <h2>shrink: {shrink}</h2>
+            <h2>shrink: {shrink}%</h2>
             </div>
             </td>
           </tr>)
@@ -181,7 +182,7 @@ const [dropdown, toggleDropdown] = useState(false);
           <tr key={id} onClick={() => {toggleAlertModal(); setProductForTable(id,organic,onSale,name)}}>
           <td colSpan = {2}>
           <tr className={styles.join(" ")} style={{width: 469}}>         
-          <td >{id}</td>
+          <td >{vin}</td>
           <td >{name}</td>
           </tr>
           </td>
@@ -194,7 +195,7 @@ const [dropdown, toggleDropdown] = useState(false);
         <tr key = {id}>
         <td colSpan = {4}>
         <tr className = {styles.join(" ")} style={{width: 469}}>
-        <td>{id}</td>
+        <td>{vin}</td>
         <td>{name}</td>
         <td>{order}</td>
         <td>{formatter.format(totalCost)}</td>

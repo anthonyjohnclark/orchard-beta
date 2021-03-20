@@ -31,7 +31,7 @@ namespace API
         {
             services.AddDbContext<DataContext>(opt =>
             {
-                opt.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
+                opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             }
 
             );
@@ -45,7 +45,7 @@ namespace API
                 });
             });
 
-            services.AddMediatR(typeof (ProductList.Handler).Assembly);
+            services.AddMediatR(typeof(ProductList.Handler).Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
