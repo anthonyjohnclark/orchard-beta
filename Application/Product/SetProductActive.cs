@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace Application.Product
 {
-    public class Edit 
+    public class SetProductActive
     {
-        public class Command : IRequest 
+        public class Command : IRequest
         {
-        public int Id { get; set; }
-        public Boolean productActive { get; set; }
+            public int Id { get; set; }
+            public Boolean productActive { get; set; }
 
         }
         public class Handler : IRequestHandler<Command>
@@ -31,7 +31,7 @@ namespace Application.Product
                 if (product == null)
                     throw new Exception("Could not find product.");
 
-                    product.productActive = !request.productActive;
+                product.productActive = !request.productActive;
 
                 var success = await _context.SaveChangesAsync() > 0;
 

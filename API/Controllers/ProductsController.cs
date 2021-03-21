@@ -7,43 +7,32 @@ using Application.Product;
 
 namespace API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-
-
-    public class ProductsController : ControllerBase
+    public class ProductsController : BaseAPIController
     {
-        private readonly IMediator _mediator;
-        public ProductsController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
         [HttpGet]
-
         public async Task<ActionResult<List<Product>>> AllProducts()
         {
-            return await _mediator.Send(new ProductList.Query());
+            return await Mediator.Send(new GetProductList.Query());
         }
 
         [HttpGet("{id}")]
 
         public async Task<ActionResult<Product>> OneProduct(int id)
         {
-            return await _mediator.Send(new ProductItem.Query { Id = id });
+            return await Mediator.Send(new GetProductItem.Query { Id = id });
         }
 
         [HttpPost]
         public async Task<ActionResult<Unit>> Create(Create.Command command)
         {
-            return await _mediator.Send(command);
+            return await Mediator.Send(command);
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Unit>> Edit(int id, Edit.Command command)
+        public async Task<ActionResult<Unit>> Edit(int id, SetProductActive.Command command)
         {
             command.Id = id;
-            return await _mediator.Send(command);
+            return await Mediator.Send(command);
         }
     }
 }

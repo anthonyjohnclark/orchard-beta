@@ -9,27 +9,21 @@ using System.Threading.Tasks;
 
 namespace Application.Product
 {
-    public class ProductItem
+    public class GetProductList
     {
-        public class Query : IRequest<Domain.Product>
-        {
-            public int Id { get; set; }
-        }
+        public class Query : IRequest<List<Domain.Product>> { }
 
-        public class Handler : IRequestHandler<Query, Domain.Product>
+        public class Handler : IRequestHandler<Query, List<Domain.Product>>
         {
-
             private readonly DataContext _context;
-
             public Handler(DataContext context)
             {
                 _context = context;
             }
-
-            public async Task<Domain.Product> Handle(Query request, CancellationToken cancellationToken)
+            public async Task<List<Domain.Product>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var product = await _context.Products.FindAsync(request.Id);
-                return product;
+                var products = await _context.Products.ToListAsync();
+                return products;
             }
         }
     }
