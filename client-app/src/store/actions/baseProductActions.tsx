@@ -12,7 +12,8 @@ export const getBaseProducts = () => {
     return (dispatch:any) => {
     return axios.get<IProductsWithInput[]>("http://localhost:5000/api/products")
     .then((response) =>
-     {return dispatch(saveBaseProducts(response))}
+     {  
+         return dispatch(saveBaseProducts(response))}
   )}};
 
 export const updateInputChanged = (id:number,e:React.ChangeEvent<HTMLInputElement>) => {

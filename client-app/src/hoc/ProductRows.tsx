@@ -9,7 +9,6 @@ interface IProps  {
   toggleAlertModal?: () => void;
   setProductForTable?: (id: string, organic: boolean, onSale: boolean, name: string) => void;
 }
-
 const ProductRows: React.FC<IProps> = ({productArray,updateInputChanged,rowsType,toggleAlertModal,setProductForTable}) => {
 
   const handleKeypress =  (e:React.KeyboardEvent<HTMLInputElement>) => {
@@ -26,7 +25,7 @@ const ProductRows: React.FC<IProps> = ({productArray,updateInputChanged,rowsType
     }
   }
   
-  const toggleDropdownForOneRow = (id: number, e:React.MouseEvent<HTMLTableRowElement, MouseEvent>) => {
+  const toggleDropdownForOneRow = (productId: number, e:React.MouseEvent<HTMLTableRowElement, MouseEvent>) => {
       //I'm not really sure why this stopPropogation  
       //works the way it does or why I do it this way to be honest.
       const element = e.target as HTMLInputElement
@@ -35,13 +34,12 @@ const ProductRows: React.FC<IProps> = ({productArray,updateInputChanged,rowsType
     
       //above conditional wraps the whole rest of the logic. 
       //I feel like there is a better way I need to figure out.
-  
-    if (id !== dropDownId ){
-      setDropdownId(id);
+    if (productId !== dropDownId ){
+      setDropdownId(productId);
       if (dropdown === false)
       toggleDropdown(!dropdown);
     }
-      if(id === dropDownId || dropDownId === null)
+      if(productId === dropDownId || dropDownId === null)
         toggleDropdown(!dropdown);
   
     }
@@ -61,7 +59,7 @@ const [dropdown, toggleDropdown] = useState(false);
     <React.Fragment>
       {productArray.map((products:any) => {
       const {
-        id,
+        productId,
         vin,
         name,
         organic,
@@ -115,9 +113,9 @@ const [dropdown, toggleDropdown] = useState(false);
 
       if (rowsType ==='InvTable' && updateInputChanged)
       return (
-        <tr key={id}>
+        <tr key={productId}>
           <td colSpan = {15}>
-        <tr className={styles.join(" ")} onClick={(e) => toggleDropdownForOneRow(id, e)}>         
+        <tr className={styles.join(" ")} onClick={(e) => toggleDropdownForOneRow(productId, e)}>         
           <td>{vin}</td>
           <td>{name}</td>
           <td>{cost}</td>
@@ -129,7 +127,7 @@ const [dropdown, toggleDropdown] = useState(false);
               type="number"
               value={inTheBack === 0 ? "" :inTheBack}
               name="inTheBack"
-              onChange={updateInputChanged(id)}
+              onChange={updateInputChanged(productId)}
               min= "0">
             </input>{" "}
           </td>
@@ -139,7 +137,7 @@ const [dropdown, toggleDropdown] = useState(false);
               type="number"
               value={onTheFloor === 0 ? "" :onTheFloor}
               name="onTheFloor"
-              onChange={updateInputChanged(id)}
+              onChange={updateInputChanged(productId)}
               max = {fill}
               min= "0"
             ></input>{" "}
@@ -154,13 +152,13 @@ const [dropdown, toggleDropdown] = useState(false);
               type="number"
               value={order === 0 ? "" :order}
               name="order"
-              onChange={updateInputChanged(id)}
+              onChange={updateInputChanged(productId)}
               onKeyPress={handleKeypress}
               min = "1"
             ></input>
           </td>
         </tr>
-        {dropdown && products.id === dropDownId ? 
+        {dropdown && products.productId === dropDownId ? 
         (<tr>
           <td colSpan={15}>
             <div className = {classes.InvProdDropdown}>
@@ -179,7 +177,7 @@ const [dropdown, toggleDropdown] = useState(false);
 
        else if (rowsType ==='selectProduct' && setProductForTable && toggleAlertModal )
         return(
-          <tr key={id} onClick={() => {toggleAlertModal(); setProductForTable(id,organic,onSale,name)}}>
+          <tr key={productId} onClick={() => {toggleAlertModal(); setProductForTable(productId,organic,onSale,name)}}>
           <td colSpan = {2}>
           <tr className={styles.join(" ")} style={{width: 469}}>         
           <td >{vin}</td>
@@ -192,7 +190,7 @@ const [dropdown, toggleDropdown] = useState(false);
         else if (rowsType === 'orderedProducts')
         if (order >0)
            return(
-        <tr key = {id}>
+        <tr key = {productId}>
         <td colSpan = {4}>
         <tr className = {styles.join(" ")} style={{width: 469}}>
         <td>{vin}</td>
