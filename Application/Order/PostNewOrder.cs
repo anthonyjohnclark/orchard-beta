@@ -3,20 +3,19 @@ using Persistence;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Domain;
 
-namespace Application.Product
+namespace Application.Order
 {
-    public class Create
+    public class PostNewOrder
     {
         public class Command : IRequest
         {
-            public int Id { get; set; }
-            public double totalCost { get; set; }
-            public int ordered { get; set; }
+            public Domain.Order Order { get; set; }
+            //properties of whatever being created here 
+
             //e.g. public string Name {get;: set;}
         }
-        public class Handler : IRequest<Command>
+        public class Handler : IRequestHandler<Command>
         {
             private readonly DataContext _context;
             public Handler(DataContext context)
@@ -25,18 +24,14 @@ namespace Application.Product
             }
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
-                // var thingBeingCreated = new ThingBeingCreated  --- like product, labor, etc.
-                {
-                    //id = request.id 
-                    //name = request.name
-                };
 
-                //context.Products.AddAsync(thingBeingCreated);
+                _context.Orders.Add(request.Order);
                 var success = await _context.SaveChangesAsync() > 0;
 
                 if (success) return Unit.Value;
                 throw new Exception("Problem saving changes");
             }
         }
+
     }
 }

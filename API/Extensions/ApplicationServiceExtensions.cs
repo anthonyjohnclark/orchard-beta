@@ -4,6 +4,8 @@ using Persistence;
 using Microsoft.EntityFrameworkCore;
 using MediatR;
 using Application.Product;
+using Application.Order;
+
 
 namespace API.Extensions
 {
@@ -27,6 +29,7 @@ namespace API.Extensions
 
             services.AddMediatR(typeof(GetProductList.Handler).Assembly);
             services.AddMediatR(typeof(GetProductItem.Handler).Assembly);
+            services.AddMediatR(typeof(PostNewOrder.Handler).Assembly);
 
             return services;
         }

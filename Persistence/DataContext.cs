@@ -1,6 +1,6 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore;
 using Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace Persistence
 {
@@ -12,14 +12,19 @@ namespace Persistence
         }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItems> OrderedItems { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<OrderItems>(entity =>
+                    {
+                        entity.HasKey(z => z.ProductId);
+                        entity.HasOne(p => p.Product)
+                             .WithOne(a => a.OrderItems)
+                             .HasForeignKey<OrderItems>(a => a.ProductId);
+                    });
+        }
 
-        // protected override void OnModelCreating(ModelBuilder builder)
-        // {
-        //     builder.Entity<Product>().HasData(
-
-        //     );
-        // }
     }
-
 }
