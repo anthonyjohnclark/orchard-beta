@@ -6,7 +6,10 @@ namespace Domain
 {
     public class OrderItems
     {
-        [Key, ForeignKey("Product")]
+        [Key]
+        public int OrderItemsId { get; set; }
+
+        [ForeignKey("Product")]
         public int ProductId { get; set; }
         public Order Order { get; set; }
         public double totalCost { get; set; }

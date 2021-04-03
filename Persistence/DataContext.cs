@@ -19,7 +19,7 @@ namespace Persistence
         {
             modelBuilder.Entity<OrderItems>(entity =>
                     {
-                        entity.HasKey(z => z.ProductId);
+                        entity.HasKey(z => z.OrderItemsId);
                         entity.HasOne(p => p.Product)
                              .WithOne(a => a.OrderItems)
                              .HasForeignKey<OrderItems>(a => a.ProductId);
