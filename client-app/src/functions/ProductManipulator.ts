@@ -6,10 +6,10 @@ class ProductManipulator   {
 public static CreateOrderedProducts = (inputs:IProductsWithInput[]) =>{
 let orderedProducts = inputs.map((products) =>  (
     {
-    id: products.id,  
+    productId: products.productId,  
     organic: products.organic,
-    onSale:products.onSale,
     productActive:products.productActive,
+    onSale:products.onSale,
     vin: products.vin,
     name: products.name,
     order:  products.order,

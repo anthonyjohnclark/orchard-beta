@@ -9,7 +9,7 @@ import { IOrderedProducts } from "../../../models/InvOrderModels/IProducts";
 interface IProps  {
     todaysSales: number; 
     salesPrediction: number; 
-    orderedProducts: IOrderedProducts[]; 
+    orderedProducts: any; 
     setOrderToSuggested: (roundingDirection: boolean, e:React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
     totalCost: string;
     totalPieces: number 

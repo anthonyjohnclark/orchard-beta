@@ -4,10 +4,10 @@ import classes from "../components/InvOrder/InvProdList/InvProd/InvProduct.modul
 
 interface IProps  {
   productArray: (IProductsWithInput | IOrderedProducts)[]
-  updateInputChanged?: (id: number) => (e: React.ChangeEvent<HTMLInputElement>) => void;
+  updateInputChanged?: (productId: number) => (e: React.ChangeEvent<HTMLInputElement>) => void;
   rowsType:string;
   toggleAlertModal?: () => void;
-  setProductForTable?: (id: string, organic: boolean, onSale: boolean, name: string) => void;
+  setProductForTable?: (productId: string, organic: boolean, onSale: boolean, name: string) => void;
 }
 const ProductRows: React.FC<IProps> = ({productArray,updateInputChanged,rowsType,toggleAlertModal,setProductForTable}) => {
 
@@ -109,7 +109,6 @@ const [dropdown, toggleDropdown] = useState(false);
           }
         }
       }
-
 
       if (rowsType ==='InvTable' && updateInputChanged)
       return (

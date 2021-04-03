@@ -8,7 +8,7 @@ import useSaveTotalCost from "./../../hooks/InvOrdHooks/useSaveTotalCost";
 import useGetBaseProducts from "./../../hooks/InvOrdHooks/useGetBaseProducts";
 import ProductManipulator  from "./../../functions/ProductManipulator";
 import useRequestSortFilter from "./../../hooks/InvOrdHooks/useRequestSortFilter";
-
+import CreatePostOrderObject  from "./../../functions/CreatePostOrderObject";
 
 const InvOrder = () => {
 
@@ -36,7 +36,7 @@ const InvOrder = () => {
   const [ baseProducts, updateInputChanged, updateSellSelling, setOrderToSuggested ] = useGetBaseProducts(todaysSales,salesPrediction)
 
   let searchFilteredProducts = ProductManipulator.SearchFilteredProducts([...baseProducts], searchText)
-
+  
   const [sortConfig, 
     filterConfig, 
     sortConfigForHeaders, 
@@ -60,6 +60,10 @@ const InvOrder = () => {
   const totalPieces = useSaveTotalPieces(orderedProducts);
 
   const totalCost = useSaveTotalCost(orderedProducts);
+
+  let orderSubmitObject = CreatePostOrderObject(totalPieces,totalCost, [...orderedProducts])
+
+  console.log(orderSubmitObject)
 
     return (
       <Auxil>

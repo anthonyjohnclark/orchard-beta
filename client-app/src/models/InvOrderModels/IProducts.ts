@@ -3,7 +3,7 @@ interface IObjectKeys {
   }
 
 export interface IProducts extends IObjectKeys {
-    id: number;
+    productId: number;
     vin: number;
     organic: boolean;
     name:string
@@ -24,7 +24,7 @@ export interface IProducts extends IObjectKeys {
 }
 
 export interface IProductsWithInput  extends IObjectKeys {
-    id: number;
+    productId: number;
     vin: number;
     organic: boolean;
     name:string
@@ -51,10 +51,10 @@ export interface IProductsWithInput  extends IObjectKeys {
 }
 
 export interface IOrderedProducts extends IObjectKeys {
+    productId: number;    
     organic: boolean,
     onSale:boolean,
     productActive:boolean,
-    id: number;
     vin: number; 
     name: string; 
     order: number; 

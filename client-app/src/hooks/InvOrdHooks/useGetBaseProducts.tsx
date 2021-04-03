@@ -13,8 +13,8 @@ const useGetBaseProducts = (todaysSales:number,salesPrediction:number) => {
   }, [dispatch])
   
   const _updateInputChanged = useCallback(
-     (id: number) => (e: React.ChangeEvent<HTMLInputElement>) => 
-     dispatch(actionCreators.updateInputChanged(id,e)), 
+     (productId: number) => (e: React.ChangeEvent<HTMLInputElement>) => 
+     dispatch(actionCreators.updateInputChanged(productId,e)), 
      [dispatch])
 
   const _updateSellSelling = useCallback(

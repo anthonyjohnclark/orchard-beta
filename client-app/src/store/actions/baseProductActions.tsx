@@ -1,6 +1,6 @@
 import * as actionTypes from "./actionTypes"
-import { IProductsWithInput } from "../../models/InvOrderModels/IProducts";
-import axios from "axios";
+import agent from "../../api/agent"
+
 
 export const saveBaseProducts = (response:any) => {
     return ({
@@ -10,16 +10,15 @@ export const saveBaseProducts = (response:any) => {
 
 export const getBaseProducts = () => {
     return (dispatch:any) => {
-    return axios.get<IProductsWithInput[]>("http://localhost:5000/api/products")
-    .then((response) =>
+    return agent.Products.list().then((response) =>
      {  
          return dispatch(saveBaseProducts(response))}
   )}};
 
-export const updateInputChanged = (id:number,e:React.ChangeEvent<HTMLInputElement>) => {
+export const updateInputChanged = (productId:number,e:React.ChangeEvent<HTMLInputElement>) => {
     return ({
         type: actionTypes.UPDATE_INPUT,
-        id: id,
+        productId: productId,
         event: e
     })
 }

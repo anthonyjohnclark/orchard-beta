@@ -10,7 +10,7 @@ const initialState:any = {
 const reducer = (state = initialState, action:any) =>{
     switch (action.type){
         case actionTypes.GET_PRODUCTS:
-            let productsNew = action.response.data.map((prods:any) => ({
+            let productsNew = action.response.map((prods:any) => ({
                 ...prods,
                 inTheBack: 0,
                 onTheFloor: 0,
@@ -27,9 +27,11 @@ const reducer = (state = initialState, action:any) =>{
 
         let productsWithInput = [...state.baseProducts];
 
-        let prodID = action.id;
+        let prodID = action.productId;
         const property = action.event.target.name;
-        const prodIndex = productsWithInput.findIndex(({ id }) => id === prodID);
+        const prodIndex = productsWithInput.findIndex(({ productId }) => productId === prodID);
+
+        console.log(productsWithInput[prodIndex][property] )
             productsWithInput[prodIndex][property] = action.event.target.value;
 
         if (property === "onTheFloor" || property === "inTheBack") {
