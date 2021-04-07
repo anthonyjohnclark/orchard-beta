@@ -9,7 +9,7 @@ namespace Domain
         public DateTime dateOrdered { get; set; }
         public int piecesOrdered { get; set; }
         public double orderTotal { get; set; }
-        public List<OrderItems> orderedProducts { get; set; }
+        public ICollection<OrderItemProduct> OrderItemProducts { get; set; }
     }
 }
 

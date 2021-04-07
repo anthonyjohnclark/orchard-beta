@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210407005516_fixingOrderItems2")]
+    partial class fixingOrderItems2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,20 +47,40 @@ namespace Persistence.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int>("OrderId")
+                    b.Property<int>("OrderItemsId")
                         .HasColumnType("int");
 
-                    b.Property<double>("ordered")
-                        .HasColumnType("float");
+                    b.HasKey("ProductId", "OrderItemsId");
+
+                    b.HasIndex("OrderItemsId");
+
+                    b.ToTable("OrderItemProduct");
+                });
+
+            modelBuilder.Entity("Domain.OrderItems", b =>
+                {
+                    b.Property<int>("OrderItemsId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ordered")
+                        .HasColumnType("int");
 
                     b.Property<double>("totalCost")
                         .HasColumnType("float");
 
-                    b.HasKey("ProductId", "OrderId");
+                    b.HasKey("OrderItemsId");
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderItemProduct");
+                    b.ToTable("OrderedItems");
                 });
 
             modelBuilder.Entity("Domain.Product", b =>
@@ -126,9 +148,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.OrderItemProduct", b =>
                 {
-                    b.HasOne("Domain.Order", "Order")
+                    b.HasOne("Domain.OrderItems", "OrderItems")
                         .WithMany("OrderItemProducts")
-                        .HasForeignKey("OrderId")
+                        .HasForeignKey("OrderItemsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -138,12 +160,26 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Order");
+                    b.Navigation("OrderItems");
 
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("Domain.OrderItems", b =>
+                {
+                    b.HasOne("Domain.Order", "Order")
+                        .WithMany("orderedProducts")
+                        .HasForeignKey("OrderId");
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("Domain.Order", b =>
+                {
+                    b.Navigation("orderedProducts");
+                });
+
+            modelBuilder.Entity("Domain.OrderItems", b =>
                 {
                     b.Navigation("OrderItemProducts");
                 });

@@ -1,11 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Domain
 {
     public class Product
     {
-        [Key]
         public int ProductId { get; set; }
         public double vin { get; set; }
         public Boolean organic { get; set; }
@@ -24,8 +24,6 @@ namespace Domain
         public double percentSales { get; set; }
         public double netGIG { get; set; }
         public double fill { get; set; }
-
-        public OrderItems OrderItems { get; set; }
-
+        public ICollection<OrderItemProduct> OrderItemProducts { get; set; }
     }
 }

@@ -13,17 +13,22 @@ namespace Persistence
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
-        public DbSet<OrderItems> OrderedItems { get; set; }
+        public DbSet<OrderItemProduct> OrderItemProduct { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<OrderItems>(entity =>
-                    {
-                        entity.HasKey(z => z.OrderItemsId);
-                        entity.HasOne(p => p.Product)
-                             .WithOne(a => a.OrderItems)
-                             .HasForeignKey<OrderItems>(a => a.ProductId);
-                    });
+            modelBuilder.Entity<OrderItemProduct>()
+             .HasKey(t => new { t.ProductId, t.OrderId });
+
+            modelBuilder.Entity<OrderItemProduct>()
+             .HasOne(pt => pt.Product)
+             .WithMany(p => p.OrderItemProducts)
+             .HasForeignKey(pt => pt.ProductId);
+
+            modelBuilder.Entity<OrderItemProduct>()
+             .HasOne(pt => pt.Order)
+             .WithMany(t => t.OrderItemProducts)
+             .HasForeignKey(pt => pt.OrderId);
         }
 
     }
