@@ -5,25 +5,26 @@ import Auxil from "../../../../hoc/Auxil";
 import InvPreviewModal from "./InvPreviewModal";
 import { IOrderedProducts } from "../../../../models/InvOrderModels/IProducts";
 
-
 interface IProps  {
   todaysSales: number; 
   salesPrediction: number; 
   orderedProducts: IOrderedProducts[]; 
   totalCost: string; 
   totalPieces: number;
+  orderSubmitObject:any;
 }
 
 const InvOrderButton:React.FC<IProps>  = ({
   orderedProducts,
   totalCost,
-  totalPieces }) => {
+  totalPieces,
+  orderSubmitObject
+   }) => {
 
 const [isShowing, setIsShowing] = useState(false);
 
 const toggleModal = () => {
   setIsShowing(!isShowing);
-  console.log(isShowing)
 }
 
 return(
@@ -34,6 +35,7 @@ return(
     orderedProducts = {orderedProducts}
     totalPieces = {totalPieces}
     totalCost = {totalCost}
+    orderSubmitObject= {orderSubmitObject}
     ></InvPreviewModal>
     </Modal>
     </Auxil>

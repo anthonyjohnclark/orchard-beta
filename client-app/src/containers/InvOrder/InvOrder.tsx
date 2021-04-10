@@ -63,8 +63,6 @@ const InvOrder = () => {
 
   let orderSubmitObject = CreatePostOrderObject(totalPieces,totalCost, [...orderedProducts])
 
-  console.log(orderSubmitObject)
-
     return (
       <Auxil>
         <InvHeader
@@ -97,6 +95,7 @@ const InvOrder = () => {
           orderedProducts = {orderedProducts}
           setOrderToSuggested = {setOrderToSuggested}
           totalCost = {totalCost}
+          orderSubmitObject = {orderSubmitObject}
           // saveTotalPieces = {saveTotalPieces}
           // saveTotalCost = {saveTotalCost}
           totalPieces = {totalPieces}

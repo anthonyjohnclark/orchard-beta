@@ -3,17 +3,21 @@ import classes from './InvPreviewModal.module.css'
 import buttonClasses from './InvOrderButton.module.css'
 import { IOrderedProducts } from "../../../../models/InvOrderModels/IProducts"
 import ProductRows from '../../../../hoc/ProductRows';
+import PostRequests from "./../../../../functions/PostRequests";
 
 interface IProps  {
     orderedProducts: IOrderedProducts[]; 
     totalPieces: number; 
     totalCost: string;  
+    orderSubmitObject:any;
 }
 
 const InvPreviewModal: React.FC<IProps> = ({
     orderedProducts, 
     totalPieces, 
-    totalCost  }) => 
+    totalCost,
+    orderSubmitObject
+      }) => 
     {
    
 return (
@@ -42,7 +46,7 @@ return (
             <tr style = {{width: 472}}>
                 <td colSpan = {4} style = {{width: 472}}>
                 <td style = {{width: 118}}>
-                <button className = {buttonClasses.InvOrderButton} style = {{width: 236}}>
+                <button className = {buttonClasses.InvOrderButton} style = {{width: 236}} onClick = {() => PostRequests.postOrder(orderSubmitObject)}>
                 Confirm Order
                 </button>
                 </td>

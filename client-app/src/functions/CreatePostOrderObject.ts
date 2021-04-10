@@ -14,8 +14,8 @@ const createPostOrderObject = (totalPieces:number,totalCost:string, orderedProdu
         piecesOrdered: totalPieces,
         orderTotal: totalCostAmount,
         dateOrdered: todaysDate,
-        orderedProducts: orderedProducts.filter(((op:any) => op.order > 0)).map((op:any) =>({
-            productId: op.productId,
+        OrderItemProducts: orderedProducts.filter(((op:any) => op.order > 0)).map((op:any) =>({
+            ProductId: op.productId,
             totalCost: op.totalCost,
             //this comes through as a string needs to be an int
             ordered: parseInt(op.order)

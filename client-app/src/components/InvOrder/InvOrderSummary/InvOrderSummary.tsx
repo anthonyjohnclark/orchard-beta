@@ -12,7 +12,8 @@ interface IProps  {
     orderedProducts: any; 
     setOrderToSuggested: (roundingDirection: boolean, e:React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
     totalCost: string;
-    totalPieces: number 
+    totalPieces: number; 
+    orderSubmitObject: any;
   }
 
 const InvOrderSummary: React.FC<IProps>  = ({
@@ -21,7 +22,8 @@ const InvOrderSummary: React.FC<IProps>  = ({
     orderedProducts, 
     setOrderToSuggested,
     totalPieces,
-    totalCost
+    totalCost, 
+    orderSubmitObject
   }) => {
 
     return (
@@ -41,6 +43,7 @@ const InvOrderSummary: React.FC<IProps>  = ({
          orderedProducts = {orderedProducts}
          totalCost = {totalCost}
          totalPieces = {totalPieces}
+         orderSubmitObject = {orderSubmitObject}
          ></InvOrderButton>
          </div>
          </div>
