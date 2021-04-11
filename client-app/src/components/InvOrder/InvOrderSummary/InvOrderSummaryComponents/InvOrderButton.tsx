@@ -57,7 +57,7 @@ const InvOrderButton:React.FC<IProps>  = ({
     toggleModal = {toggleModal}
     ></InvPreviewModal>
     </Modal>
-    <AlertModal show = {alertIsShowing} modalClosed = {toggleAlertModal}>
+    <AlertModal show = {alertIsShowing} modalClosed = {toggleAlertModal} backdropClicked = {closeBothModals}>
       <OrderSubmitConfirmationModal
       orderSubmitObject= {orderSubmitObject}
       toggleAlertModal = {toggleAlertModal}

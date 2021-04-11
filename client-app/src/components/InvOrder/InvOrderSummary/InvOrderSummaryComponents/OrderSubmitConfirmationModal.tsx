@@ -54,7 +54,8 @@ const OrderSubmitConfirmationModal: React.FC<IProps>  = ({
         :
         <h3>
             Something went horribly wrong.
-        </h3>}
+        </h3>
+        }
     </div>
     )
 }

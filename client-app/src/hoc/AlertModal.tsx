@@ -8,7 +8,7 @@ const AlertModal = (props:any) => {
     return(
     <Auxil>
         <Backdrop show = {props.show} 
-        //backdropClicked={props.modalClosed}
+        backdropClicked={props.backdropClicked}
         />
     <div className = {classes.Modal}
         style = {{
