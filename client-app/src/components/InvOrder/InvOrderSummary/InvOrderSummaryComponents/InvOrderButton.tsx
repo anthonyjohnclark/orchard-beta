@@ -42,11 +42,7 @@ const InvOrderButton:React.FC<IProps>  = ({
         setIsShowing(false);
       }
 
-      console.log(isShowing)
-            console.log(alertIsShowing)
-
-
-return(
+  return(
     <Auxil>
     <button className = {classes.InvOrderButton} onClick={()=>toggleModal()}>Order</button>
     <Modal show = {isShowing} modalClosed = {toggleModal}>
