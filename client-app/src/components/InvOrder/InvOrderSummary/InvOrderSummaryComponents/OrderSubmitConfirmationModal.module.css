@@ -1,0 +1,59 @@
+.OrderSubmit {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.OrderSubmit h3 {
+  color: white;
+  font-weight: bolder;
+  margin: 3px;
+  padding: 0;
+}
+
+.OrderSubmitOrderButton {
+  box-sizing: border-box;
+  outline: none;
+  width: 5vw;
+  float: inline-start;
+  padding: 8px 8px;
+  background-color: #a4031f;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border: 4px;
+  border-bottom: 4px solid transparent;
+}
+
+.OrderSubmitBackButton {
+  box-sizing: border-box;
+  outline: none;
+  width: 5vw;
+  float: inline-start;
+  padding: 8px 8px;
+  background-color: #29335c;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border: 4px;
+  border-bottom: 4px solid transparent;
+}
+
+.OrderSubmitBackButton:hover {
+  cursor: pointer;
+  background-color: #b2bec3;
+  border-bottom: 4px solid #fdcb6e;
+  box-sizing: border-box;
+}
+
+.OrderSubmitOrderButton:hover {
+  cursor: pointer;
+  background-color: #b2bec3;
+  border-bottom: 4px solid #fdcb6e;
+  box-sizing: border-box;
+}

@@ -4,6 +4,8 @@ import Modal from "../../../../hoc/Modal";
 import Auxil from "../../../../hoc/Auxil";
 import InvPreviewModal from "./InvPreviewModal";
 import { IOrderedProducts } from "../../../../models/InvOrderModels/IProducts";
+import AlertModal from '../../../../hoc/AlertModal';
+import OrderSubmitConfirmationModal from './OrderSubmitConfirmationModal';
 
 interface IProps  {
   todaysSales: number; 
@@ -21,11 +23,28 @@ const InvOrderButton:React.FC<IProps>  = ({
   orderSubmitObject
    }) => {
 
-const [isShowing, setIsShowing] = useState(false);
 
-const toggleModal = () => {
-  setIsShowing(!isShowing);
-}
+    const [isShowing, setIsShowing] = useState(false);
+
+    const toggleModal = () => {
+      setIsShowing(!isShowing);
+      }
+  
+      const [alertIsShowing, setAlertIsShowing] = useState(false);
+  
+      const toggleAlertModal = () => {
+        setAlertIsShowing(!alertIsShowing);    
+        setIsShowing(!isShowing);
+        }
+  
+      const closeBothModals = () => {
+        setAlertIsShowing(false);    
+        setIsShowing(false);
+      }
+
+      console.log(isShowing)
+            console.log(alertIsShowing)
+
 
 return(
     <Auxil>
@@ -36,8 +55,18 @@ return(
     totalPieces = {totalPieces}
     totalCost = {totalCost}
     orderSubmitObject= {orderSubmitObject}
+    closeBothModals = {closeBothModals}
+    toggleAlertModal = {toggleAlertModal}
+    alertIsShowing = {alertIsShowing}
+    toggleModal = {toggleModal}
     ></InvPreviewModal>
     </Modal>
+    <AlertModal show = {alertIsShowing} modalClosed = {toggleAlertModal}>
+      <OrderSubmitConfirmationModal
+      orderSubmitObject= {orderSubmitObject}
+      toggleAlertModal = {toggleAlertModal}
+      ></OrderSubmitConfirmationModal>
+    </AlertModal>
     </Auxil>
 )
 

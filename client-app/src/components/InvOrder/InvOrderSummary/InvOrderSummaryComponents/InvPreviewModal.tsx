@@ -1,26 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classes from './InvPreviewModal.module.css'
 import buttonClasses from './InvOrderButton.module.css'
 import { IOrderedProducts } from "../../../../models/InvOrderModels/IProducts"
 import ProductRows from '../../../../hoc/ProductRows';
-import PostRequests from "./../../../../functions/PostRequests";
+import Auxil from '../../../../hoc/Auxil';
 
 interface IProps  {
     orderedProducts: IOrderedProducts[]; 
     totalPieces: number; 
     totalCost: string;  
     orderSubmitObject:any;
+    closeBothModals: () => void;
+    toggleAlertModal: () => void;
+    toggleModal: () => void;
+    alertIsShowing: boolean;
 }
 
 const InvPreviewModal: React.FC<IProps> = ({
     orderedProducts, 
     totalPieces, 
     totalCost,
-    orderSubmitObject
+    orderSubmitObject,
+    alertIsShowing,
+    closeBothModals,
+    toggleAlertModal,
+    toggleModal
       }) => 
-    {
+{
    
 return (
+    <Auxil>
     <div className={classes.InvPreviewModal}>
              <table>
                 <thead>
@@ -46,7 +55,8 @@ return (
             <tr style = {{width: 472}}>
                 <td colSpan = {4} style = {{width: 472}}>
                 <td style = {{width: 118}}>
-                <button className = {buttonClasses.InvOrderButton} style = {{width: 236}} onClick = {() => PostRequests.postOrder(orderSubmitObject)}>
+                <button className = {buttonClasses.InvOrderButton} style = {{width: 236}} 
+                onClick = {() => { toggleAlertModal() }}>
                 Confirm Order
                 </button>
                 </td>
@@ -61,6 +71,7 @@ return (
             </tfoot>
             </table>
             </div>
+            </Auxil>
     /* <div className = {classes.InvModalSummary}>
         <div className = {classes.InvModalTotals}>
         <span>Pieces: </span><p>{totalPieces}</p>
