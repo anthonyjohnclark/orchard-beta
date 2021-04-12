@@ -8,6 +8,7 @@ import AlertModal from '../../../../hoc/AlertModal';
 import OrderSubmitConfirmationModal from './OrderSubmitConfirmationModal';
 
 interface IProps  {
+  orderable: boolean;
   todaysSales: number; 
   salesPrediction: number; 
   orderedProducts: IOrderedProducts[]; 
@@ -20,7 +21,8 @@ const InvOrderButton:React.FC<IProps>  = ({
   orderedProducts,
   totalCost,
   totalPieces,
-  orderSubmitObject
+  orderSubmitObject,
+  orderable
    }) => {
 
 
@@ -44,12 +46,14 @@ const InvOrderButton:React.FC<IProps>  = ({
 
       let productsToOrder = orderedProducts.length
 
-      console.log(productsToOrder)
+      console.log(orderable)
 
   return(
     <Auxil>
-    {productsToOrder > 0 ?
+    {productsToOrder > 0 && orderable ?
     <button className = {classes.InvOrderButton} onClick={()=>toggleModal()}>Order</button>
+    : !orderable ?
+    <button className = {classes.InvOrderButtonUnorderable}>Order</button>
     :
     <button className = {classes.InvOrderButtonUnorderable}>Order</button>
     }

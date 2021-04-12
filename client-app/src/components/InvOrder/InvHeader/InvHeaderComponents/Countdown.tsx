@@ -1,11 +1,20 @@
 import React, { useState, useEffect } from "react";
 import classes from "./Countdown.module.css";
 
-const Countdown = () => {
+
+//toggleIsOrderable: () => void
+interface IProps  {
+  toggleIsOrderable: () => void;
+}
+
+const Countdown:React.FC<IProps> = ({
+  toggleIsOrderable
+}) => {
+
   const calculateTimeLeft = () => {
     let time = new Date();
     let difference = new Date(
-      +new Date(time.getFullYear(), time.getMonth(), time.getDate(), 21, 0, 0) -
+      +new Date(time.getFullYear(), time.getMonth(), time.getDate(), 20, 14, 0) -
         +new Date(
           time.getFullYear(),
           time.getMonth(),
@@ -39,6 +48,10 @@ const Countdown = () => {
 
   if (!!timeLeft && timeLeft.getTime() < 300000) {
     styles.push(classes.Alert);
+  }
+
+  if(!timeLeft){
+    toggleIsOrderable();
   }
 
   return (

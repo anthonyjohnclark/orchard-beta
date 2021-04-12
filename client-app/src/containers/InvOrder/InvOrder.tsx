@@ -8,6 +8,7 @@ import useSaveTotalCost from "./../../hooks/InvOrdHooks/useSaveTotalCost";
 import useGetBaseProducts from "./../../hooks/InvOrdHooks/useGetBaseProducts";
 import ProductManipulator  from "./../../functions/ProductManipulator";
 import useRequestSortFilter from "./../../hooks/InvOrdHooks/useRequestSortFilter";
+import useIsOrderable from "./../../hooks/InvOrdHooks/useIsOrderable";
 import CreatePostOrderObject  from "./../../functions/CreatePostOrderObject";
 
 const InvOrder = () => {
@@ -63,6 +64,8 @@ const InvOrder = () => {
 
   let orderSubmitObject = CreatePostOrderObject(totalPieces,totalCost, [...orderedProducts])
 
+  const [orderable, toggleIsOrderable] = useIsOrderable();
+
     return (
       <Auxil>
         <InvHeader
@@ -71,6 +74,7 @@ const InvOrder = () => {
         setNewTodaysSales = {setNewTodaysSales}
         setNewSalesPrediction = {setNewSalesPrediction}
         setNewSearch = {setNewSearch}
+        toggleIsOrderable = {toggleIsOrderable}
         />
         <InvProdList
           filterEnabled={filterEnabled}
@@ -99,6 +103,7 @@ const InvOrder = () => {
           // saveTotalPieces = {saveTotalPieces}
           // saveTotalCost = {saveTotalCost}
           totalPieces = {totalPieces}
+          orderable = {orderable}
         />
       </Auxil>
     );

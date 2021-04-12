@@ -12,6 +12,7 @@ interface IProps  {
   setNewSearch: (newSearchText: string) => void
   todaysSales: number;
   salesPrediction: number;
+  toggleIsOrderable: () => void;
 }
 
 const InvHeader: React.FC<IProps> = ({
@@ -19,12 +20,15 @@ const InvHeader: React.FC<IProps> = ({
   setNewTodaysSales,
   setNewSearch,
   todaysSales,
-  salesPrediction
+  salesPrediction,
+  toggleIsOrderable
  }) => {
   return (
       <Auxil>
       <div className={classes.InvHeader}>
-        <Countdown />
+        <Countdown
+          toggleIsOrderable = {toggleIsOrderable}
+        />
         <SalesPredictor
           setNewSalesPrediction={setNewSalesPrediction}
           salesPrediction={salesPrediction}

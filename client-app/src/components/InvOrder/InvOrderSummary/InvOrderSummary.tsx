@@ -7,6 +7,7 @@ import { IOrderedProducts } from "../../../models/InvOrderModels/IProducts";
 
 //to-do - find how to calculate blended margin? 
 interface IProps  {
+    orderable: boolean;
     todaysSales: number; 
     salesPrediction: number; 
     orderedProducts: any; 
@@ -17,6 +18,7 @@ interface IProps  {
   }
 
 const InvOrderSummary: React.FC<IProps>  = ({
+    orderable,
     todaysSales, 
     salesPrediction, 
     orderedProducts, 
@@ -44,6 +46,7 @@ const InvOrderSummary: React.FC<IProps>  = ({
          totalCost = {totalCost}
          totalPieces = {totalPieces}
          orderSubmitObject = {orderSubmitObject}
+         orderable = {orderable}
          ></InvOrderButton>
          </div>
          </div>
