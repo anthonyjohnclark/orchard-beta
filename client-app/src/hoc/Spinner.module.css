@@ -3,17 +3,18 @@
 .Loader:after {
   border-radius: 50%;
   width: 2.5em;
-  height: 2.5em;
+  height: 2.4em;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
   -webkit-animation: load7 1.8s infinite ease-in-out;
   animation: load7 1.8s infinite ease-in-out;
+  vertical-align: middle;
 }
 .Loader {
   color: #ffffff;
   font-size: 10px;
-  margin: 80px auto;
-  position: relative;
+  margin-bottom: 53px;
+  margin-left: 50%;
   text-indent: -9999em;
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
@@ -25,7 +26,6 @@
 .Loader:after {
   content: "";
   position: absolute;
-  top: 0;
 }
 .Loader:before {
   left: -3.5em;
