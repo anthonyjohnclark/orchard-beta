@@ -1,7 +1,7 @@
 .Modal {
   display: flex;
   justify-content: center;
-  height: 50px;
+  height: auto;
   position: fixed;
   z-index: 600;
   background-color: #221d23;

@@ -7,11 +7,21 @@
   align-items: center;
 }
 
-.OrderSubmit h3 {
+.OrderSubmitMessages {
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.OrderSubmitMessages h3 {
   color: white;
   font-weight: bolder;
-  margin: 3px;
-  padding: 0;
+  margin-bottom: 25px;
+  margin-top: 25px;
+  padding: 2px;
+  text-align: center;
 }
 
 .OrderSubmitOrderButton {

@@ -16,22 +16,26 @@ const OrderSubmitConfirmationModal: React.FC<IProps>  = ({
 
     const [loading, setLoadingState] = useState(false)
     const [successfulSubmit, setSuccessfulSubmit] = useState(false)
-
+    const [returnedError, setError] = useState("")
 
     let postOrderHandler = (orderSubmitObject:any) => {
         setLoadingState(true);
 
         agent.Orders.postOrder(orderSubmitObject)
         .then(response => {
-            setSuccessfulSubmit(true)
             setLoadingState(false)
+            setSuccessfulSubmit(true)
         })
-        .catch(error => {setLoadingState(false)})
+        .catch(error => {
+            setError(error.message)
+            setLoadingState(false) 
+            setSuccessfulSubmit(false)
+        })
     }
 
     return (
         <div className = {classes.OrderSubmit}>
-        {!loading && !successfulSubmit ?                
+        {!loading && !successfulSubmit && !returnedError ?                
         <Auxil>    
         <h3>
             Are you sure you want to submit your order?
@@ -47,14 +51,22 @@ const OrderSubmitConfirmationModal: React.FC<IProps>  = ({
         </Auxil>
         : loading && !successfulSubmit ?
         <Spinner/>
-        : successfulSubmit ?
+        : successfulSubmit &&  !loading ?
+        <div className = {classes.OrderSubmitMessages}>
         <h3>
-            Your order has been submitted succesfully.
+            Your order has been submitted <span style ={{color:"#7fb069"}}> succesfully.</span>
         </h3>
+        </div>
+        : returnedError && !loading  ?
+        <div className = {classes.OrderSubmitMessages}>
+        <h3>
+            Something went horribly wrong. Here what kind of error this was: 
+            <br/>
+            <span style = {{color: "#a4031f"}}>{returnedError}</span>
+        </h3>
+        </div>
         :
-        <h3>
-            Something went horribly wrong.
-        </h3>
+        null
         }
     </div>
     )
