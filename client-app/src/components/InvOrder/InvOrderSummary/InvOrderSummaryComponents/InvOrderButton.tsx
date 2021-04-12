@@ -46,8 +46,6 @@ const InvOrderButton:React.FC<IProps>  = ({
 
       let productsToOrder = orderedProducts.length
 
-      console.log(orderable)
-
   return(
     <Auxil>
     {productsToOrder > 0 && orderable ?

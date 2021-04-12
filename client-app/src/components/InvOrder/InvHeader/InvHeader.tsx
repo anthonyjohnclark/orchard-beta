@@ -23,6 +23,7 @@ const InvHeader: React.FC<IProps> = ({
   salesPrediction,
   toggleIsOrderable
  }) => {
+   
   return (
       <Auxil>
       <div className={classes.InvHeader}>
