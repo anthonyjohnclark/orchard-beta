@@ -42,9 +42,17 @@ const InvOrderButton:React.FC<IProps>  = ({
         setIsShowing(false);
       }
 
+      let productsToOrder = orderedProducts.length
+
+      console.log(productsToOrder)
+
   return(
     <Auxil>
+    {productsToOrder > 0 ?
     <button className = {classes.InvOrderButton} onClick={()=>toggleModal()}>Order</button>
+    :
+    <button className = {classes.InvOrderButtonUnorderable}>Order</button>
+    }
     <Modal show = {isShowing} modalClosed = {toggleModal}>
     <InvPreviewModal
     orderedProducts = {orderedProducts}
