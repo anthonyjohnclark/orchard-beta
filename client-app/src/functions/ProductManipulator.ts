@@ -4,7 +4,7 @@ import { IFilterConfig, ISortConfig, ISortConfigForHeaders } from "../models/Inv
 class ProductManipulator   {
 
 public static CreateOrderedProducts = (inputs:IProductsWithInput[]) =>{
-let orderedProducts = inputs.map((products) =>  (
+let orderedProducts = inputs.filter(((products:any) => products.order > 0)).map((products) =>  (
     {
     productId: products.productId,  
     organic: products.organic,

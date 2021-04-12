@@ -5,16 +5,14 @@ const createPostOrderObject = (totalPieces:number,totalCost:string, orderedProdu
     var date = new Date();
 
     //need to convert totalCost from the currency format to number 
-    var numberCost = totalCost.substr(1)
-    var totalCostAmount = parseFloat(numberCost);
-
+    var totalCostAmount = parseFloat(totalCost.substr(1).replace(/,/g, ''));
     var todaysDate = date.toISOString();
 
     let createdOrder = {
         piecesOrdered: totalPieces,
         orderTotal: totalCostAmount,
         dateOrdered: todaysDate,
-        OrderItemProducts: orderedProducts.filter(((op:any) => op.order > 0)).map((op:any) =>({
+        OrderItemProducts: orderedProducts.map((op:any) =>({
             ProductId: op.productId,
             totalCost: op.totalCost,
             //this comes through as a string needs to be an int
