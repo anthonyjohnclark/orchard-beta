@@ -3,6 +3,7 @@ import Auxil from "../../hoc/Auxil";
 import OTFHeader from "../../components/OnTheFloor/OnTheFloorHeader/OTFHeader";
 import TheCanvas from '../../components/OnTheFloor/OnTheFloorComponents/TheCanvas';
 import useUpdateProductFloor from "./../../hooks/OnTheFloorHooks/useUpdateProductFloor";
+import CreatePostFloorObject from "../../functions/CreatePostFloorObject";
 import * as Konva from "react-konva";
 
 const OnTheFloor = () => {
@@ -39,6 +40,12 @@ const OnTheFloor = () => {
     updateNewFillValue,
     selectedProduct
       ] =  useUpdateProductFloor(selectedId, hardscapeLabelText);
+
+      console.log(floor)
+
+    let postFloorObject = CreatePostFloorObject(floor); 
+
+    console.log(postFloorObject)
 
     return (
         <Auxil>

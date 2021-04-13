@@ -14,7 +14,7 @@ namespace Persistence
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItemProduct> OrderItemProduct { get; set; }
-
+        public DbSet<FloorObjects> FloorObjects { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<OrderItemProduct>()

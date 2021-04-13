@@ -20,9 +20,14 @@ const Orders = {
     postOrder: (order:any) => requests.post<void>('/orders', order)
 }
 
+const Floor = {
+    postFloor: (floor:any) => requests.post<void>('/floor', floor)
+}
+
 const agent = {
     Products,
-    Orders
+    Orders,
+    Floor
 }
 
 export default agent;
