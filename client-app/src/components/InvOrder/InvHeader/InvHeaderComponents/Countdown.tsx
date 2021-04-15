@@ -14,7 +14,7 @@ const Countdown:React.FC<IProps> = ({
   const calculateTimeLeft = () => {
     let time = new Date();
     let difference = new Date(
-      +new Date(time.getFullYear(), time.getMonth(), time.getDate(), 20, 14, 0) -
+      +new Date(time.getFullYear(), time.getMonth(), time.getDate(), 22, 14, 0) -
         +new Date(
           time.getFullYear(),
           time.getMonth(),

@@ -1,13 +1,34 @@
-import React  from "react"
+import React, { useState }  from "react"
+import AlertModal from "../../../hoc/AlertModal"
 import Auxil from "../../../hoc/Auxil"
+import FloorCreationModal from "./FloorCreationModal"
 import classes from "./OnTheFloorHeader.module.css"
 
 interface IProps  {
+     setFloorName: (name: string) => void,
      setNewFloorType: (type:any) => void;
      floor: any;
+     floorName: string;
+     postFloorObject: any;
+     selectShape: React.Dispatch<React.SetStateAction<string>>
   }
 
-const OnTheFloorHeader: React.FC<IProps> = ({ setNewFloorType, floor}) => {
+const OnTheFloorHeader: React.FC<IProps> = ({ 
+    setNewFloorType, 
+    floor,
+    setFloorName,
+    floorName,
+    postFloorObject,
+    selectShape
+    }) => {
+
+  const [alertIsShowing, setAlertIsShowing] = useState(false);
+
+  console.log(alertIsShowing)
+
+  const toggleAlertModal = () => {
+    setAlertIsShowing(!alertIsShowing);    
+    }
 
     return (
         <Auxil>
@@ -17,7 +38,7 @@ const OnTheFloorHeader: React.FC<IProps> = ({ setNewFloorType, floor}) => {
           <h1>Current Floor: </h1><select></select>
           </div>
         <button className = {classes.Button}>Save</button>
-        <button className = {classes.Button}>Save As</button>
+        <button className = {classes.Button} onClick = {() => {toggleAlertModal(); selectShape("")}}>Save As</button>
         </div>
         <div className = {classes.BottomHeader}>
         <div className = {classes.ProductTable}
@@ -44,6 +65,15 @@ const OnTheFloorHeader: React.FC<IProps> = ({ setNewFloorType, floor}) => {
         </div>
         </div>
         </div>
+        <AlertModal show = {alertIsShowing}  backdropClicked = {toggleAlertModal}>
+          <FloorCreationModal
+            postFloorObject = {postFloorObject}
+            setFloorName = {setFloorName}
+            floorName = {floorName}
+            toggleAlertModal = {toggleAlertModal}
+          />
+        </AlertModal>
         </Auxil>
   )}
+  
 export default OnTheFloorHeader; 

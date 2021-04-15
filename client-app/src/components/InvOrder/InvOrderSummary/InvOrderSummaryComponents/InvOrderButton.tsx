@@ -74,8 +74,5 @@ const InvOrderButton:React.FC<IProps>  = ({
       ></OrderSubmitConfirmationModal>
     </AlertModal>
     </Auxil>
-)
-
-}
-
+)}
 export default InvOrderButton;

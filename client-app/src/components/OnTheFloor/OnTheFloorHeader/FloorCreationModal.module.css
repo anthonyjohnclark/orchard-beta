@@ -1,0 +1,67 @@
+.FloorCreationModal {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.FloorCreationModal h3 {
+  color: white;
+  font-weight: bolder;
+  margin: 3px;
+  padding: 0;
+}
+
+.FloorCreationModal input {
+  display: flex;
+  align-items: center;
+  width: 25%;
+  outline: none;
+  color: white;
+  font-weight: bold;
+  background-color: #221d23;
+  text-align: center;
+  border: none;
+  font-size: 30px;
+}
+
+.FloorCreationModalEnterButton {
+  box-sizing: border-box;
+  outline: none;
+  width: 5vw;
+  float: inline-start;
+  padding: 8px 8px;
+  background-color: #51783f;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border: 4px;
+  border-bottom: 4px solid transparent;
+}
+
+.FloorCreationModalEnterButton:hover {
+  cursor: pointer;
+  background-color: #b2bec3;
+  border-bottom: 4px solid #fdcb6e;
+  box-sizing: border-box;
+}
+
+.FloorSubmitMessages {
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.FloorSubmitMessages h3 {
+  color: white;
+  font-weight: bolder;
+  margin-bottom: 25px;
+  margin-top: 25px;
+  padding: 2px;
+  text-align: center;
+}

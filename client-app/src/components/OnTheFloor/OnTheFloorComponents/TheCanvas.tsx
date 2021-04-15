@@ -103,9 +103,15 @@ const TheCanvas:React.FC<IProps> = (
   }}
       
     useEffect(() => {
+      const canvas = document.getElementById("canvas")
+      console.log(canvas)
+      canvas ?
+      canvas.addEventListener('keydown', handleKeyDown) : 
       document.addEventListener('keydown', handleKeyDown);
               
      return () => {
+       canvas ?
+      canvas.removeEventListener('keydown', handleKeyDown) :
       document.removeEventListener('keydown', handleKeyDown);
      };
         

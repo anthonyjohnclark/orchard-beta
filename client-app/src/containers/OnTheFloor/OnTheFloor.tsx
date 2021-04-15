@@ -11,6 +11,8 @@ const OnTheFloor = () => {
   const [selectedId, selectShape] = useState(String);
   const [floorType, setFloorType] = useState(String);
   const [hardscapeLabelText, updateHardscapeLabelText] = useState(String);
+  const [floorName, setFloorNameText] = useState(String);
+
 
   const stageEl = createRef<typeof Konva.Stage>();
   const layerEl = createRef<typeof Konva.Layer>();
@@ -25,6 +27,10 @@ const OnTheFloor = () => {
 
   const setHardscapeLabelText = (text:string) => {
     updateHardscapeLabelText(text);
+  }
+
+  const setFloorName = (name:string) => {
+    setFloorNameText(name);
   }
  
   const [
@@ -43,15 +49,19 @@ const OnTheFloor = () => {
 
       console.log(floor)
 
-    let postFloorObject = CreatePostFloorObject(floor); 
+    let postFloorObject = CreatePostFloorObject(floor, floorName); 
 
     console.log(postFloorObject)
 
     return (
         <Auxil>
         <OTFHeader
+            postFloorObject = {postFloorObject}
             setNewFloorType = {setNewFloorType}
             floor = {floor}
+            setFloorName = {setFloorName}
+            floorName = {floorName}
+            selectShape = {selectShape}
         />
         <TheCanvas 
             stageEl = {stageEl}
