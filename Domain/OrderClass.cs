@@ -5,7 +5,7 @@ namespace Domain
 {
     public class Order
     {
-        public int Id { get; set; }
+        public int OrderId { get; set; }
         public DateTime dateOrdered { get; set; }
         public int piecesOrdered { get; set; }
         public double orderTotal { get; set; }
